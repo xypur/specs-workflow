@@ -1,0 +1,17 @@
+description = "Create or update a module's requirements.md"
+prompt = '''
+Create or update the `.specs/{{args}}/requirements.md` document for the module `{{args}}`. If `{{args}}` is empty, ask the user for the module name first.
+
+Load the specs-workflow skill (skill tool, name `specs-workflow`), then read from the skill directory: `references/file-templates.md` (skeleton), `references/prompt-templates.md` (depth guidance), and `references/examples/traceability.md` (traceability format), and follow them. If the skill is not available, follow the rules below.
+
+Follow these rules:
+
+- **Introduction**: 1–2 paragraphs — what this module is, what problem it solves, and who uses it. Lead with the core technical pain point.
+- **Glossary**: define every key term the document relies on (components, state, protocols, config names). One precise bullet per term.
+- **Requirements**: each numbered `Requirement N` (integer, incrementing from 1 within the module), containing:
+  - A readable capability title starting with a verb
+  - A complete User Story with all three parts: *As a `<role>`, I want `<capability>`, so that `<value>`* — the value clause must explain *why*, not restate the capability
+  - Acceptance Criteria numbered `N.M` in the `THE <System> SHALL` / `WHEN` / `IF` / `WHILE` forms, every one machine-testable, together covering the happy path, boundary conditions, and error/exclusion cases
+
+If `.specs/{{args}}/requirements.md` already exists, preserve its content and extend it rather than rewriting. If `.specs/README.md` exists and the module `{{args}}` is not listed in its status table, add a row for it.
+'''

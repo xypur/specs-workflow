@@ -1,0 +1,15 @@
+description = "Create or update a module's tasks.md"
+prompt = '''
+Create or update the `.specs/{{args}}/tasks.md` document for the module `{{args}}`. If `{{args}}` is empty, ask the user for the module name first.
+
+Load the specs-workflow skill (skill tool, name `specs-workflow`), then read from the skill directory: `references/file-templates.md` (skeleton), `references/prompt-templates.md` (depth guidance), and `references/examples/traceability.md` (traceability format), and follow them. If the skill is not available, follow the rules below.
+
+Follow these rules:
+
+- **Overview**: phased implementation approach with explicit verification methods.
+- **Tasks**: hierarchical tasks numbered `N.M` (decoupled from requirement numbers), split by **dependency**, not by time or file order. Every task references the requirement clauses it implements with `_Requirements: x.y, x.z_`. Mark optional / MVP-skippable subtasks with `*`.
+- **Checkpoints**: at meaningful milestones, add checkpoint tasks that run the test suite/build and surface issues early.
+- **Task Dependency Graph**: express the phases as ordered waves in JSON so execution order is unambiguous.
+
+Read the module's `.specs/{{args}}/requirements.md` first so every requirement clause referenced by `_Requirements:` actually exists — no dangling references. If `.specs/{{args}}/tasks.md` already exists, preserve its content and extend it rather than rewriting.
+'''

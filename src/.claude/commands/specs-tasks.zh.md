@@ -1,0 +1,16 @@
+---
+description: 创建或更新模块的 tasks.md
+---
+
+为模块 `$1` 创建或更新 `.specs/$1/tasks.md` 文档。若 `$1` 为空，先向用户询问模块名。
+
+加载 specs-workflow 技能（skill 工具，名称为 `specs-workflow`），然后从技能目录中阅读：`references/file-templates.md`（骨架）、`references/prompt-templates.md`（深度指引）、`references/examples/traceability.md`（追溯格式），并遵循它们。若技能不可用，遵循下方规则。
+
+遵循以下规则：
+
+- **Overview（概述）**：分阶段实现思路，并明确验证方式。
+- **Tasks（任务）**：层级任务按 `N.M` 编号（与需求编号解耦），按**依赖**划分，而非按时间或文件顺序。每条任务用 `_Requirements: x.y, x.z_` 引用其实现的需求条款。可选 / MVP 可跳过的子任务用 `*` 标注。
+- **Checkpoints（检查点）**：在有意义的里程碑处添加检查点任务，运行测试/构建并尽早暴露问题。
+- **Task Dependency Graph（任务依赖图）**：将各阶段表达为有序 waves（JSON），使执行顺序无歧义。
+
+先阅读模块的 `.specs/$1/requirements.md`，确保 `_Requirements:` 引用的每个需求条款真实存在——不允许悬空引用。若 `.specs/$1/tasks.md` 已存在，保留原有内容进行扩展，而不是重写。
