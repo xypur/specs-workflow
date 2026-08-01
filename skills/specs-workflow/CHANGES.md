@@ -1,5 +1,42 @@
 # 修改记录
 
+## 2026-08-01
+
+### 移除 `.specs/archive/` 物理归档，只保留 `archived` 状态标记
+
+原约定"验收完结后把整个模块目录移入 `.specs/archive/`"改为：在 `.specs/README.md` 状态总表中将模块状态标记为 `archived`，模块目录保留原位，文档由 git 历史保存。理由：与 git 历史冗余、物理移动破坏跨文档链接、状态列已足以下达信号、且与 `.specs/shared/` 依赖存在冲突。
+
+- `rules/specs-workflow.md` / `src/rules/specs-workflow.zh.md`：强制规则 6 改为"标记 `archived`，目录保留原位"。
+- `SKILL.md` / `SKILL.zh.md`：Step 8 改为"标记已归档"；目录结构删除 `archive/` 行；强制规则 6、description、When to Use 措辞同步。
+- `references/file-templates.md`：`.specs/README.md` 状态图例下补充"Archived modules stay listed with status `archived`; their directories are not moved"。
+- `specs-workflow.md`（根模板）：目录结构删除 `archive/` 行；规则 6 改为 README 标记归档。
+- `commands/specs-init.toml` / `src/...zh.toml`：删除"创建空的 `.specs/archive/` 目录"步骤；`commands/specs.toml` / `src/...zh.toml` 引导括注去掉 `archive/`。
+- README / README.zh：`/specs-init` 说明去掉 `archive/`。
+- 全部规则适配器（EN + ZH）与 `.opencode/` / `.claude/` 指令重新生成；`node scripts/check-sync.js` 通过。
+- 保留项：状态取值 `archived`、状态图例、`.specs/shared/` 约定均不变。
+
+## 2026-08-01
+
+### 新增统一创建命令 `/specs`
+
+- 新增 `commands/specs.toml`（EN）与 `src/commands/specs.zh.toml`（ZH）：统一入口 `/specs <需求描述>` —— 直接在命令中输入功能描述，代理从描述推导 kebab-case 模块名（推导不出或信息不足时才追问），一次性生成 `requirements.md` / `design.md` / `tasks.md` / `CHANGELOG.md` 四个文档，在状态总表加行（状态 `design`）并更新 Change Log；`.specs/` 不存在时先引导。其余命令 `/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks` 作为其分步 / 单文档变体保留。
+- `scripts/check-sync.js` 的 `COMMANDS` 数组加入 `'specs'`（首位）；`.opencode/commands/`、`.claude/commands/`（含 `src/` 中文链）派生文件重新生成。
+- README / README.zh：指令表首行新增 `/specs <需求描述>`；安装表补充 `/specs`，斜杠指令数量改为五个。
+- `docs/agent-portability.md` / `src/docs/agent-portability.zh.md`：opencode 与 Gemini 行补充 `/specs`。
+
+## 2026-08-01
+
+### 采纳 Kiro 方法论技术（对比 `references/kiro/`）
+
+对比 `references/kiro/`（spec-driven 方法论技能集）后，保持"单技能 + 紧凑规则集"架构不变，采纳其三项技术深度改进：
+
+- **设计新增 Key Decisions（ADR 段）**：`design.md` 增加"关键决策"节（上下文 / 含优缺点与工作量的备选方案 / 选定方案 / 理由）。同步到 `references/file-templates.md`、`references/prompt-templates.md`、`rules/specs-workflow.md`、`commands/specs-design.toml`、`SKILL.md`。
+- **任务新增排序策略**：`tasks.md` 要求说明所选排序策略（Foundation-First / Feature-Slice / Risk-First / Hybrid）。同步到 `references/prompt-templates.md`、`references/file-templates.md`、`rules/specs-workflow.md`、`commands/specs-tasks.toml`、`SKILL.md`。
+- **需求扩展 EARS 变体**：验收标准句式补充复合 `AND` / `OR` 条件以及基于状态、性能与安全类的变体。同步到 `references/prompt-templates.md`、`references/file-templates.md`、`rules/specs-workflow.md`、`commands/specs-requirements.toml`、`SKILL.md`。
+- **新增 `references/checklists.md`**：三阶段（requirements / design / tasks）质量验收清单，逐条可判定通过/失败，避免"user-friendly"这类模糊项；`SKILL.md` / `SKILL.zh.md` Step 2 增加该链接。
+- 全部变更同步中文镜像 `src/`（`SKILL.zh.md`、`src/rules/specs-workflow.zh.md`、`src/commands/*.zh.toml`），并重新生成全部规则适配器与 `.opencode/` / `.claude/` 指令；`node scripts/check-sync.js` 通过。
+- README / README.zh 的 `references/` 描述补入"质量清单"。
+
 ## 2026-07-31
 
 ### 多工具适配（ponytail 风格）

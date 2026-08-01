@@ -9,8 +9,7 @@ Load the specs-workflow skill (skill tool, name `specs-workflow`), then read `re
    - An "Execution Order / Dependencies" section
    - A "Change Log" table with `Date | Change` columns
    - If there are no modules yet, leave the status table with its header row only and note the status value legend
-2. Create an empty `.specs/archive/` directory.
-3. Do NOT create any module directories yet.
+2. Do NOT create any module directories yet.
 
 Match the template's structure and wording exactly. Do not invent status values or extra sections.
 '''

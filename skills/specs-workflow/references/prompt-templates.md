@@ -18,7 +18,11 @@ For each `Requirement N`:
 
 1. **Title** — a readable capability title starting with a verb (e.g. "Checkbox checking with indeterminate state"), not a component name.
 2. **User Story** — fill all three parts: *As a `<role>` / I want `<capability>` / so that `<value>`*. The value clause must explain *why*, not restate the capability.
-3. **Acceptance Criteria** — every criterion must be machine-testable. Use the `THE <System> SHALL` / `WHEN` / `IF`/`WHILE` forms. Cover three cases in total:
+3. **Acceptance Criteria** — every criterion must be machine-testable. Use the `THE <System> SHALL` / `WHEN` / `IF` / `WHILE` forms, plus composite `AND` / `OR` conditions and these variants when the scenario calls for them:
+   - state-based: `WHEN <system> is in <state>, THEN <system> SHALL <behavior>`
+   - performance: `WHEN <user action>, THEN <system> SHALL <respond within X seconds/milliseconds>`
+   - security: `IF <authentication condition>, THEN <system> SHALL <security response>`
+   Cover three cases in total:
    - happy path (the normal behavior)
    - boundary conditions (empty, single, max, first/last, no-op)
    - error/exclusion cases (disabled states, invalid input, failure paths)
@@ -42,6 +46,10 @@ For each core component: interface, responsibility, and core logic in structured
 
 List the types, their fields, literal union values, and defaults. State which fields are optional and what an omitted field means.
 
+### Key Decisions
+
+Record every decision that involved a real trade-off. For each: the **Context** (situation that forced the decision), the **Options Considered** with pros/cons/effort for each, the **Decision** (chosen option), and a **Rationale** explaining why it beats the alternatives. Do not pad with obvious choices; if the right answer is forced by the requirements, say so in one line.
+
 ### Error Handling
 
 Fill a scenario/strategy table covering: exceptional inputs, disabled/empty states, async failures, and misuse (e.g. used outside a provider). Each row must state the actual handling strategy, not just acknowledge the scenario.
@@ -55,6 +63,11 @@ Each property is a formal, machine-verifiable statement about what the system sh
 ### Task breakdown
 
 - Split phases by **dependency**, not by time or file order.
+- Choose a sequencing strategy and state it in the Overview:
+  - **Foundation-First** — core interfaces/data models before dependent components (new or complex systems)
+  - **Feature-Slice** — complete vertical slices end-to-end (MVP, early validation)
+  - **Risk-First** — tackle the most uncertain parts first (high-uncertainty, proof-of-concept)
+  - **Hybrid** — minimal foundation, then the highest-value/highest-risk slice, then expand (default)
 - Every task references the requirement clauses it implements: `_Requirements: x.y, x.z_`.
 - Mark optional/MVP-skippable subtasks with `*`.
 - Include **Checkpoint** tasks at meaningful milestones that run the test suite/build and surface issues early.

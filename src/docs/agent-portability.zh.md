@@ -6,9 +6,9 @@ Specs-workflow 是可移植的 AI 技能分发。核心行为在 `skills/specs-w
 
 | 宿主 | 文件 | 说明 |
 |------|------|------|
-| opencode | `.opencode/commands/*.md`、`skills/specs-workflow/` | 斜杠指令 `/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks`。技能通过 skill 工具按需加载。 |
+| opencode | `.opencode/commands/*.md`、`skills/specs-workflow/` | 斜杠指令 `/specs`、`/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks`。技能通过 skill 工具按需加载。 |
 | Claude Code | `.claude/commands/*.md`、`skills/specs-workflow/` | 自定义斜杠指令；可用时按需加载技能。 |
-| Gemini CLI | `commands/*.toml` | 自动发现的自定义指令（`/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks`）；`{{args}}` 为参数占位符。 |
+| Gemini CLI | `commands/*.toml` | 自动发现的自定义指令（`/specs`、`/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks`）；`{{args}}` 为参数占位符。 |
 | Cursor | `.cursor/rules/specs-workflow.mdc` | 常驻项目规则。 |
 | Windsurf | `.windsurf/rules/specs-workflow.md` | 项目规则。 |
 | Cline | `.clinerules/specs-workflow.md` | 项目规则。 |

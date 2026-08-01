@@ -6,9 +6,9 @@ Specs-workflow is an agent-portable skill distribution. The behavior lives in `s
 
 | Host | Files | Notes |
 |------|-------|-------|
-| opencode | `.opencode/commands/*.md`, `skills/specs-workflow/` | Slash commands `/specs-init`, `/specs-requirements`, `/specs-design`, `/specs-tasks`. The skill is loaded on demand via the skill tool. |
+| opencode | `.opencode/commands/*.md`, `skills/specs-workflow/` | Slash commands `/specs`, `/specs-init`, `/specs-requirements`, `/specs-design`, `/specs-tasks`. The skill is loaded on demand via the skill tool. |
 | Claude Code | `.claude/commands/*.md`, `skills/specs-workflow/` | Custom slash commands; the skill is loaded on demand when available. |
-| Gemini CLI | `commands/*.toml` | Custom commands auto-discovered (`/specs-init`, `/specs-requirements`, `/specs-design`, `/specs-tasks`); `{{args}}` is the argument placeholder. |
+| Gemini CLI | `commands/*.toml` | Custom commands auto-discovered (`/specs`, `/specs-init`, `/specs-requirements`, `/specs-design`, `/specs-tasks`); `{{args}}` is the argument placeholder. |
 | Cursor | `.cursor/rules/specs-workflow.mdc` | Always-on project rule. |
 | Windsurf | `.windsurf/rules/specs-workflow.md` | Project rule. |
 | Cline | `.clinerules/specs-workflow.md` | Project rule. |

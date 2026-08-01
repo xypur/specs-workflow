@@ -10,6 +10,7 @@ Follow these rules:
 - **Architecture**: layers/modules and data flow. Use a Mermaid diagram. Explain *why* the system is split this way, not just how.
 - **Components / Composables**: for each core component — interface, responsibility, and core logic in structured pseudocode. Explain the trade-offs and constraints behind each choice, highlight state transitions and core branching logic.
 - **Interfaces & Data Models**: types, fields, literal union values, defaults, and which fields are optional and what omission means.
+- **Key Decisions**: for each decision with a real trade-off (e.g. controlled vs uncontrolled, headless vs styled) — context, options considered with pros/cons/effort, the chosen option, and the rationale for why it beats the alternatives. Do not pad with obvious choices.
 - **Error Handling**: a scenario/handling table covering exceptional inputs, empty/disabled states, async failures, and misuse (e.g. used outside a provider).
 - **Correctness Properties**: formal statements in the `*For any* <precondition>, <conclusion>` form, each marked `**Validates: Requirements x.y**`. Every property must be checkable by a test; if it cannot be asserted, it is not a property.
 

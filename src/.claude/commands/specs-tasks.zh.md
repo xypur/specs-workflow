@@ -8,7 +8,7 @@ description: 创建或更新模块的 tasks.md
 
 遵循以下规则：
 
-- **Overview（概述）**：分阶段实现思路，并明确验证方式。
+- **Overview（概述）**：分阶段实现思路，并明确验证方式。说明你选择的排序策略——Foundation-First（新/复杂系统）、Feature-Slice（MVP / 早期验证）、Risk-First（高不确定性）、Hybrid（默认）——以及原因。
 - **Tasks（任务）**：层级任务按 `N.M` 编号（与需求编号解耦），按**依赖**划分，而非按时间或文件顺序。每条任务用 `_Requirements: x.y, x.z_` 引用其实现的需求条款。可选 / MVP 可跳过的子任务用 `*` 标注。
 - **Checkpoints（检查点）**：在有意义的里程碑处添加检查点任务，运行测试/构建并尽早暴露问题。
 - **Task Dependency Graph（任务依赖图）**：将各阶段表达为有序 waves（JSON），使执行顺序无歧义。

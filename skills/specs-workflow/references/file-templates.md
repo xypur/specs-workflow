@@ -17,7 +17,7 @@ Organized by functional module, each module is a self-contained directory (requi
 | tree | design | shared | Tree component |
 | modal | draft | - | Modal dialog |
 
-Status values: `draft` → `design` → `implementing` → `implemented` → `archived`
+Status values: `draft` → `design` → `implementing` → `implemented` → `archived`. Archived modules stay listed with status `archived`; their directories are not moved.
 
 ## Execution Order / Dependencies
 
@@ -54,6 +54,8 @@ One sentence describing what this module is and what problem it solves.
 1. THE <System> SHALL <behavior>。
 2. WHEN <condition>，THE <System> SHALL <behavior>。
 3. IF <condition>，THEN THE <System> SHALL <behavior>。
+4. WHEN <event> AND <additional condition>，THEN THE <System> SHALL <behavior>。
+5. WHEN <system> is in <state>，THEN THE <System> SHALL <behavior>。
 ```
 
 ## `<module>/design.md`
@@ -76,6 +78,22 @@ Interface, responsibility, and core logic of each core component (in structured 
 ## Interfaces & Data Models
 
 Type definitions and data structures.
+
+## Key Decisions
+
+```markdown
+### Decision 1: <Decision Title>
+
+**Context:** <situation requiring the decision>
+
+**Options Considered:**
+- **Option A: <name>** — Pros: <benefits> / Cons: <drawbacks> / Effort: <low|medium|high>
+- **Option B: <name>** — Pros: <benefits> / Cons: <drawbacks> / Effort: <low|medium|high>
+
+**Decision:** <chosen option>
+
+**Rationale:** <why it beats the alternatives>
+```
 
 ## Error Handling
 
@@ -117,6 +135,7 @@ Phased implementation approach with explicit verification methods.
 ## Notes
 
 - Subtasks marked with `*` are optional and can be skipped in the MVP phase
+- Pick a sequencing strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid) and state it in the Overview
 - Every task references requirement clauses to guarantee traceability
 
 ## Task Dependency Graph

@@ -6,7 +6,7 @@
 
 ## 包含内容
 
-- **`skills/specs-workflow/`** — 完整技能（`SKILL.md` + `references/`，含文件模板、提示深度指引与追溯示例）。由支持技能的代理按需加载。
+- **`skills/specs-workflow/`** — 完整技能（`SKILL.md` + `references/`，含文件模板、提示深度指引、质量清单与追溯示例）。由支持技能的代理按需加载。
 - **`commands/*.toml`** — 命令提示词规范源（Gemini CLI 自定义指令）。
 - **`rules/specs-workflow.md`** — 紧凑常驻规则集规范源（强制规则 + 文档格式 + 禁止事项）。
 - **适配器** — 上述内容的各工具副本。
@@ -15,9 +15,9 @@
 
 | 工具 | 方式 | 得到什么 |
 |------|------|----------|
-| opencode | 将 `.opencode/commands/*.md` 复制到项目的 `.opencode/commands/`（或全局 `~/.config/opencode/commands/`） | `/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks` |
-| Claude Code | 将 `.claude/commands/*.md` 复制到项目的 `.claude/commands/` | 同样的四个斜杠指令 |
-| Gemini CLI | 将 `commands/*.toml` 复制到项目的 `commands/` | 同样的四个斜杠指令 |
+| opencode | 将 `.opencode/commands/*.md` 复制到项目的 `.opencode/commands/`（或全局 `~/.config/opencode/commands/`） | `/specs`、`/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks` |
+| Claude Code | 将 `.claude/commands/*.md` 复制到项目的 `.claude/commands/` | 同样的五个斜杠指令 |
+| Gemini CLI | 将 `commands/*.toml` 复制到项目的 `commands/` | 同样的五个斜杠指令 |
 | Cursor | 将 `.cursor/rules/specs-workflow.mdc` 复制到项目的 `.cursor/rules/` | 常驻的规范先行规则 |
 | Windsurf | 将 `.windsurf/rules/specs-workflow.md` 复制到项目的 `.windsurf/rules/` | 常驻的规范先行规则 |
 | Cline | 将 `.clinerules/specs-workflow.md` 复制到项目的 `.clinerules/` | 常驻的规范先行规则 |
@@ -34,7 +34,8 @@
 
 | 指令 | 作用 |
 |------|------|
-| `/specs-init [<dir>]` | 初始化 `.specs/`（README 索引 + 状态总表、`archive/`） |
+| `/specs <需求描述>` | 统一入口：描述功能，一次性为推导出的模块创建四个 spec 文档。下列指令是其分步 / 单文档变体。 |
+| `/specs-init [<dir>]` | 初始化 `.specs/`（README 索引 + 状态总表） |
 | `/specs-requirements <module>` | 创建/更新模块的 `requirements.md` |
 | `/specs-design <module>` | 创建/更新模块的 `design.md` |
 | `/specs-tasks <module>` | 创建/更新模块的 `tasks.md` |

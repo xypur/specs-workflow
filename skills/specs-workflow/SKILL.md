@@ -1,6 +1,6 @@
 ---
 name: specs-workflow
-description: "Spec-driven workflow for AI coding tasks. Use when starting or continuing feature/module work in a project and you need to set up or follow a .specs/ convention: create requirements/design/tasks/CHANGELOG docs before writing code, keep requirements↔design↔tasks traceable, sync the .specs/README.md status table, and archive completed modules."
+description: "Spec-driven workflow for AI coding tasks. Use when starting or continuing feature/module work in a project and you need to set up or follow a .specs/ convention: create requirements/design/tasks/CHANGELOG docs before writing code, keep requirements↔design↔tasks traceable, sync the .specs/README.md status table, and mark completed modules as archived."
 license: MIT
 ---
 
@@ -16,7 +16,7 @@ Use this skill when the user:
 - Continues work on a project that already has a `.specs/` directory and needs to follow its conventions
 - Wants requirements, design decisions, and implementation tasks to stay traceable to each other
 - Needs to decide module status, dependencies, or implementation order in `.specs/README.md`
-- Finishes a module and needs to archive it
+- Finishes a module and needs to mark it as archived
 - Redesigns a module without creating scattered version documents
 
 ## Workflow
@@ -27,19 +27,19 @@ If `.specs/` already exists, read `.specs/README.md` first to learn the module s
 
 ### Step 2: Create Module Documents Before Coding
 
-Before writing any code for a new module or feature, create `.specs/<module>/` containing `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md`, and fill in the requirements. Add a row for the module in the `.specs/README.md` status table. Use the skeletons in [references/file-templates.md](references/file-templates.md) for structure, the per-section prompting guidance in [references/prompt-templates.md](references/prompt-templates.md) for depth, and the [references/examples/traceability.md](references/examples/traceability.md) example for the exact traceability format.
+Before writing any code for a new module or feature, create `.specs/<module>/` containing `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md`, and fill in the requirements. Add a row for the module in the `.specs/README.md` status table. Use the skeletons in [references/file-templates.md](references/file-templates.md) for structure, the per-section prompting guidance in [references/prompt-templates.md](references/prompt-templates.md) for depth, the quality gates in [references/checklists.md](references/checklists.md) for acceptance, and the [references/examples/traceability.md](references/examples/traceability.md) example for the exact traceability format.
 
 ### Step 3: Write Requirements
 
-Document what the system must do in `requirements.md`. Number each requirement as `Requirement N` (integer, incrementing per module), each with a user story and acceptance criteria numbered `N.M`. Write acceptance criteria in SHALL / WHEN / IF form so they are testable.
+Document what the system must do in `requirements.md`. Number each requirement as `Requirement N` (integer, incrementing per module), each with a user story and acceptance criteria numbered `N.M`. Write acceptance criteria in SHALL / WHEN / IF / WHILE form, plus composite `AND` / `OR` conditions and state-based, performance, and security variants, so they are testable.
 
 ### Step 4: Write the Design
 
-Document how the system is built in `design.md`: architecture, data flow, component interfaces, data models, and error handling. For every correctness guarantee, add a **Correctness Property** and mark it with `**Validates: Requirements x.y**` so the design maps back to the requirements.
+Document how the system is built in `design.md`: architecture, data flow, component interfaces, data models, error handling, and the key decisions you made (context, options considered, chosen option, rationale). For every correctness guarantee, add a **Correctness Property** and mark it with `**Validates: Requirements x.y**` so the design maps back to the requirements.
 
 ### Step 5: Write the Task Plan
 
-Break the implementation into hierarchical tasks numbered `N.M` (independent of requirement numbers) in `tasks.md`. Every task references the requirements it implements with `_Requirements: x.y, x.z_`. Include a Task Dependency Graph (waves) and checkpoint tasks that run tests/builds at meaningful milestones.
+Break the implementation into hierarchical tasks numbered `N.M` (independent of requirement numbers) in `tasks.md`, sequenced by a stated strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid). Every task references the requirements it implements with `_Requirements: x.y, x.z_`. Include a Task Dependency Graph (waves) and checkpoint tasks that run tests/builds at meaningful milestones.
 
 ### Step 6: Implement and Sync Progress
 
@@ -49,16 +49,15 @@ Execute tasks in dependency order. Check off completed tasks with `- [x]` and ke
 
 When a design changes, append the change to `<module>/CHANGELOG.md` with the date, what changed, and the rationale. Never create `v1.md` / `v2.md` version files.
 
-### Step 8: Archive Completed Modules
+### Step 8: Mark Completed Modules as Archived
 
-When a module is accepted and finished, move its entire directory into `.specs/archive/` and set its status to `archived` in the status table.
+When a module is accepted and finished, set its status to `archived` in the `.specs/README.md` status table. The module directory stays in place; git history preserves the documents.
 
 ## Directory Structure
 
 ```
 .specs/
 ├── README.md            # Global index + module status table + dependencies/priority
-├── archive/             # Archived directories for finished/abandoned modules
 └── <module>/
     ├── requirements.md  # Requirements (Requirement N + acceptance criteria)
     ├── design.md        # Design (architecture/data flow/interfaces + Correctness Properties)
@@ -75,7 +74,7 @@ When a module is accepted and finished, move its entire directory into `.specs/a
 | 3 | Record design revisions in `CHANGELOG.md`; never create `v1.md`/`v2.md` files |
 | 4 | Shared facilities reused across modules get their own spec dir under `.specs/shared/` |
 | 5 | Check off tasks `- [x]` and sync the `.specs/README.md` status table as you go |
-| 6 | Move accepted modules into `.specs/archive/` |
+| 6 | Mark accepted modules `archived` in the `.specs/README.md` status table |
 
 ## Naming Conventions
 

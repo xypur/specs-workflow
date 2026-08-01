@@ -28,7 +28,7 @@ function check(ok, msg) {
   }
 }
 
-const COMMANDS = ['specs-init', 'specs-requirements', 'specs-design', 'specs-tasks'];
+const COMMANDS = ['specs', 'specs-init', 'specs-requirements', 'specs-design', 'specs-tasks'];
 
 // Languages: en (repo root) and zh (src/ mirrors, .zh.* suffix).
 const languages = [

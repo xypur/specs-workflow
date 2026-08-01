@@ -6,7 +6,7 @@ This repo is a portable distribution: one skill + one compact ruleset, shipped a
 
 ## What's in the box
 
-- **`skills/specs-workflow/`** — the full skill (`SKILL.md` + `references/` with file templates, prompting guidance, and a traceability example). Loaded on demand by skill-capable agents.
+- **`skills/specs-workflow/`** — the full skill (`SKILL.md` + `references/` with file templates, prompting guidance, quality checklists, and a traceability example). Loaded on demand by skill-capable agents.
 - **`commands/*.toml`** — canonical command prompts (Gemini CLI custom commands).
 - **`rules/specs-workflow.md`** — canonical compact always-on ruleset (mandatory rules + document formats + prohibitions).
 - **Adapters** — tool-specific copies of the above.
@@ -15,9 +15,9 @@ This repo is a portable distribution: one skill + one compact ruleset, shipped a
 
 | Tool | How | What you get |
 |------|-----|--------------|
-| opencode | Copy `.opencode/commands/*.md` into the project's `.opencode/commands/` (or global `~/.config/opencode/commands/`) | `/specs-init`, `/specs-requirements`, `/specs-design`, `/specs-tasks` |
-| Claude Code | Copy `.claude/commands/*.md` into the project's `.claude/commands/` | Same four slash commands |
-| Gemini CLI | Copy `commands/*.toml` into the project's `commands/` | Same four slash commands |
+| opencode | Copy `.opencode/commands/*.md` into the project's `.opencode/commands/` (or global `~/.config/opencode/commands/`) | `/specs`, `/specs-init`, `/specs-requirements`, `/specs-design`, `/specs-tasks` |
+| Claude Code | Copy `.claude/commands/*.md` into the project's `.claude/commands/` | Same five slash commands |
+| Gemini CLI | Copy `commands/*.toml` into the project's `commands/` | Same five slash commands |
 | Cursor | Copy `.cursor/rules/specs-workflow.mdc` into the project's `.cursor/rules/` | Always-on spec-first rule |
 | Windsurf | Copy `.windsurf/rules/specs-workflow.md` into the project's `.windsurf/rules/` | Always-on spec-first rule |
 | Cline | Copy `.clinerules/specs-workflow.md` into the project's `.clinerules/` | Always-on spec-first rule |
@@ -34,7 +34,8 @@ See [docs/agent-portability.md](docs/agent-portability.md) for the full host →
 
 | Command | What it does |
 |---------|--------------|
-| `/specs-init [<dir>]` | Bootstrap `.specs/` (README index + status table, `archive/`) |
+| `/specs <description>` | Unified entry: describe the feature, creates all four spec documents for the derived module in one pass. The commands below are the step-by-step / single-document variants. |
+| `/specs-init [<dir>]` | Bootstrap `.specs/` (README index + status table) |
 | `/specs-requirements <module>` | Create/update a module's `requirements.md` |
 | `/specs-design <module>` | Create/update a module's `design.md` |
 | `/specs-tasks <module>` | Create/update a module's `tasks.md` |

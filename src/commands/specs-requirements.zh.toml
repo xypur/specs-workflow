@@ -11,7 +11,7 @@ prompt = '''
 - **Requirements（需求）**：每条编号为 `Requirement N`（整数，模块内从 1 递增），包含：
   - 以动词开头的可读能力标题
   - 完整的 User Story，三段式齐全：*As a `<角色>`, I want `<能力>`, so that `<价值>`* —— 价值从句必须说明"为什么"，而非复述能力本身
-  - 验收标准按 `N.M` 编号，使用 `THE <System> SHALL` / `WHEN` / `IF` / `WHILE` 句式，每一条都必须可被机器测试，整体覆盖正常路径、边界条件与错误/排除场景
+  - 验收标准按 `N.M` 编号，使用 `THE <System> SHALL` / `WHEN` / `IF` / `WHILE` 句式，可补充复合 `AND` / `OR` 条件以及基于状态、性能与安全类的变体，每一条都必须可被机器测试，整体覆盖正常路径、边界条件与错误/排除场景
 
 若 `.specs/{{args}}/requirements.md` 已存在，保留原有内容进行扩展，而不是重写。若 `.specs/README.md` 存在且状态总表中没有模块 `{{args}}`，为其添加一行。
 '''

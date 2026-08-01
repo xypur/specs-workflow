@@ -6,7 +6,7 @@ Load the specs-workflow skill (skill tool, name `specs-workflow`), then read fro
 
 Follow these rules:
 
-- **Overview**: phased implementation approach with explicit verification methods.
+- **Overview**: phased implementation approach with explicit verification methods. State the sequencing strategy you chose — Foundation-First (new/complex systems), Feature-Slice (MVP/early validation), Risk-First (high uncertainty), Hybrid (default) — and why.
 - **Tasks**: hierarchical tasks numbered `N.M` (decoupled from requirement numbers), split by **dependency**, not by time or file order. Every task references the requirement clauses it implements with `_Requirements: x.y, x.z_`. Mark optional / MVP-skippable subtasks with `*`.
 - **Checkpoints**: at meaningful milestones, add checkpoint tasks that run the test suite/build and surface issues early.
 - **Task Dependency Graph**: express the phases as ordered waves in JSON so execution order is unambiguous.
