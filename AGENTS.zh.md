@@ -16,7 +16,7 @@ skills/
     CHANGES.md            # 修改变更日志
     references/           # 可选：详细参考文档
       ...
-src/
+zh/
   <skill-name>/           # 技能文档的中文版本
     SKILL.zh.md           # 中文技能定义，内容与 skills/<skill-name>/SKILL.md 相同
 commands/*.toml           # 命令提示词规范源（Gemini CLI 自定义指令）
@@ -44,7 +44,7 @@ example/                  # 参考示例（已 gitignore），不属于本项目
 ## 中英文同步规则
 
 - **英文版本**：`skills/<skill-name>/SKILL.md` — 可分发的规范技能文件。
-- **中文版本**：`src/<skill-name>/SKILL.zh.md` — 面向中文用户，单独存放以保持 `skills/` 目录整洁。
+- **中文版本**：`zh/<skill-name>/SKILL.zh.md` — 面向中文用户，单独存放以保持 `skills/` 目录整洁。
 - **修改时**：必须同时更新两个文件。内容必须在结构和语义上完全一致 — 相同的章节、相同的表格、相同的代码块、相同的示例。仅语言不同。
 
 ## 技能文档格式
@@ -122,16 +122,16 @@ description: "<一句话描述何时使用该技能，包括触发场景>"
    - `GENERATION.md`（元数据：来源、git SHA、生成日期）
    - `CHANGES.md`（中文变更日志）
    - `references/`（可选，用于补充文档）
-2. 创建 `src/<skill-name>/`，包含：
+2. 创建 `zh/<skill-name>/`，包含：
    - `SKILL.zh.md`（中文，与英文版本结构一致）
-3. 更新 `README.md` 和 `README.zh.md`，添加新技能条目和安装命令。
+3. 更新 `README.md` 和 `README.zh-CN.md`，添加新技能条目和安装命令。
 
 ### 修改现有技能
 
 1. 首先编辑 `skills/<skill-name>/SKILL.md`（英文）。
-2. 将所有更改同步到 `src/<skill-name>/SKILL.zh.md`（中文）。
+2. 将所有更改同步到 `zh/<skill-name>/SKILL.zh.md`（中文）。
 3. 更新 `skills/<skill-name>/CHANGES.md`，记录修改。
-4. 如果技能的范围、描述或安装指令发生变化，更新 `README.md` 和 `README.zh.md`。
+4. 如果技能的范围、描述或安装指令发生变化，更新 `README.md` 和 `README.zh-CN.md`。
 
 ### 验证一致性
 
@@ -139,7 +139,7 @@ description: "<一句话描述何时使用该技能，包括触发场景>"
 
 ```bash
 grep -n '^##' skills/<skill-name>/SKILL.md
-grep -n '^##' src/<skill-name>/SKILL.zh.md
+grep -n '^##' zh/<skill-name>/SKILL.zh.md
 ```
 
 行数和章节编号应该匹配。

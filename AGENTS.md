@@ -16,7 +16,7 @@ skills/
     CHANGES.md            # Modification changelog
     references/           # Optional: detailed reference documents
       ...
-src/
+zh/
   <skill-name>/           # Chinese versions of skill documents
     SKILL.zh.md           # Chinese skill definition, same content as skills/<skill-name>/SKILL.md
 commands/*.toml           # Canonical command prompts (Gemini CLI custom commands)
@@ -44,7 +44,7 @@ example/                  # Reference examples (gitignored), not part of this pr
 ## Chinese/English Sync Rule
 
 - **English version**: `skills/<skill-name>/SKILL.md` — the distributable, canonical skill file.
-- **Chinese version**: `src/<skill-name>/SKILL.zh.md` — for Chinese-speaking users, stored separately to keep the `skills/` directory clean.
+- **Chinese version**: `zh/<skill-name>/SKILL.zh.md` — for Chinese-speaking users, stored separately to keep the `skills/` directory clean.
 - **When modifying**: Always update both files simultaneously. Content must be structurally and semantically identical — same sections, same tables, same code blocks, same examples. Only the language differs.
 
 ## Skill Document Format
@@ -122,16 +122,16 @@ Skills are loaded on-demand — the agent sees only the skill name and descripti
    - `GENERATION.md` (metadata: source, git SHA, generation date)
    - `CHANGES.md` (changelog in Chinese)
    - `references/` (optional, for supplementary docs)
-2. Create `src/<skill-name>/` with:
+2. Create `zh/<skill-name>/` with:
    - `SKILL.zh.md` (Chinese, structurally identical to the English version)
-3. Update `README.md` and `README.zh.md` with the new skill entry and install command.
+3. Update `README.md` and `README.zh-CN.md` with the new skill entry and install command.
 
 ### Modifying an Existing Skill
 
 1. Edit `skills/<skill-name>/SKILL.md` (English) first.
-2. Synchronize all changes to `src/<skill-name>/SKILL.zh.md` (Chinese).
+2. Synchronize all changes to `zh/<skill-name>/SKILL.zh.md` (Chinese).
 3. Update `skills/<skill-name>/CHANGES.md` with the modification record.
-4. If the skill's scope, description, or install instructions change, update `README.md` and `README.zh.md`.
+4. If the skill's scope, description, or install instructions change, update `README.md` and `README.zh-CN.md`.
 
 ### Verifying Consistency
 
@@ -139,7 +139,7 @@ After modifying a skill, compare section headers to ensure both language version
 
 ```bash
 grep -n '^##' skills/<skill-name>/SKILL.md
-grep -n '^##' src/<skill-name>/SKILL.zh.md
+grep -n '^##' zh/<skill-name>/SKILL.zh.md
 ```
 
 Line counts and section numbers should match.

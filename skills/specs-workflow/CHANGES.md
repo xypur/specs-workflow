@@ -2,6 +2,29 @@
 
 ## 2026-08-01
 
+### `src/` 改名为 `zh/`
+
+精简后 `src/` 仅剩两个中文文档，不再是"源码"目录，改名为 `zh/` 以准确表达其作用。
+
+- `git mv src zh`：`src/SKILL.zh.md` → `zh/SKILL.zh.md`、`src/rules/specs-workflow.zh.md` → `zh/rules/specs-workflow.zh.md`。
+- `AGENTS.md` / `AGENTS.zh.md`：结构树与 `src/<skill-name>/` 相关引用（共 4 处）改为 `zh/<skill-name>/`。
+- `docs/agent-portability.zh.md`：`位于 src/` 改为 `位于 zh/`。
+- `GENERATION.md` 的 Source（指向旧 `src/specs-workflow/...`）为生成时元数据，保留。
+
+## 2026-08-01
+
+### 精简 `src/` 中文镜像
+
+`src/` 中的中文副本仅保留内容层的两个文档，删除命令/适配器/文档镜像（这些 zh 文件无任何宿主自动加载，仅作人类参考，且正文与规则集重复）：
+
+- **保留**：`src/SKILL.zh.md`（中文技能定义）、`src/rules/specs-workflow.zh.md`（中文规则集）。
+- **删除**（23 个）：`src/commands/*.zh.toml`、`src/.opencode/commands/*.zh.md`、`src/.claude/commands/*.zh.md`、7 个 zh 规则适配器（`.cursor/.windsurf/.clinerules/.kiro/.agents/.qoder/.github`）。
+- **移动**：`src/docs/agent-portability.zh.md` → `docs/agent-portability.zh.md`，并更新其中对 `src/` 镜像与"中文链"的过时描述。
+- `scripts/check-sync.js`：移除 ZH 校验链（`languages` 数组改为单一 EN 链），日志同步。
+- `AGENTS.md` / `AGENTS.zh.md`：`README.zh.md` 引用更正为 `README.zh-CN.md`。
+
+## 2026-08-01
+
 ### `.specs/README.md` 改名为 `.specs/index.md`
 
 将 `.specs/` 约定中的入口索引文件从 `README.md` 改名为 `index.md`（其本质是"全局索引 + 状态总表"，而非项目简介；`index.md` 更贴合语义）。不兼容旧的 `.specs/README.md`，已有项目需手动迁移。

@@ -25,7 +25,7 @@ Specs-workflow 是可移植的 AI 技能分发。核心行为在 `skills/specs-w
 | `rules/specs-workflow.md` | 紧凑规则集规范源；所有规则适配器原样复制其正文（仅宿主 frontmatter 不同）。 |
 | `skills/specs-workflow/SKILL.md` | 完整技能定义，含模板与提示深度。 |
 
-中文副本位于 `src/`（`.zh.*` 后缀），仅供中文用户参考，不被各宿主自动加载。
+中文参考：`SKILL.zh.md` 与 `rules/specs-workflow.zh.md` 位于 `zh/`，仅供中文用户参考，不被各宿主自动加载。
 
 ## 同步
 
@@ -35,4 +35,4 @@ Specs-workflow 是可移植的 AI 技能分发。核心行为在 `skills/specs-w
 node scripts/check-sync.js
 ```
 
-它验证：(a) 每个规则适配器正文等于 `rules/specs-workflow.md`（及 `src/` 中文链）；(b) 每个 `.opencode/` + `.claude/` 指令等于其 `commands/*.toml` 提示词。
+它验证：(a) 每个规则适配器正文等于 `rules/specs-workflow.md`；(b) 每个 `.opencode/` + `.claude/` 指令等于其 `commands/*.toml` 提示词。
