@@ -7,7 +7,7 @@
 
 ```
 .specs/
-├── README.md            # 全局索引 + 模块状态总表 + 依赖/优先级
+├── index.md            # 全局索引 + 模块状态总表 + 依赖/优先级
 └── <module>/
     ├── requirements.md  # 需求（编号 Requirement N + 验收标准）
     ├── design.md        # 设计（架构/数据流/接口 + Correctness Properties）
@@ -21,12 +21,12 @@
 2. **可追溯**：`tasks.md` 中每条任务引用需求编号（格式 `_Requirements: 3.5, 3.6_`）；`design.md` 中每条 Correctness Property 标注 `**Validates: Requirements x.y**`。
 3. **设计改版不建散文件**：设计变更追加到 `CHANGELOG.md`，不要创建 `v1.md` / `v2.md` 等版本文件。
 4. **共享设施单独成 spec**：被多个模块复用的基础设施（如 `useSelectionBehavior`、定位 composable）建独立目录 `.specs/shared/`，避免任务重复。
-5. **进度同步**：任务完成勾选 `- [x]`，同时更新 `.specs/README.md` 的模块状态总表。
-6. **归档**：模块验收完结后，在 `.specs/README.md` 状态总表中将其状态改为 `archived`，模块目录保留原位。
+5. **进度同步**：任务完成勾选 `- [x]`，同时更新 `.specs/index.md` 的模块状态总表。
+6. **归档**：模块验收完结后，在 `.specs/index.md` 状态总表中将其状态改为 `archived`，模块目录保留原位。
 
 ## 各文件骨架模板
 
-### .specs/README.md
+### .specs/index.md
 
 ```markdown
 # Specs 索引

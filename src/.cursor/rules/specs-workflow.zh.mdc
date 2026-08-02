@@ -10,12 +10,12 @@ alwaysApply: true
 
 ## 强制规则
 
-1. 编码之前，先创建 `.specs/<module>/`，包含 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md` 四个文件，并填好需求。在 `.specs/README.md` 状态总表中为模块添加一行。
+1. 编码之前，先创建 `.specs/<module>/`，包含 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md` 四个文件，并填好需求。在 `.specs/index.md` 状态总表中为模块添加一行。
 2. 保持可追溯：每条任务用 `_Requirements: x.y, x.z_` 引用其实现的需求条款；每条设计 Correctness Property 标注 `**Validates: Requirements x.y**`。不允许悬空引用。
 3. 设计改版记录到 `CHANGELOG.md`；绝不创建 `v1.md` / `v2.md` 版本文件。
 4. 被多个模块复用的共享设施单独建目录 `.specs/shared/`。
-5. 勾选已完成的任务 `- [x]`，并让 `.specs/README.md` 状态总表保持同步（`draft` → `design` → `implementing` → `implemented` → `archived`）。
-6. 模块验收完结后，在 `.specs/README.md` 状态总表中将其状态标记为 `archived`。模块目录保留原位，文档由 git 历史保存。
+5. 勾选已完成的任务 `- [x]`，并让 `.specs/index.md` 状态总表保持同步（`draft` → `design` → `implementing` → `implemented` → `archived`）。
+6. 模块验收完结后，在 `.specs/index.md` 状态总表中将其状态标记为 `archived`。模块目录保留原位，文档由 git 历史保存。
 
 ## 文档格式
 

@@ -15,4 +15,4 @@ Follow these rules:
   - A complete User Story with all three parts: *As a `<role>`, I want `<capability>`, so that `<value>`* — the value clause must explain *why*, not restate the capability
   - Acceptance Criteria numbered `N.M` in the `THE <System> SHALL` / `WHEN` / `IF` / `WHILE` forms, plus composite `AND` / `OR` conditions and state-based, performance, and security variants, every one machine-testable, together covering the happy path, boundary conditions, and error/exclusion cases
 
-If `.specs/$1/requirements.md` already exists, preserve its content and extend it rather than rewriting. If `.specs/README.md` exists and the module `$1` is not listed in its status table, add a row for it.
+If `.specs/$1/requirements.md` already exists, preserve its content and extend it rather than rewriting. If `.specs/index.md` exists and the module `$1` is not listed in its status table, add a row for it.

@@ -6,7 +6,7 @@ Create the `.specs/<module>/` for the feature described in `$1`, with all four d
 
 Derive a lowercase `kebab-case` module name from the description (e.g. "a user auth module with registration and OAuth" → `user-auth`). If you cannot derive one, ask the user. If the description lacks essential details — scope boundaries, edge cases, or constraints — ask 1–2 focused questions before writing; otherwise proceed directly.
 
-If `.specs/` does not exist yet, bootstrap it first (README.md index + status table) before creating the module.
+If `.specs/` does not exist yet, bootstrap it first (index.md + status table) before creating the module.
 
 Load the specs-workflow skill (skill tool, name `specs-workflow`), then read from the skill directory: `references/file-templates.md` (skeleton), `references/prompt-templates.md` (depth guidance), `references/checklists.md` (quality gates), and `references/examples/traceability.md` (traceability format), and follow them. If the skill is not available, follow the rules below.
 
@@ -16,6 +16,6 @@ Generate the documents in dependency order:
 2. **design.md** — read `requirements.md` first: Overview / Architecture (Mermaid, explain *why*) / Components & Composables / Interfaces & Data Models / Key Decisions (context, options, rationale) / Error Handling / Correctness Properties (`*For any* <precondition>, <conclusion>`, each marked `**Validates: Requirements x.y**`, no dangling references).
 3. **tasks.md** — read `requirements.md` first: hierarchical tasks numbered `N.M`, sequenced by a stated strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid), each referencing `_Requirements: x.y, x.z_`, checkpoint tasks, and a JSON Task Dependency Graph (waves).
 4. **CHANGELOG.md** — create with a header and no entries yet.
-5. Add a row for the module in the `.specs/README.md` status table with status `design` (requirements + design complete, ready for implementation) and append to the Change Log table.
+5. Add a row for the module in the `.specs/index.md` status table with status `design` (requirements + design complete, ready for implementation) and append to the Change Log table.
 
 Do not write any implementation code. If the module directory already exists, tell the user and extend the existing documents rather than overwriting. To update a single document later, use `/specs-requirements`, `/specs-design`, or `/specs-tasks`.

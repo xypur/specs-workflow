@@ -2,7 +2,7 @@
 
 Use these skeletons when creating `.specs/` documents. Copy each block into the corresponding file and fill in the content.
 
-## `.specs/README.md`
+## `.specs/index.md`
 
 ```markdown
 # Specs Index

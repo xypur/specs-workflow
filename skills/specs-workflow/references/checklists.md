@@ -32,4 +32,4 @@ Use these checklists as acceptance gates before a document is considered done. E
 - [ ] Checkpoint tasks run the test suite/build at meaningful milestones.
 - [ ] The Task Dependency Graph (JSON waves) lists every task and respects task dependencies.
 - [ ] The sequencing strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid) is stated in the Overview.
-- [ ] Completed tasks are checked off `- [x]`, and the `.specs/README.md` status table is in sync.
+- [ ] Completed tasks are checked off `- [x]`, and the `.specs/index.md` status table is in sync.

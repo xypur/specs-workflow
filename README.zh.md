@@ -1,6 +1,6 @@
 # specs-workflow
 
-面向 AI 编码助手的规范驱动工作流（spec-driven workflow）。在写代码之前，每个模块在 `.specs/` 下获得 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md`，保持相互可追溯，并通过 `.specs/README.md` 同步状态。
+面向 AI 编码助手的规范驱动工作流（spec-driven workflow）。在写代码之前，每个模块在 `.specs/` 下获得 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md`，保持相互可追溯，并通过 `.specs/index.md` 同步状态。
 
 本仓库是可移植分发：一个技能 + 一个紧凑规则集，以薄适配器的形式分发到多个 AI CLI 工具。
 
@@ -35,7 +35,7 @@
 | 指令 | 作用 |
 |------|------|
 | `/specs <需求描述>` | 统一入口：描述功能，一次性为推导出的模块创建四个 spec 文档。下列指令是其分步 / 单文档变体。 |
-| `/specs-init [<dir>]` | 初始化 `.specs/`（README 索引 + 状态总表） |
+| `/specs-init [<dir>]` | 初始化 `.specs/`（索引 + 状态总表） |
 | `/specs-requirements <module>` | 创建/更新模块的 `requirements.md` |
 | `/specs-design <module>` | 创建/更新模块的 `design.md` |
 | `/specs-tasks <module>` | 创建/更新模块的 `tasks.md` |

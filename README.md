@@ -1,6 +1,6 @@
 # specs-workflow
 
-Spec-driven workflow for AI coding assistants. Before code is written, every module gets `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md` under `.specs/`, kept traceable to each other and synced through `.specs/README.md`.
+Spec-driven workflow for AI coding assistants. Before code is written, every module gets `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md` under `.specs/`, kept traceable to each other and synced through `.specs/index.md`.
 
 This repo is a portable distribution: one skill + one compact ruleset, shipped as thin adapters for multiple AI CLI tools.
 
@@ -35,7 +35,7 @@ See [docs/agent-portability.md](docs/agent-portability.md) for the full host →
 | Command | What it does |
 |---------|--------------|
 | `/specs <description>` | Unified entry: describe the feature, creates all four spec documents for the derived module in one pass. The commands below are the step-by-step / single-document variants. |
-| `/specs-init [<dir>]` | Bootstrap `.specs/` (README index + status table) |
+| `/specs-init [<dir>]` | Bootstrap `.specs/` (index + status table) |
 | `/specs-requirements <module>` | Create/update a module's `requirements.md` |
 | `/specs-design <module>` | Create/update a module's `design.md` |
 | `/specs-tasks <module>` | Create/update a module's `tasks.md` |

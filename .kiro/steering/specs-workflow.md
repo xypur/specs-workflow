@@ -9,12 +9,12 @@ Work spec-first in this project. Before writing code for a new module or feature
 
 ## Mandatory Rules
 
-1. Before coding, create `.specs/<module>/` with `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md`, and fill in the requirements. Add a row for the module in the `.specs/README.md` status table.
+1. Before coding, create `.specs/<module>/` with `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md`, and fill in the requirements. Add a row for the module in the `.specs/index.md` status table.
 2. Keep traceability: every task references the requirement clauses it implements with `_Requirements: x.y, x.z_`; every design Correctness Property marks `**Validates: Requirements x.y**`. No dangling references.
 3. Record design revisions in `CHANGELOG.md`; never create `v1.md` / `v2.md` version files.
 4. Shared facilities reused by multiple modules get their own spec directory under `.specs/shared/`.
-5. Check off completed tasks `- [x]` and keep the `.specs/README.md` status table in sync (`draft` → `design` → `implementing` → `implemented` → `archived`).
-6. On acceptance, mark the module `archived` in the `.specs/README.md` status table. The module directory stays in place; git history preserves the documents.
+5. Check off completed tasks `- [x]` and keep the `.specs/index.md` status table in sync (`draft` → `design` → `implementing` → `implemented` → `archived`).
+6. On acceptance, mark the module `archived` in the `.specs/index.md` status table. The module directory stays in place; git history preserves the documents.
 
 ## Document Formats
 

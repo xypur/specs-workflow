@@ -2,6 +2,20 @@
 
 ## 2026-08-01
 
+### `.specs/README.md` 改名为 `.specs/index.md`
+
+将 `.specs/` 约定中的入口索引文件从 `README.md` 改名为 `index.md`（其本质是"全局索引 + 状态总表"，而非项目简介；`index.md` 更贴合语义）。不兼容旧的 `.specs/README.md`，已有项目需手动迁移。
+
+- `rules/specs-workflow.md` / `src/rules/specs-workflow.zh.md`：规则 1/5/6 中 `.specs/README.md` → `.specs/index.md`。
+- `SKILL.md` / `SKILL.zh.md`：description、When to Use、Step 1/2/6/8、目录结构树、强制规则表、Prohibitions 全部引用同步。
+- `references/file-templates.md`：节标题改为 `## .specs/index.md`；`references/checklists.md` 末尾检查项同步。
+- `specs-workflow.md`（根模板）：目录树、规则 5/6、`### .specs/index.md` 节标题同步。
+- `commands/specs-init.toml` / `src/...zh.toml`、`commands/specs.toml` / `src/...zh.toml`、`commands/specs-requirements.toml` / `src/...zh.toml`：相应引用同步。
+- README / README.zh：intro 与 `/specs-init` 行同步。
+- 全部规则适配器与 `.opencode/` / `.claude/` 指令重新生成；`node scripts/check-sync.js` 通过。
+
+## 2026-08-01
+
 ### 移除 `.specs/archive/` 物理归档，只保留 `archived` 状态标记
 
 原约定"验收完结后把整个模块目录移入 `.specs/archive/`"改为：在 `.specs/README.md` 状态总表中将模块状态标记为 `archived`，模块目录保留原位，文档由 git 历史保存。理由：与 git 历史冗余、物理移动破坏跨文档链接、状态列已足以下达信号、且与 `.specs/shared/` 依赖存在冲突。

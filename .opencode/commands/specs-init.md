@@ -6,7 +6,7 @@ Bootstrap the `.specs/` spec-driven workflow convention in this project.
 
 Load the specs-workflow skill (skill tool, name `specs-workflow`), then read `references/file-templates.md` from the skill directory and follow its skeleton. If the skill is not available, follow the rules below.
 
-1. Create `.specs/README.md` with:
+1. Create `.specs/index.md` with:
    - A "Module Status Table" with columns `Module | Status | Depends on | Notes`, using only the status values `draft` → `design` → `implementing` → `implemented` → `archived`
    - An "Execution Order / Dependencies" section
    - A "Change Log" table with `Date | Change` columns
