@@ -1,5 +1,7 @@
 # specs-workflow
 
+[English](./README.md) | 中文
+
 面向 AI 编码助手的规范驱动工作流（spec-driven workflow）。在写代码之前，每个模块在 `.specs/` 下获得 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md`，保持相互可追溯，并通过 `.specs/index.md` 同步状态。
 
 本仓库是可移植分发：一个技能 + 一个紧凑规则集，以薄适配器的形式分发到多个 AI CLI 工具。
@@ -26,6 +28,14 @@
 | GitHub Copilot | 将 `.github/copilot-instructions.md` 复制到仓库 | 仓库级规范先行指令 |
 | 通用代理 | 复制 `rules/specs-workflow.md` 或加载 `skills/specs-workflow/SKILL.md` | 规则集或完整技能 |
 
+### 技能
+
+使用 [Skills CLI](https://skills.sh/) 安装完整的 `specs-workflow` 技能：
+
+```bash
+npx skills add https://github.com/xypur/specs-workflow --skill specs-workflow
+```
+
 技能本身可用于任何支持技能的宿主（Claude Code、Codex、opencode、Gemini、Qoder、Devin 等）：把 `skills/specs-workflow/` 注册为技能，遇到 `.specs/` 相关工作即会激活。
 
 完整的宿主 → 文件映射见 [docs/agent-portability.md](docs/agent-portability.md)。
@@ -35,12 +45,12 @@
 | 指令 | 作用 |
 |------|------|
 | `/specs <需求描述>` | 统一入口：描述功能，一次性为推导出的模块创建四个 spec 文档。下列指令是其分步 / 单文档变体。 |
-| `/specs-init [<dir>]` | 初始化 `.specs/`（索引 + 状态总表） |
+| `/specs-init` | 初始化 `.specs/`（索引 + 状态总表） |
 | `/specs-requirements <module>` | 创建/更新模块的 `requirements.md` |
 | `/specs-design <module>` | 创建/更新模块的 `design.md` |
 | `/specs-tasks <module>` | 创建/更新模块的 `tasks.md` |
 
-`<module>` 参数随指令传入；若省略，代理会先询问。
+`/specs` 接收自由文本的 `<需求描述>`；若省略，代理会先询问。各 `<module>` 指令接收模块名；若省略，代理会先询问。
 
 ## 开发
 

@@ -1,5 +1,7 @@
 # specs-workflow
 
+English | [中文](./README.zh-CN.md)
+
 Spec-driven workflow for AI coding assistants. Before code is written, every module gets `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md` under `.specs/`, kept traceable to each other and synced through `.specs/index.md`.
 
 This repo is a portable distribution: one skill + one compact ruleset, shipped as thin adapters for multiple AI CLI tools.
@@ -26,6 +28,14 @@ This repo is a portable distribution: one skill + one compact ruleset, shipped a
 | GitHub Copilot | Copy `.github/copilot-instructions.md` into the repo | Repo-wide spec-first instructions |
 | Generic agents | Copy `rules/specs-workflow.md` or load `skills/specs-workflow/SKILL.md` | Ruleset or full skill |
 
+### Skill
+
+Install the full `specs-workflow` skill with the [Skills CLI](https://skills.sh/):
+
+```bash
+npx skills add https://github.com/xypur/specs-workflow --skill specs-workflow
+```
+
 The skill itself works in any skill-capable host (Claude Code, Codex, opencode, Gemini, Qoder, Devin, etc.): register `skills/specs-workflow/` as a skill and it activates on `.specs/` work.
 
 See [docs/agent-portability.md](docs/agent-portability.md) for the full host → file mapping.
@@ -35,12 +45,12 @@ See [docs/agent-portability.md](docs/agent-portability.md) for the full host →
 | Command | What it does |
 |---------|--------------|
 | `/specs <description>` | Unified entry: describe the feature, creates all four spec documents for the derived module in one pass. The commands below are the step-by-step / single-document variants. |
-| `/specs-init [<dir>]` | Bootstrap `.specs/` (index + status table) |
+| `/specs-init` | Bootstrap `.specs/` (index + status table) |
 | `/specs-requirements <module>` | Create/update a module's `requirements.md` |
 | `/specs-design <module>` | Create/update a module's `design.md` |
 | `/specs-tasks <module>` | Create/update a module's `tasks.md` |
 
-The `<module>` argument is passed to the command; if omitted, the agent asks for it.
+`/specs` takes a free-text `<description>` of the feature; if omitted, the agent asks for it. The `<module>` commands each take a module name; if omitted, the agent asks for it.
 
 ## Development
 
