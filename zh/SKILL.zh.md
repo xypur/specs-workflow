@@ -1,12 +1,30 @@
 ---
 name: specs-workflow
-description: "面向 AI 编码任务的规范驱动工作流（spec-driven workflow）。当你在项目中开始或继续某个功能/模块开发，需要建立或遵循 .specs/ 约定时使用：在写代码前先创建 requirements/design/tasks/CHANGELOG 文档，保持需求↔设计↔任务之间的可追溯性，同步 .specs/index.md 的状态总表，并将已完结的模块标记为 archived。"
+description: "面向 AI 编码任务的规范驱动工作流（spec-driven workflow）。当你在项目中开始或继续某个功能/模块开发，需要建立或遵循 .specs/ 约定时使用：先读 .specs/index.md 索引确定要执行的模块与任务，再按需加载相关模块文档；在写代码前先创建 requirements/design/tasks/CHANGELOG 文档，保持需求↔设计↔任务之间的可追溯性，同步 .specs/index.md 的状态总表与任务摘要表，并将已完结的模块标记为 archived。"
 license: MIT
 ---
 
 # 规范工作流（Specs Workflow）
 
 本技能为 AI 编码任务强制推行"规范驱动、全程可追溯"的工作流。在写代码前，每个模块都需在 `.specs/` 下建立 `requirements.md`、`design.md`、`tasks.md` 和 `CHANGELOG.md`，让 AI 始终清楚要构建什么、为什么构建、以及它在整体中的位置。
+
+## 渐进式披露（Progressive Disclosure）
+
+`.specs/` 采用与 skills 相同的渐进式披露协议：索引是常驻的轻量层，模块文档只在当前任务需要时才被加载。
+
+| 层 | 内容 | 何时读取 |
+|----|------|---------|
+| L1 · 索引（常驻） | `.specs/index.md` — 模块状态总表 + 任务摘要表 + 依赖/优先级 | 总是先读 —— 决定要执行哪些模块与任务 |
+| L2 · 模块文档（按需） | `<module>/requirements.md`、`design.md`、`tasks.md` | 仅当当前任务涉及该模块时 |
+| L3 · 支撑文档（按需） | `<module>/CHANGELOG.md`、被引用的文件 | 仅当需要设计改版或历史信息时 |
+
+```mermaid
+flowchart TD
+    A["读取 .specs/index.md<br/>(模块状态 + 任务摘要)"] --> B{"确定要执行的任务"}
+    B --> C["按需打开相关模块文档"]
+    C --> D["按依赖顺序实现"]
+    D --> E["同步索引状态 + 任务摘要"]
+```
 
 ## 何时使用本技能
 
@@ -16,18 +34,19 @@ license: MIT
 - 用户继续一个已存在 `.specs/` 目录的项目，需要遵循其约定
 - 用户希望需求、设计决策与实现任务之间保持可追溯性
 - 用户需要在 `.specs/index.md` 中确定模块状态、依赖关系或实现顺序
+- 用户需要了解各模块有哪些待办任务，再决定下一步做哪个
 - 用户完成一个模块，需要将其标记为已归档
 - 用户需要改版设计，但不希望产生零散的版本文档
 
 ## 工作流
 
-### 第 1 步：阅读现有 Specs 上下文
+### 第 1 步：先读索引（渐进式披露）
 
-若 `.specs/` 已存在，先阅读 `.specs/index.md`，了解模块状态总表、依赖关系与执行顺序。判断当前工作属于现有模块还是需要新建模块。若 `.specs/` 不存在，应在开始任务前提议创建它。
+总是先读 `.specs/index.md` —— 它是常驻索引。根据模块状态总表与任务摘要表，判断本次工作属于哪些模块、哪些任务待执行。然后只按需打开相关模块文档（`tasks.md`，必要时再读 `requirements.md` / `design.md`），不要一次性读遍所有模块文档。若 `.specs/` 不存在，应在开始任务前提议创建它。
 
 ### 第 2 步：写代码前先创建模块文档
 
-在为新模块或新功能编写任何代码之前，先创建 `.specs/<module>/` 目录，包含 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md` 四个文件，并填好需求。同时在 `.specs/index.md` 状态总表中为该模块新增一行。骨架模板见 [references/file-templates.md](references/file-templates.md)（定结构）；逐节思考提示见 [references/prompt-templates.md](references/prompt-templates.md)（定深度）；质量验收清单见 [references/checklists.md](references/checklists.md)（定合格标准）；精确的追溯格式见 [references/examples/traceability.md](references/examples/traceability.md)（示例）。
+在为新模块或新功能编写任何代码之前，先创建 `.specs/<module>/` 目录，包含 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md` 四个文件，并填好需求。在 `.specs/index.md` 状态总表中为该模块新增一行，并在任务摘要表中为每个任务新增一行（随 `tasks.md` 编写）。骨架模板见 [references/file-templates.md](references/file-templates.md)（定结构）；逐节思考提示见 [references/prompt-templates.md](references/prompt-templates.md)（定深度）；质量验收清单见 [references/checklists.md](references/checklists.md)（定合格标准）；精确的追溯格式见 [references/examples/traceability.md](references/examples/traceability.md)（示例）。
 
 ### 第 3 步：编写需求
 
@@ -43,7 +62,7 @@ license: MIT
 
 ### 第 6 步：实现并同步进度
 
-按依赖顺序执行任务。完成的任务勾选 `- [x]`，并及时更新 `.specs/index.md` 模块状态总表（按 `draft → design → implementing → implemented` 推进）。在每个检查点运行测试/构建并汇报结果。
+按依赖顺序执行任务。完成的任务勾选 `- [x]`，及时更新 `.specs/index.md` 模块状态总表（按 `draft → design → implementing → implemented` 推进），并同步 `.specs/index.md` 任务摘要表中的勾选状态与 `tasks.md` 保持一致。在每个检查点运行测试/构建并汇报结果。
 
 ### 第 7 步：记录设计变更
 
@@ -57,7 +76,7 @@ license: MIT
 
 ```
 .specs/
-├── index.md             # 全局索引 + 模块状态总表 + 依赖/优先级
+├── index.md             # 全局索引：模块状态总表 + 任务摘要表 + 依赖/优先级
 └── <module>/
     ├── requirements.md  # 需求（Requirement N + 验收标准）
     ├── design.md        # 设计（架构/数据流/接口 + Correctness Properties）
@@ -69,12 +88,13 @@ license: MIT
 
 | # | 规则 |
 |---|------|
-| 1 | 动工前先创建 `.specs/<module>/` 四个文件并填好需求，再开始实现 |
+| 1 | 动工前先创建 `.specs/<module>/` 四个文件并填好需求，再开始实现；并在 `.specs/index.md` 中登记模块及其任务 |
 | 2 | 保持可追溯：任务引用 `_Requirements: x.y_`；每条 Correctness Property 标注 `**Validates: Requirements x.y**` |
 | 3 | 设计改版记录到 `CHANGELOG.md`；严禁创建 `v1.md`/`v2.md` 文件 |
 | 4 | 跨模块复用的共享设施单独建目录 `.specs/shared/` |
-| 5 | 完成的任务勾选 `- [x]`，并同步 `.specs/index.md` 状态总表 |
+| 5 | 完成的任务勾选 `- [x]`，并同步 `.specs/index.md` 状态总表与任务摘要表 |
 | 6 | 验收完结的模块在 `.specs/index.md` 状态总表中标记为 `archived` |
+| 7 | 读任何模块文档前，先读 `.specs/index.md`；根据任务摘要表按需加载模块文档 |
 
 ## 命名约定
 
@@ -88,9 +108,10 @@ license: MIT
 ## Prohibitions
 
 - 不得在模块的 `.specs/<module>/` 文档（至少是 `requirements.md`）创建并填写完成之前编写代码。
+- 不得一次性读遍所有模块文档；应先读 `.specs/index.md`，只加载当前任务需要的文档。
 - 不得创建 `v1.md` / `v2.md` 等版本化设计文件；应使用 `CHANGELOG.md`。
 - 不得在任务中跳过需求引用，或在设计属性中跳过 `Validates` 标注。
-- 不得让已完成的任务保持未勾选，或与 `.specs/index.md` 状态总表脱节。
+- 不得让已完成的任务保持未勾选，或与 `.specs/index.md` 状态总表、任务摘要表脱节。
 - 不得在各模块中重复编写共享基础设施的需求；应抽取到 `.specs/shared/`。
 
 ## 不确定时

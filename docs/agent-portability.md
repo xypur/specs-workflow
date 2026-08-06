@@ -1,6 +1,6 @@
 # Agent Portability
 
-Specs-workflow is an agent-portable skill distribution. The behavior lives in `skills/specs-workflow/` (full skill) and `rules/specs-workflow.md` (compact always-on ruleset); the host-specific files are thin adapters that make the same behavior easy to load in a given agent.
+Specs-workflow is an agent-portable skill distribution. The behavior lives in `skills/specs-workflow/` (full skill) and `rules/specs-workflow.md` (compact always-on ruleset); the host-specific files are thin adapters that make the same behavior easy to load in a given agent. The workflow uses progressive disclosure: agents read `.specs/index.md` (module status + Task Summary) first, then load only the relevant module documents on demand.
 
 ## Supported Adapters
 

@@ -16,6 +16,6 @@ Generate the documents in dependency order:
 2. **design.md** — read `requirements.md` first: Overview / Architecture (Mermaid, explain *why*) / Components & Composables / Interfaces & Data Models / Key Decisions (context, options, rationale) / Error Handling / Correctness Properties (`*For any* <precondition>, <conclusion>`, each marked `**Validates: Requirements x.y**`, no dangling references).
 3. **tasks.md** — read `requirements.md` first: hierarchical tasks numbered `N.M`, sequenced by a stated strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid), each referencing `_Requirements: x.y, x.z_`, checkpoint tasks, and a JSON Task Dependency Graph (waves).
 4. **CHANGELOG.md** — create with a header and no entries yet.
-5. Add a row for the module in the `.specs/index.md` status table with status `design` (requirements + design complete, ready for implementation) and append to the Change Log table.
+5. Add a row for the module in the `.specs/index.md` status table with status `design` (requirements + design complete, ready for implementation), add a row per task in the `.specs/index.md` Task Summary table (Task = `<module>.<N.M>`), and append to the Change Log table.
 
 Do not write any implementation code. If the module directory already exists, tell the user and extend the existing documents rather than overwriting. To update a single document later, use `/specs-requirements`, `/specs-design`, or `/specs-tasks`.

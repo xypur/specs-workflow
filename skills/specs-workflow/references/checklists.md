@@ -2,6 +2,15 @@
 
 Use these checklists as acceptance gates before a document is considered done. Every item is written so a reader (or a test) can decide it pass/fail — no vague items like "be user-friendly". Cross off only what is actually true; if an item does not apply, leave it and note why.
 
+## `index.md`
+
+- [ ] `.specs/index.md` exists and was read before any module document (progressive disclosure entry point).
+- [ ] Module Status Table lists every module with a valid status and no duplicate rows.
+- [ ] Task Summary lists every task from every `tasks.md` with a globally unique id `<module>.<N.M>`.
+- [ ] Every `[x]` / `[ ]` checkbox in the Task Summary matches its `tasks.md` counterpart.
+- [ ] `Depends on` in the Task Summary only references existing task ids.
+- [ ] The execution order respects the stated dependencies.
+
 ## `requirements.md`
 
 - [ ] Every requirement has a title, a User Story with all three parts, and acceptance criteria numbered `N.M`.
@@ -32,4 +41,5 @@ Use these checklists as acceptance gates before a document is considered done. E
 - [ ] Checkpoint tasks run the test suite/build at meaningful milestones.
 - [ ] The Task Dependency Graph (JSON waves) lists every task and respects task dependencies.
 - [ ] The sequencing strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid) is stated in the Overview.
-- [ ] Completed tasks are checked off `- [x]`, and the `.specs/index.md` status table is in sync.
+- [ ] Every task has a row in the `.specs/index.md` Task Summary with a matching `Status`.
+- [ ] Completed tasks are checked off `- [x]`, and the `.specs/index.md` status and Task Summary tables are in sync.

@@ -4,15 +4,17 @@ Work spec-first in this project. Before writing code for a new module or feature
 
 ## Mandatory Rules
 
-1. Before coding, create `.specs/<module>/` with `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md`, and fill in the requirements. Add a row for the module in the `.specs/index.md` status table.
+1. Before coding, create `.specs/<module>/` with `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md`, and fill in the requirements. Add a row for the module in the `.specs/index.md` status table and a row per task in its Task Summary table.
 2. Keep traceability: every task references the requirement clauses it implements with `_Requirements: x.y, x.z_`; every design Correctness Property marks `**Validates: Requirements x.y**`. No dangling references.
 3. Record design revisions in `CHANGELOG.md`; never create `v1.md` / `v2.md` version files.
 4. Shared facilities reused by multiple modules get their own spec directory under `.specs/shared/`.
-5. Check off completed tasks `- [x]` and keep the `.specs/index.md` status table in sync (`draft` → `design` → `implementing` → `implemented` → `archived`).
+5. Check off completed tasks `- [x]` and keep the `.specs/index.md` status and Task Summary tables in sync (`draft` → `design` → `implementing` → `implemented` → `archived`).
 6. On acceptance, mark the module `archived` in the `.specs/index.md` status table. The module directory stays in place; git history preserves the documents.
+7. Read `.specs/index.md` before any module document; use its Task Summary to determine which tasks to execute and load module docs on demand — do not read every module's documents upfront.
 
 ## Document Formats
 
+- `index.md`: resident index — Module Status Table (`Module | Status | Depends on | Notes`), Task Summary table (`Task | Module | Title | Status | Depends on`, with `Task` = globally unique `<module>.<N.M>` mirroring `tasks.md` checkboxes), execution order/dependencies, and a Change Log.
 - `requirements.md`: `Requirement N` (integer, incrementing) + User Story (*As a `<role>` / I want `<capability>` / so that `<value>`*) + Acceptance Criteria numbered `N.M` in the `THE <System> SHALL` / `WHEN` / `IF` / `WHILE` forms, plus composite `AND` / `OR` conditions and state-based, performance, and security variants, every one machine-testable and together covering the happy path, boundary conditions, and error/exclusion cases.
 - `design.md`: Overview (positioning + key trade-offs) / Architecture (layers + data flow with a Mermaid diagram; explain *why* the split) / Components & Composables (interface, responsibility, structured pseudocode) / Interfaces & Data Models (types, fields, defaults, optionality) / Key Decisions (decision records: context, options considered with pros/cons/effort, chosen option, rationale) / Error Handling (scenario/handling table) / Correctness Properties (`*For any* <precondition>, <conclusion>`, each marked `**Validates: Requirements x.y**`).
 - `tasks.md`: hierarchical tasks numbered `N.M` (decoupled from requirement numbers), split by **dependency**, sequenced by a stated strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid), each referencing `_Requirements: x.y_`, optional/MVP-skippable subtasks marked `*`, Checkpoint tasks that run the tests/build at meaningful milestones, and a JSON Task Dependency Graph (ordered waves).
@@ -21,9 +23,10 @@ Work spec-first in this project. Before writing code for a new module or feature
 ## Prohibitions
 
 - No code before the module's `.specs/<module>/` documents (at minimum `requirements.md`) exist and are filled in.
+- No reading every module's documents upfront; read `.specs/index.md` first and load only what the current task needs.
 - No versioned design files (`v1.md` / `v2.md`); use `CHANGELOG.md` instead.
 - No skipping `_Requirements:` references in tasks or `**Validates:**` annotations in design properties.
-- No leaving completed tasks unchecked or the status table out of sync.
+- No leaving completed tasks unchecked or the status/Task Summary tables out of sync.
 - No duplicating shared infrastructure requirements across modules; extract them to `.specs/shared/`.
 
 ## Naming Conventions

@@ -4,10 +4,14 @@ Use these skeletons when creating `.specs/` documents. Copy each block into the 
 
 ## `.specs/index.md`
 
+`.specs/index.md` is the **always-read entry point** of the progressive disclosure chain. Its Task Summary table lets the agent decide which tasks to execute without opening every module's `tasks.md`.
+
 ```markdown
 # Specs Index
 
 Organized by functional module, each module is a self-contained directory (requirements / design / tasks / CHANGELOG).
+
+Read this file before any module document: use the Module Status Table and Task Summary below to determine which module(s) and task(s) the current request touches, then open only the relevant module documents on demand.
 
 ## Module Status Table
 
@@ -18,6 +22,18 @@ Organized by functional module, each module is a self-contained directory (requi
 | modal | draft | - | Modal dialog |
 
 Status values: `draft` → `design` → `implementing` → `implemented` → `archived`. Archived modules stay listed with status `archived`; their directories are not moved.
+
+## Task Summary
+
+Global index of every task across modules. Add one row per task in `<module>/tasks.md`; keep the checkbox state in sync.
+
+| Task | Module | Title | Status | Depends on |
+|------|--------|-------|--------|------------|
+| shared.1 | shared | Selection behavior core | [x] | - |
+| tree.1 | tree | Tree state model | [ ] | shared.1 |
+| tree.2 | tree | Tree node rendering | [ ] | tree.1 |
+
+`Task` is the globally unique id `<module>.<N.M>` (the module dir name + the task's number in `tasks.md`). `Status` mirrors the `- [ ]` / `- [x]` checkbox in `tasks.md`.
 
 ## Execution Order / Dependencies
 

@@ -1,5 +1,21 @@
 # 修改记录
 
+## 2026-08-06
+
+### 引入渐进式披露（Progressive Disclosure）
+
+将 skills 的渐进式披露协议映射到 `.specs/` 约定：`.specs/index.md` 作为常驻索引（L1），模块文档按需加载（L2），CHANGELOG/支撑文件按需读取（L3）。
+
+- **`index.md` 新增 Task Summary 任务摘要表**：跨模块的全局任务索引，列 `Task | Module | Title | Status | Depends on`，`Task` 为全局唯一编号 `<module>.<N.M>`，与 `tasks.md` 勾选状态保持同步。代理先读 index 即可确定要执行哪些任务，无需打开每个 `tasks.md`。
+- **新增强制规则 7**："读任何模块文档前，先读 `.specs/index.md`，根据任务摘要表确定要执行的任务并按需加载模块文档"。规则 1/5 同步扩展为登记/同步任务摘要表。
+- `SKILL.md` / `SKILL.zh.md`：新增 "Progressive Disclosure" 章节（三层表格 + Mermaid 流程图）；改写 Step 1（先读索引）；Step 2/6 补充任务摘要表登记与同步；description、目录结构注释、Prohibitions 同步。
+- `references/file-templates.md`：index.md 骨架新增 Task Summary 表；`references/prompt-templates.md` 新增 `index.md` 逐节思考要点；`references/checklists.md` 新增 `index.md` 验收清单与 tasks 同步项。
+- `rules/specs-workflow.md` / `zh/rules/specs-workflow.zh.md`：Document Formats 新增 `index.md`；Prohibitions 新增"不一次性读遍所有模块文档"。
+- `specs-workflow.md`（根模板）：目录结构、规则 7、index.md 骨架（含任务摘要表）同步。
+- `commands/specs-init.toml`：index.md 引导加入 Task Summary 表；`commands/specs.toml`：第 5 步新增任务摘要表行登记；`commands/specs-tasks.toml`：新增 Index sync 规则。
+- README / README.zh、docs/agent-portability（EN/ZH）提及渐进式披露与 Task Summary。
+- 全部规则适配器与 `.opencode/` / `.claude/` 指令重新生成；`node scripts/check-sync.js` 通过。
+
 ## 2026-08-01
 
 ### `src/` 改名为 `zh/`

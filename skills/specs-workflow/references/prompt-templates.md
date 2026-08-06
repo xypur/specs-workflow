@@ -2,6 +2,30 @@
 
 Use these prompts together with the skeletons in [file-templates.md](file-templates.md) when generating `.specs/` documents. Each section below states what the AI must *think about* when filling that section — the skeletons define the structure, the prompts define the depth. For the concrete traceability format (`Validates:` / `_Requirements:`), see [examples/traceability.md](examples/traceability.md).
 
+## `index.md`
+
+`index.md` is the resident index that drives progressive disclosure — the agent reads it before any module document, so it must be scannable and accurate.
+
+### Module Status Table
+
+One row per module: name, current status, what it depends on, and a one-line note. Status values follow the `draft` → `design` → `implementing` → `implemented` → `archived` convention.
+
+### Task Summary
+
+One row per task across all modules so the agent can pick what to execute without opening every `tasks.md`. For each row:
+
+1. **Task** — the globally unique id `<module>.<N.M>` (module dir name + the task's number in that module's `tasks.md`).
+2. **Module** — the module dir name the task belongs to.
+3. **Title** — a short task title matching `tasks.md`.
+4. **Status** — `[x]` / `[ ]`, always mirroring the checkbox in `tasks.md`.
+5. **Depends on** — task ids that must be done first; `-` if none.
+
+Keep the table in sync with `tasks.md` whenever a task is added, checked off, or reprioritized.
+
+### Execution Order / Dependencies
+
+State which modules run first and who blocks whom, derived from the Task Summary dependencies.
+
 ## `requirements.md`
 
 ### Introduction

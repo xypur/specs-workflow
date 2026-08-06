@@ -1,6 +1,6 @@
 # 多工具移植（Agent Portability）
 
-Specs-workflow 是可移植的 AI 技能分发。核心行为在 `skills/specs-workflow/`（完整技能）与 `rules/specs-workflow.md`（紧凑常驻规则集）中；各宿主文件是让同一行为在特定代理中易于加载的薄适配器。
+Specs-workflow 是可移植的 AI 技能分发。核心行为在 `skills/specs-workflow/`（完整技能）与 `rules/specs-workflow.md`（紧凑常驻规则集）中；各宿主文件是让同一行为在特定代理中易于加载的薄适配器。该工作流采用渐进式披露：代理先读 `.specs/index.md`（模块状态 + 任务摘要表），再按需加载相关模块文档。
 
 ## 支持的适配器
 
