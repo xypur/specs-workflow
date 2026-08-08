@@ -5,7 +5,11 @@ Use these checklists as acceptance gates before a document is considered done. E
 ## `index.md`
 
 - [ ] `.specs/index.md` exists and was read before any module document (progressive disclosure entry point).
+- [ ] The Status Bar blockquote exists at the top with all fields filled: active module + status, done/total, blocked, next task, next gate, last updated.
+- [ ] `Next task` is the first Task Summary row with `[ ]` whose every `Depends on` id is `[x]` — derived, not hand-picked.
+- [ ] `Next gate` is the first unchecked phase-terminal task in the active module's gate chain.
 - [ ] Module Status Table lists every module with a valid status and no duplicate rows.
+- [ ] Every module row's `Progress` (`done/total`) matches the count of `[x]` over all its task checkboxes.
 - [ ] Task Summary lists every task from every `tasks.md` with a globally unique id `<module>.<N.M>`.
 - [ ] Every `[x]` / `[ ]` checkbox in the Task Summary matches its `tasks.md` counterpart.
 - [ ] `Depends on` in the Task Summary only references existing task ids.
@@ -42,4 +46,7 @@ Use these checklists as acceptance gates before a document is considered done. E
 - [ ] The Task Dependency Graph (JSON waves) lists every task and respects task dependencies.
 - [ ] The sequencing strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid) is stated in the Overview.
 - [ ] Every task has a row in the `.specs/index.md` Task Summary with a matching `Status`.
-- [ ] Completed tasks are checked off `- [x]`, and the `.specs/index.md` status and Task Summary tables are in sync.
+- [ ] A Status Block exists at the end of `tasks.md` with progress, current task, and the gate chain.
+- [ ] The gate chain lists each phase's terminal task in order (`<phase>.<last task> → …`) and matches the phases in the dependency graph.
+- [ ] `当前` in the Status Block is the first `[ ]` task whose deps are all `[x]`, consistent with the index status bar.
+- [ ] Completed tasks are checked off `- [x]`, and the `.specs/index.md` status, Task Summary, `Progress` column, Status Bar, and module Status Blocks are in sync.

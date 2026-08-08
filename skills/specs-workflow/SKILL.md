@@ -14,16 +14,16 @@ This skill enforces a spec-driven, traceable workflow for AI coding tasks. Befor
 
 | Layer | What | When loaded |
 |-------|------|-------------|
-| L1 · Index (resident) | `.specs/index.md` — module status table + Task Summary + dependencies/priority | Always, first — determines which module(s) and task(s) to execute |
+| L1 · Index (resident) | `.specs/index.md` — status bar (next task / next gate) + module status table with Progress + Task Summary + dependencies/priority | Always, first — determines which module(s) and task(s) to execute |
 | L2 · Module docs (on demand) | `<module>/requirements.md`, `design.md`, `tasks.md` | Only for modules the current task touches |
 | L3 · Supporting docs (on demand) | `<module>/CHANGELOG.md`, referenced files | Only when design revisions or history are needed |
 
 ```mermaid
 flowchart TD
-    A["Read .specs/index.md<br/>(module status + Task Summary)"] --> B{"Determine<br/>which tasks to execute"}
+    A["Read .specs/index.md<br/>(status bar + module status + Task Summary)"] --> B{"Determine<br/>which tasks to execute"}
     B --> C["Open only the relevant<br/>module docs on demand"]
     C --> D["Implement in dependency order"]
-    D --> E["Sync index status + Task Summary"]
+    D --> E["Sync index status bar + Progress + Task Summary"]
 ```
 
 ## When to Use This Skill
@@ -34,7 +34,7 @@ Use this skill when the user:
 - Continues work on a project that already has a `.specs/` directory and needs to follow its conventions
 - Wants requirements, design decisions, and implementation tasks to stay traceable to each other
 - Needs to decide module status, dependencies, or implementation order in `.specs/index.md`
-- Needs to know which pending tasks exist across modules before picking the next one to work on
+- Needs to know which pending tasks exist across modules before picking the next one to work on, or wants a glanceable progress/status snapshot (done/total, next task, next gate)
 - Finishes a module and needs to mark it as archived
 - Redesigns a module without creating scattered version documents
 
@@ -42,7 +42,7 @@ Use this skill when the user:
 
 ### Step 1: Read the Index First (Progressive Disclosure)
 
-Always read `.specs/index.md` first — it is the resident index. From the module status table and the Task Summary table, determine which module(s) the requested work belongs to and which tasks are pending. Then open only the relevant module documents (`tasks.md`, and `requirements.md` / `design.md` as needed) on demand — do not load every module's documents upfront. If `.specs/` does not exist, propose creating it before starting the task.
+Always read `.specs/index.md` first — it is the resident index. Read the status bar at the top to see the current module + status, done/blocked counts, and the derived **next task** and **next gate**; from the module status table (with `Progress`) and the Task Summary table, determine which module(s) the requested work belongs to and which tasks are pending. Then open only the relevant module documents (`tasks.md`, and `requirements.md` / `design.md` as needed) on demand — do not load every module's documents upfront. If `.specs/` does not exist, propose creating it before starting the task.
 
 ### Step 2: Create Module Documents Before Coding
 
@@ -58,11 +58,11 @@ Document how the system is built in `design.md`: architecture, data flow, compon
 
 ### Step 5: Write the Task Plan
 
-Break the implementation into hierarchical tasks numbered `N.M` (independent of requirement numbers) in `tasks.md`, sequenced by a stated strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid). Every task references the requirements it implements with `_Requirements: x.y, x.z_`. Include a Task Dependency Graph (waves) and checkpoint tasks that run tests/builds at meaningful milestones.
+Break the implementation into hierarchical tasks numbered `N.M` (independent of requirement numbers) in `tasks.md`, sequenced by a stated strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid). Every task references the requirements it implements with `_Requirements: x.y, x.z_`. Include a Task Dependency Graph (waves) and checkpoint tasks that run tests/builds at meaningful milestones — each phase's terminal task is that phase's **gate**. At the end of `tasks.md`, add a **Status Block** with the progress (`done/total`), the current task, and the gate chain (`<phase>.<last task> → …`).
 
 ### Step 6: Implement and Sync Progress
 
-Execute tasks in dependency order. Check off completed tasks with `- [x]`, keep the `.specs/index.md` module status table up to date (move the module along `draft → design → implementing → implemented`), and sync the Task Summary table checkboxes in `.specs/index.md` to match `tasks.md`. At each checkpoint, run the tests/build and report results.
+Execute tasks in dependency order. Check off completed tasks with `- [x]`, keep the `.specs/index.md` module status table up to date (move the module along `draft → design → implementing → implemented`), and sync the Task Summary table checkboxes in `.specs/index.md` to match `tasks.md`. Update the `Progress` column (`done/total (pct)`), the module's Status Block, and the index status bar: **next task** = the first todo task whose `Depends on` are all done; **next gate** = the next unchecked phase-terminal task in the gate chain. At each checkpoint, run the tests/build and report results.
 
 ### Step 7: Record Design Changes
 
@@ -76,11 +76,11 @@ When a module is accepted and finished, set its status to `archived` in the `.sp
 
 ```
 .specs/
-├── index.md             # Global index: module status + task summary tables, dependencies/priority
+├── index.md             # Global index: status bar + module status (with Progress) + task summary, dependencies/priority
 └── <module>/
     ├── requirements.md  # Requirements (Requirement N + acceptance criteria)
     ├── design.md        # Design (architecture/data flow/interfaces + Correctness Properties)
-    ├── tasks.md         # Tasks (reference requirement numbers + dependency graph)
+    ├── tasks.md         # Tasks (reference requirement numbers + dependency graph + status block)
     └── CHANGELOG.md     # Change log (design revision records)
 ```
 
@@ -92,9 +92,10 @@ When a module is accepted and finished, set its status to `archived` in the `.sp
 | 2 | Keep traceability: tasks reference `_Requirements: x.y_`; each Correctness Property marks `**Validates: Requirements x.y**` |
 | 3 | Record design revisions in `CHANGELOG.md`; never create `v1.md`/`v2.md` files |
 | 4 | Shared facilities reused across modules get their own spec dir under `.specs/shared/` |
-| 5 | Check off tasks `- [x]` and sync the `.specs/index.md` status and Task Summary tables as you go |
+| 5 | Check off tasks `- [x]` and sync the `.specs/index.md` status and Task Summary tables, `Progress` column, index status bar, and module status blocks as you go |
 | 6 | Mark accepted modules `archived` in the `.specs/index.md` status table |
 | 7 | Read `.specs/index.md` before any module document; load module docs on demand based on the Task Summary |
+| 8 | Derive next task / next gate from dependencies (first todo task with all deps done; next unchecked phase-terminal task) and record them in the index status bar |
 
 ## Naming Conventions
 
@@ -112,6 +113,7 @@ When a module is accepted and finished, set its status to `archived` in the `.sp
 - Do not create versioned design files such as `v1.md` / `v2.md`; use `CHANGELOG.md` instead.
 - Do not skip requirement references in tasks or `Validates` annotations in design properties.
 - Do not leave completed tasks unchecked or out of sync with the `.specs/index.md` status and Task Summary tables.
+- Do not let the index status bar, the `Progress` column, or a module's status block go stale relative to the task checkboxes.
 - Do not duplicate shared infrastructure requirements across modules; extract them to `.specs/shared/`.
 
 ## When Unsure

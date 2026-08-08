@@ -1,5 +1,23 @@
 # 修改记录
 
+## 2026-08-08
+
+### 模块进度条 + 顶部状态栏 + 模块内状态块
+
+为 `.specs/` 约定引入"一眼看到全局"的进度快照：Index 顶部状态栏（对标 IDE 底部状态栏）与模块表 `Progress` 列、以及每个模块 `tasks.md` 末尾的状态块（对标 IDE 模块级状态头，含门禁链）。
+
+- **`index.md` 顶部新增状态栏**：`> 📍 **状态栏**` 块引用，含当前模块 + 状态、done/total、阻塞数、下一任务、下一门禁、最近更新。**下一任务 / 下一门禁由依赖自动推导**：下一任务 = 任务摘要表中第一个 `[ ]` 且 `Depends on` 全部为 `[x]` 的任务；下一门禁 = 活动模块门禁链中第一个未勾选的阶段终态（Checkpoint）任务；阻塞数 = 依赖未满足的 `[ ]` 任务数。手动维护时即一条规则。
+- **模块状态总表新增 `Progress` 列**：`Module | Status | Progress | Depends on | Notes`，`Progress` 格式 `done/total (pct)`，统计该模块 `tasks.md` 全部任务勾选（含可选 `*` 与 Checkpoint）。
+- **`tasks.md` 末尾新增状态块**：`进度 done/total · 当前：<module>.<当前任务> · 门禁链：<阶段>.<末位任务> → …`。门禁 = 每阶段终态任务（通常是 Checkpoint）；门禁链把依赖图压缩成一条可背诵的线，`当前` 与索引状态栏的"下一任务"同源。
+- `rules/specs-workflow.md` / `zh/rules/specs-workflow.zh.md`：规则 5 扩展（勾选时同步 Progress/状态栏/状态块）；新增规则 8（从依赖推导下一任务/下一门禁）；Document Formats 中 `index.md` / `tasks.md` 行更新；Prohibitions 新增状态栏/Progress/状态块脱节禁令。
+- `SKILL.md` / `SKILL.zh.md`：L1 表与 Mermaid 流程更新；Step 1（读状态栏）、Step 5（tasks.md 状态块 + 门禁链）、Step 6（同步 Progress/状态栏/状态块）改写；强制规则表新增第 8 条；When to Use、目录结构注释、Prohibitions 同步。
+- `references/file-templates.md`：index.md 骨架新增状态栏、`Progress` 列与"下一任务/下一门禁"推导规则；tasks.md 骨架新增 Status Block 节。
+- `references/prompt-templates.md`：index.md 新增 Status Bar 逐字段思考要点、模块表 Progress；tasks.md 新增 Status Block 与门禁链推导。
+- `references/checklists.md`：index.md 新增状态栏/Progress/下一任务/下一门禁检查项；tasks.md 新增状态块与门禁链检查项。
+- `commands/specs-init.toml`：引导创建状态栏与含 `Progress` 列的模块表；`commands/specs.toml`：第 5 步补充 Progress、状态栏重建与 tasks.md 状态块；`commands/specs-tasks.toml`：Index sync 规则扩展为含状态块与状态栏。
+- `specs-workflow.md`（根模板）：index.md / tasks.md 骨架同步。
+- 全部规则适配器与 `.opencode/` / `.claude/` 指令重新生成；`node scripts/check-sync.js` 通过。
+
 ## 2026-08-06
 
 ### 引入渐进式披露（Progressive Disclosure）

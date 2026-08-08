@@ -2,7 +2,7 @@
 
 English | [中文](./README.zh-CN.md)
 
-Spec-driven workflow for AI coding assistants. Before code is written, every module gets `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md` under `.specs/`, kept traceable to each other and synced through `.specs/index.md`. `.specs/index.md` is a progressive-disclosure index: its Task Summary table lets the agent pick which tasks to execute, and module documents are loaded on demand — only for the modules the current task touches.
+Spec-driven workflow for AI coding assistants. Before code is written, every module gets `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md` under `.specs/`, kept traceable to each other and synced through `.specs/index.md`. `.specs/index.md` is a progressive-disclosure index: a top status bar (done/blocked, dependency-derived next task and next gate), a module status table with `Progress`, and a Task Summary table let the agent pick which tasks to execute; module documents are loaded on demand — only for the modules the current task touches. Each `tasks.md` ends with a module status block (progress · current task · gate chain).
 
 This repo is a portable distribution: one skill + one compact ruleset, shipped as thin adapters for multiple AI CLI tools.
 
@@ -44,7 +44,7 @@ See [docs/agent-portability.md](docs/agent-portability.md) for the full host →
 | Command | What it does |
 |---------|--------------|
 | `/specs <description>` | Unified entry: describe the feature, creates all four spec documents for the derived module in one pass. The commands below are the step-by-step / single-document variants. |
-| `/specs-init` | Bootstrap `.specs/` (index with status table + task summary + dependencies) |
+| `/specs-init` | Bootstrap `.specs/` (index with status bar + status table + task summary + dependencies) |
 | `/specs-requirements <module>` | Create/update a module's `requirements.md` |
 | `/specs-design <module>` | Create/update a module's `design.md` |
 | `/specs-tasks <module>` | Create/update a module's `tasks.md` |

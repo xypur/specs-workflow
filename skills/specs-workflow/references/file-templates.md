@@ -11,17 +11,21 @@ Use these skeletons when creating `.specs/` documents. Copy each block into the 
 
 Organized by functional module, each module is a self-contained directory (requirements / design / tasks / CHANGELOG).
 
-Read this file before any module document: use the Module Status Table and Task Summary below to determine which module(s) and task(s) the current request touches, then open only the relevant module documents on demand.
+Read this file before any module document: use the Status Bar, Module Status Table, and Task Summary below to determine which module(s) and task(s) the current request touches, then open only the relevant module documents on demand.
+
+> 📍 **Status Bar** · cs-foundation [`design`] · 0/31 done · 0 blocked ·
+> Next task: **cs-foundation.1.1** (deps satisfied) · Next gate: **cs-foundation.1.6**
+> Last updated: YYYY-MM-DD (init .specs)
 
 ## Module Status Table
 
-| Module | Status | Depends on | Notes |
-|--------|--------|------------|-------|
-| shared | implementing | - | Cross-module shared facilities |
-| tree | design | shared | Tree component |
-| modal | draft | - | Modal dialog |
+| Module | Status | Progress | Depends on | Notes |
+|--------|--------|----------|------------|-------|
+| shared | implementing | 2/5 (40%) | - | Cross-module shared facilities |
+| tree | design | 0/12 (0%) | shared | Tree component |
+| modal | draft | 0/8 (0%) | - | Modal dialog |
 
-Status values: `draft` → `design` → `implementing` → `implemented` → `archived`. Archived modules stay listed with status `archived`; their directories are not moved.
+`Progress` = `done/total (pct)` counting every task checkbox in `<module>/tasks.md`. Status values: `draft` → `design` → `implementing` → `implemented` → `archived`. Archived modules stay listed with status `archived`; their directories are not moved.
 
 ## Task Summary
 
@@ -34,6 +38,12 @@ Global index of every task across modules. Add one row per task in `<module>/tas
 | tree.2 | tree | Tree node rendering | [ ] | tree.1 |
 
 `Task` is the globally unique id `<module>.<N.M>` (the module dir name + the task's number in `tasks.md`). `Status` mirrors the `- [ ]` / `- [x]` checkbox in `tasks.md`.
+
+**Next task / next gate** are derived from the dependencies, not hand-written:
+- **Next task** = the first Task Summary row with `[ ]` whose every `Depends on` id is `[x]`; if none, note "all blocked".
+- **Blocked count** = number of `[ ]` tasks whose deps are not all done.
+- **Next gate** = the first unchecked phase-terminal (Checkpoint) task in the active module's gate chain.
+- Update the Status Bar (and `Progress` / `Last updated`) whenever a task is checked off.
 
 ## Execution Order / Dependencies
 
@@ -164,6 +174,18 @@ Phased implementation approach with explicit verification methods.
   ]
 }
 ```
+
+## Status Block
+
+Module-local status snapshot, kept in sync with the checkboxes above. Each phase's terminal task (the last `N.M`, usually its Checkpoint) is a **gate**; the gate chain compresses the phase dependency graph into one line.
+
+```markdown
+进度 2/5 · 当前：tree.1.2 · 门禁链：1.4 → 2.3
+```
+
+- **进度**: `done/total` from the task checkboxes (same numbers as the `Progress` column in `.specs/index.md`).
+- **当前**: the task id that satisfies "next task" (first `[ ]` whose deps are all `[x]`).
+- **门禁链**: `<phase>.<last task>` for each phase in order, joined with ` → `.
 ```
 
 ## `<module>/CHANGELOG.md`

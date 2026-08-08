@@ -6,9 +6,21 @@ Use these prompts together with the skeletons in [file-templates.md](file-templa
 
 `index.md` is the resident index that drives progressive disclosure — the agent reads it before any module document, so it must be scannable and accurate.
 
+### Status Bar
+
+A blockquote at the top of the file — the "IDE bottom bar" equivalent: one glance shows the whole project's state. Fields:
+
+1. **Active module + status** — the module currently being worked on, with its status in brackets (e.g. `cs-foundation [\`design\`]`).
+2. **done/total** — count of `[x]` over all task checkboxes, plus the blocked count (todo tasks whose deps are not all done).
+3. **Next task** — the first Task Summary row with `[ ]` whose every `Depends on` id is `[x]`; if no task is ready, note "all blocked". This is the "smart next step" — derive it, never hand-pick.
+4. **Next gate** — the first unchecked phase-terminal (Checkpoint) task in the active module's gate chain.
+5. **Last updated** — date + a one-line note (e.g. "init .specs").
+
+Keep the status bar in sync every time a task is checked off, a module status changes, or the task list is edited.
+
 ### Module Status Table
 
-One row per module: name, current status, what it depends on, and a one-line note. Status values follow the `draft` → `design` → `implementing` → `implemented` → `archived` convention.
+One row per module: name, current status, `Progress` (`done/total (pct)` counting every task checkbox in the module's `tasks.md`), what it depends on, and a one-line note. Status values follow the `draft` → `design` → `implementing` → `implemented` → `archived` convention.
 
 ### Task Summary
 
@@ -99,6 +111,10 @@ Each property is a formal, machine-verifiable statement about what the system sh
 ### Task Dependency Graph
 
 Express the phases as ordered waves so execution order is unambiguous.
+
+### Status Block
+
+At the end of `tasks.md`, add a one-line module-local status snapshot: `进度 done/total · 当前：<module>.<current task> · 门禁链：<phase>.<last task> → …`. Treat each phase's terminal task (its last `N.M`, usually the Checkpoint) as that phase's **gate**; the chain compresses the phase dependency graph into a recitable line. `当前` is the same "next task" derivation as the index status bar (first `[ ]` whose deps are all `[x]`). Update the block whenever a task is checked off.
 
 ## Cross-cutting: Traceability
 

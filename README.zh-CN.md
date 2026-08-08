@@ -2,7 +2,7 @@
 
 [English](./README.md) | 中文
 
-面向 AI 编码助手的规范驱动工作流（spec-driven workflow）。在写代码之前，每个模块在 `.specs/` 下获得 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md`，保持相互可追溯，并通过 `.specs/index.md` 同步状态。`.specs/index.md` 是渐进式披露索引：其任务摘要表让代理确定要执行哪些任务，模块文档按需加载 —— 只加载当前任务涉及的模块。
+面向 AI 编码助手的规范驱动工作流（spec-driven workflow）。在写代码之前，每个模块在 `.specs/` 下获得 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md`，保持相互可追溯，并通过 `.specs/index.md` 同步状态。`.specs/index.md` 是渐进式披露索引：顶部状态栏（done/blocked、由依赖推导的下一任务与下一门禁）、含 `Progress` 的模块状态总表与任务摘要表让代理确定要执行哪些任务，模块文档按需加载 —— 只加载当前任务涉及的模块。每个 `tasks.md` 末尾有模块状态块（进度 · 当前任务 · 门禁链）。
 
 本仓库是可移植分发：一个技能 + 一个紧凑规则集，以薄适配器的形式分发到多个 AI CLI 工具。
 
@@ -45,7 +45,7 @@ npx skills add https://github.com/xypur/specs-workflow --skill specs-workflow
 | 指令 | 作用 |
 |------|------|
 | `/specs <需求描述>` | 统一入口：描述功能，一次性为推导出的模块创建四个 spec 文档。下列指令是其分步 / 单文档变体。 |
-| `/specs-init` | 初始化 `.specs/`（索引：状态总表 + 任务摘要表 + 依赖） |
+| `/specs-init` | 初始化 `.specs/`（索引：状态栏 + 状态总表 + 任务摘要表 + 依赖） |
 | `/specs-requirements <module>` | 创建/更新模块的 `requirements.md` |
 | `/specs-design <module>` | 创建/更新模块的 `design.md` |
 | `/specs-tasks <module>` | 创建/更新模块的 `tasks.md` |

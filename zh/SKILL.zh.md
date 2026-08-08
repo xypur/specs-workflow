@@ -14,16 +14,16 @@ license: MIT
 
 | 层 | 内容 | 何时读取 |
 |----|------|---------|
-| L1 · 索引（常驻） | `.specs/index.md` — 模块状态总表 + 任务摘要表 + 依赖/优先级 | 总是先读 —— 决定要执行哪些模块与任务 |
+| L1 · 索引（常驻） | `.specs/index.md` — 状态栏（下一任务 / 下一门禁）+ 含 Progress 的模块状态总表 + 任务摘要表 + 依赖/优先级 | 总是先读 —— 决定要执行哪些模块与任务 |
 | L2 · 模块文档（按需） | `<module>/requirements.md`、`design.md`、`tasks.md` | 仅当当前任务涉及该模块时 |
 | L3 · 支撑文档（按需） | `<module>/CHANGELOG.md`、被引用的文件 | 仅当需要设计改版或历史信息时 |
 
 ```mermaid
 flowchart TD
-    A["读取 .specs/index.md<br/>(模块状态 + 任务摘要)"] --> B{"确定要执行的任务"}
+    A["读取 .specs/index.md<br/>(状态栏 + 模块状态 + 任务摘要)"] --> B{"确定要执行的任务"}
     B --> C["按需打开相关模块文档"]
     C --> D["按依赖顺序实现"]
-    D --> E["同步索引状态 + 任务摘要"]
+    D --> E["同步索引状态栏 + Progress + 任务摘要"]
 ```
 
 ## 何时使用本技能
@@ -34,7 +34,7 @@ flowchart TD
 - 用户继续一个已存在 `.specs/` 目录的项目，需要遵循其约定
 - 用户希望需求、设计决策与实现任务之间保持可追溯性
 - 用户需要在 `.specs/index.md` 中确定模块状态、依赖关系或实现顺序
-- 用户需要了解各模块有哪些待办任务，再决定下一步做哪个
+- 用户需要了解各模块有哪些待办任务，再决定下一步做哪个，或想一眼看到进度/状态快照（done/total、下一任务、下一门禁）
 - 用户完成一个模块，需要将其标记为已归档
 - 用户需要改版设计，但不希望产生零散的版本文档
 
@@ -42,7 +42,7 @@ flowchart TD
 
 ### 第 1 步：先读索引（渐进式披露）
 
-总是先读 `.specs/index.md` —— 它是常驻索引。根据模块状态总表与任务摘要表，判断本次工作属于哪些模块、哪些任务待执行。然后只按需打开相关模块文档（`tasks.md`，必要时再读 `requirements.md` / `design.md`），不要一次性读遍所有模块文档。若 `.specs/` 不存在，应在开始任务前提议创建它。
+总是先读 `.specs/index.md` —— 它是常驻索引。先看顶部的状态栏，获取当前模块 + 状态、done/blocked 计数以及推导出的**下一任务**与**下一门禁**；再根据含 `Progress` 的模块状态总表与任务摘要表，判断本次工作属于哪些模块、哪些任务待执行。然后只按需打开相关模块文档（`tasks.md`，必要时再读 `requirements.md` / `design.md`），不要一次性读遍所有模块文档。若 `.specs/` 不存在，应在开始任务前提议创建它。
 
 ### 第 2 步：写代码前先创建模块文档
 
@@ -58,11 +58,11 @@ flowchart TD
 
 ### 第 5 步：编写任务计划
 
-在 `tasks.md` 中将实现拆分为层级编号的任务（`N.M`，与需求编号解耦），并按选定的排序策略组织（Foundation-First / Feature-Slice / Risk-First / Hybrid）。每条任务用 `_Requirements: x.y, x.z_` 引用其实现的需求条款。包含任务依赖图（waves）与检查点（checkpoint）任务，在关键里程碑运行测试/构建。
+在 `tasks.md` 中将实现拆分为层级编号的任务（`N.M`，与需求编号解耦），并按选定的排序策略组织（Foundation-First / Feature-Slice / Risk-First / Hybrid）。每条任务用 `_Requirements: x.y, x.z_` 引用其实现的需求条款。包含任务依赖图（waves）与检查点（checkpoint）任务，在关键里程碑运行测试/构建 —— 每个阶段的终态任务即该阶段的**门禁**。在 `tasks.md` 末尾添加**状态块**：进度（`done/total`）、当前任务、门禁链（`<阶段>.<末位任务> → …`）。
 
 ### 第 6 步：实现并同步进度
 
-按依赖顺序执行任务。完成的任务勾选 `- [x]`，及时更新 `.specs/index.md` 模块状态总表（按 `draft → design → implementing → implemented` 推进），并同步 `.specs/index.md` 任务摘要表中的勾选状态与 `tasks.md` 保持一致。在每个检查点运行测试/构建并汇报结果。
+按依赖顺序执行任务。完成的任务勾选 `- [x]`，及时更新 `.specs/index.md` 模块状态总表（按 `draft → design → implementing → implemented` 推进），并同步 `.specs/index.md` 任务摘要表中的勾选状态与 `tasks.md` 保持一致。同步更新 `Progress` 列（`done/total (pct)`）、模块的状态块与索引状态栏：**下一任务** = 第一个状态为 `[ ]` 且其 `Depends on` 全部已完成的任务；**下一门禁** = 门禁链中下一个尚未勾选的阶段终态任务。在每个检查点运行测试/构建并汇报结果。
 
 ### 第 7 步：记录设计变更
 
@@ -76,11 +76,11 @@ flowchart TD
 
 ```
 .specs/
-├── index.md             # 全局索引：模块状态总表 + 任务摘要表 + 依赖/优先级
+├── index.md             # 全局索引：状态栏 + 含 Progress 的模块状态总表 + 任务摘要表 + 依赖/优先级
 └── <module>/
     ├── requirements.md  # 需求（Requirement N + 验收标准）
     ├── design.md        # 设计（架构/数据流/接口 + Correctness Properties）
-    ├── tasks.md         # 任务（引用需求编号 + 依赖图）
+    ├── tasks.md         # 任务（引用需求编号 + 依赖图 + 状态块）
     └── CHANGELOG.md     # 变更日志（设计改版记录）
 ```
 
@@ -92,9 +92,10 @@ flowchart TD
 | 2 | 保持可追溯：任务引用 `_Requirements: x.y_`；每条 Correctness Property 标注 `**Validates: Requirements x.y**` |
 | 3 | 设计改版记录到 `CHANGELOG.md`；严禁创建 `v1.md`/`v2.md` 文件 |
 | 4 | 跨模块复用的共享设施单独建目录 `.specs/shared/` |
-| 5 | 完成的任务勾选 `- [x]`，并同步 `.specs/index.md` 状态总表与任务摘要表 |
+| 5 | 完成的任务勾选 `- [x]`，并同步 `.specs/index.md` 状态总表、任务摘要表、`Progress` 列、索引状态栏与模块状态块 |
 | 6 | 验收完结的模块在 `.specs/index.md` 状态总表中标记为 `archived` |
 | 7 | 读任何模块文档前，先读 `.specs/index.md`；根据任务摘要表按需加载模块文档 |
+| 8 | 从依赖推导下一任务 / 下一门禁（第一个依赖全部满足的待办任务；门禁链中下一个未勾选的阶段终态任务），并记录在索引状态栏中 |
 
 ## 命名约定
 
@@ -112,6 +113,7 @@ flowchart TD
 - 不得创建 `v1.md` / `v2.md` 等版本化设计文件；应使用 `CHANGELOG.md`。
 - 不得在任务中跳过需求引用，或在设计属性中跳过 `Validates` 标注。
 - 不得让已完成的任务保持未勾选，或与 `.specs/index.md` 状态总表、任务摘要表脱节。
+- 不得让索引状态栏、`Progress` 列或模块的状态块与任务勾选状态脱节。
 - 不得在各模块中重复编写共享基础设施的需求；应抽取到 `.specs/shared/`。
 
 ## 不确定时
