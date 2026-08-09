@@ -1,6 +1,6 @@
 ---
 name: specs-workflow
-description: "Spec-driven workflow for AI coding tasks. Use when starting or continuing feature/module work in a project and you need to set up or follow a .specs/ convention: read the .specs/index.md index first to determine which module(s) and task(s) to execute, then load only the relevant module documents on demand; create requirements/design/tasks/CHANGELOG docs before writing code, keep requirements↔design↔tasks traceable, sync the .specs/index.md status and task summary tables, and mark completed modules as archived."
+description: "Spec-driven workflow for AI coding tasks. Use when the user explicitly invokes the specs workflow (e.g. '使用 specs 创建任务', '使用 specs workflow 创建任务', '/specs'), when starting a new feature/module that should be planned before coding, or when continuing work in a project that already has a .specs/ directory. The workflow: read .specs/index.md first, create requirements/design/tasks/CHANGELOG docs before writing code, keep requirements↔design↔tasks traceable, sync .specs/index.md status and task summary tables, and mark completed modules archived."
 license: MIT
 ---
 

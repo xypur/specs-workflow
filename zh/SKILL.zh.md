@@ -1,6 +1,6 @@
 ---
 name: specs-workflow
-description: "面向 AI 编码任务的规范驱动工作流（spec-driven workflow）。当你在项目中开始或继续某个功能/模块开发，需要建立或遵循 .specs/ 约定时使用：先读 .specs/index.md 索引确定要执行的模块与任务，再按需加载相关模块文档；在写代码前先创建 requirements/design/tasks/CHANGELOG 文档，保持需求↔设计↔任务之间的可追溯性，同步 .specs/index.md 的状态总表与任务摘要表，并将已完结的模块标记为 archived。"
+description: "面向 AI 编码任务的规范驱动工作流（spec-driven workflow）。当用户明确要求使用 specs 工作流（如'使用 specs 创建任务'、'使用 specs workflow 创建任务'、'/specs'）、开始一个需要在编码前先规划的新功能/新模块、或继续一个已有 .specs/ 目录的项目时使用。工作流：先读 .specs/index.md 索引，写代码前创建 requirements/design/tasks/CHANGELOG 文档，保持需求↔设计↔任务可追溯，同步 .specs/index.md 状态总表与任务摘要表，并将已完结的模块标记为 archived。"
 license: MIT
 ---
 
