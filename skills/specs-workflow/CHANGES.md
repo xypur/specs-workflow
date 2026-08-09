@@ -4,7 +4,7 @@
 
 ### description 触发策略改为"显式调用短语 + 隐式场景"混合
 
-将 `SKILL.md` / `SKILL.zh.md` frontmatter 的 `description` 从"纯隐式触发"（start/continue feature/module work）改为**混合触发**：新增用户显式调用短语（"使用 specs 创建任务"、"使用 specs workflow 创建任务"、`/specs`）作为首要触发信号，同时保留隐式场景（开始新功能/模块需先规划、继续已有 `.specs/` 目录的项目）。未引入"每次任务前强制创建"的措辞——强制仍由 SKILL.md 正文 Mandatory Rules、常驻 ruleset 与 `/specs` 命令承担；description 只负责激活判断。仅改描述字段，正文、ruleset、commands 与适配器均不变；`node scripts/check-sync.js` 通过。
+将 `SKILL.md` / `SKILL.zh.md` frontmatter 的 `description` 从"纯隐式触发"（start/continue feature/module work）改为**混合触发**：新增用户显式调用短语作为首要触发信号（英文版用英文示例 "use specs to create a task" / "specs workflow" / `/specs`，中文版用中文示例"使用 specs 创建任务"/"使用 specs workflow 创建任务"/`/specs`），同时保留隐式场景（开始新功能/模块需先规划、继续已有 `.specs/` 目录的项目）。未引入"每次任务前强制创建"的措辞——强制仍由 SKILL.md 正文 Mandatory Rules、常驻 ruleset 与 `/specs` 命令承担；description 只负责激活判断。仅改描述字段，正文、ruleset、commands 与适配器均不变；`node scripts/check-sync.js` 通过。
 
 ## 2026-08-08
 
