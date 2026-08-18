@@ -14,4 +14,6 @@ Follow these rules:
   - Acceptance Criteria numbered `N.M` in the `THE <System> SHALL` / `WHEN` / `IF` / `WHILE` forms, plus composite `AND` / `OR` conditions and state-based, performance, and security variants, every one machine-testable, together covering the happy path, boundary conditions, and error/exclusion cases
 
 If `.specs/{{args}}/requirements.md` already exists, preserve its content and extend it rather than rewriting. If `.specs/index.md` exists and the module `{{args}}` is not listed in its status table, add a row for it.
+
+If `scripts/validate-specs.js` is available, run `node scripts/validate-specs.js .` before finishing and report any validation errors.
 '''

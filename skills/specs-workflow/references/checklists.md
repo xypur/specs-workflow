@@ -46,7 +46,5 @@ Use these checklists as acceptance gates before a document is considered done. E
 - [ ] The Task Dependency Graph (JSON waves) lists every task and respects task dependencies.
 - [ ] The sequencing strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid) is stated in the Overview.
 - [ ] Every task has a row in the `.specs/index.md` Task Summary with a matching `Status`.
-- [ ] A Status Block exists at the end of `tasks.md` with progress, current task, and the gate chain.
-- [ ] The gate chain lists each phase's terminal task in order (`<phase>.<last task> → …`) and matches the phases in the dependency graph.
-- [ ] `当前` in the Status Block is the first `[ ]` task whose deps are all `[x]`, consistent with the index status bar.
-- [ ] Completed tasks are checked off `- [x]`, and the `.specs/index.md` status, Task Summary, `Progress` column, Status Bar, and module Status Blocks are in sync.
+- [ ] The index derives progress, next task, and next gate from task checkboxes and the dependency graph.
+- [ ] Completed tasks are checked off `- [x]`, and the `.specs/index.md` status, Task Summary, `Progress` column, and Status Bar are in sync.

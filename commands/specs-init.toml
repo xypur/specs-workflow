@@ -13,5 +13,7 @@ Load the specs-workflow skill (skill tool, name `specs-workflow`), then read `re
    - If there are no modules yet, leave the status table and Task Summary table with their header rows only and note the status value legend
 2. Do NOT create any module directories yet.
 
+If `scripts/validate-specs.js` is available, run `node scripts/validate-specs.js .` after initialization.
+
 Match the template's structure and wording exactly. Do not invent status values or extra sections.
 '''

@@ -21,7 +21,7 @@ Specs-workflow 是可移植的 AI 技能分发。核心行为在 `skills/specs-w
 
 | 源 | 用途 |
 |----|------|
-| `commands/*.toml` | 命令提示词规范源；`.opencode/commands/` 与 `.claude/commands/` 由它派生（`{{args}}` → `$1`）。 |
+| `commands/*.toml` | 命令提示词规范源；`.opencode/commands/` 与 `.claude/commands/` 由它派生，并使用宿主参数变量（`$ARGUMENTS`）。 |
 | `rules/specs-workflow.md` | 紧凑规则集规范源；所有规则适配器原样复制其正文（仅宿主 frontmatter 不同）。 |
 | `skills/specs-workflow/SKILL.md` | 完整技能定义，含模板与提示深度。 |
 

@@ -15,4 +15,6 @@ Follow these rules:
 - **Correctness Properties**: formal statements in the `*For any* <precondition>, <conclusion>` form, each marked `**Validates: Requirements x.y**`. Every property must be checkable by a test; if it cannot be asserted, it is not a property.
 
 Read the module's `.specs/{{args}}/requirements.md` first so every requirement number referenced by `**Validates:**` actually exists. If `.specs/{{args}}/design.md` already exists, preserve its content and extend it rather than rewriting.
+
+If `scripts/validate-specs.js` is available, run `node scripts/validate-specs.js .` before finishing and report any validation errors.
 '''

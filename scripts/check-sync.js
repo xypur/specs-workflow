@@ -43,7 +43,10 @@ const RULE_COPIES = [
   '.github/copilot-instructions.md',
 ];
 const COMMAND_TOML = (name) => `commands/${name}.toml`;
-const COMMAND_DIRS = ['.opencode/commands', '.claude/commands'];
+const COMMAND_TARGETS = [
+  { dir: '.opencode/commands', args: '$ARGUMENTS' },
+  { dir: '.claude/commands', args: '$ARGUMENTS' },
+];
 
 // 1. Ruleset copies: every adapter body equals the canonical compact ruleset.
 const rulesetBody = stripFrontmatter(read(RULESET));
@@ -55,15 +58,16 @@ for (const rel of RULE_COPIES) {
 for (const name of COMMANDS) {
   const toml = read(COMMAND_TOML(name));
   const description = parseToml(toml, 'description');
-  const prompt = parseToml(toml, 'prompt').replace(/\{\{args\}\}/g, '$1');
-  for (const dir of COMMAND_DIRS) {
-    const md = read(`${dir}/${name}.md`);
+  const prompt = parseToml(toml, 'prompt');
+  for (const target of COMMAND_TARGETS) {
+    const derivedPrompt = prompt.replace(/\{\{args\}\}/g, target.args);
+    const md = read(`${target.dir}/${name}.md`);
     const fm = md.match(/^---\n([\s\S]*?)\n---\n/);
     const descMatch = fm && fm[1].match(/^description:\s*(.+)$/m);
     const descriptionInMd = descMatch ? descMatch[1].trim() : '';
     const body = md.replace(/^---\n[\s\S]*?\n---\n*/, '').trim();
-    check(descriptionInMd === description, `${dir}/${name} description drifted from ${COMMAND_TOML(name)}`);
-    check(body === prompt, `${dir}/${name} body drifted from ${COMMAND_TOML(name)}`);
+    check(descriptionInMd === description, `${target.dir}/${name} description drifted from ${COMMAND_TOML(name)}`);
+    check(body === derivedPrompt, `${target.dir}/${name} body drifted from ${COMMAND_TOML(name)}`);
   }
 }
 

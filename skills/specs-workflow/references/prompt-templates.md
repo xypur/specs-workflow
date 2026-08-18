@@ -112,9 +112,9 @@ Each property is a formal, machine-verifiable statement about what the system sh
 
 Express the phases as ordered waves so execution order is unambiguous.
 
-### Status Block
+### Derived Status
 
-At the end of `tasks.md`, add a one-line module-local status snapshot: `进度 done/total · 当前：<module>.<current task> · 门禁链：<phase>.<last task> → …`. Treat each phase's terminal task (its last `N.M`, usually the Checkpoint) as that phase's **gate**; the chain compresses the phase dependency graph into a recitable line. `当前` is the same "next task" derivation as the index status bar (first `[ ]` whose deps are all `[x]`). Update the block whenever a task is checked off.
+Do not add a module-local status snapshot. The index is the single source of status and derives progress, the next task, and the next gate from task checkboxes and dependencies.
 
 ## Cross-cutting: Traceability
 

@@ -10,15 +10,13 @@
 
 ```
 skills/
-  <skill-name>/           # kebab-case 命名，可分发的技能包
-    SKILL.md              # 英文技能定义（必需）
+  specs-workflow/         # 可分发的技能包
+    SKILL.md              # 英文技能定义
     GENERATION.md         # 来源与生成元数据
     CHANGES.md            # 修改变更日志
-    references/           # 可选：详细参考文档
-      ...
+    references/           # 详细参考文档
 zh/
-  <skill-name>/           # 技能文档的中文版本
-    SKILL.zh.md           # 中文技能定义，内容与 skills/<skill-name>/SKILL.md 相同
+  SKILL.zh.md             # skills/specs-workflow/SKILL.md 的中文版本
 commands/*.toml           # 命令提示词规范源（Gemini CLI 自定义指令）
 rules/specs-workflow.md   # 紧凑常驻规则集规范源
 .opencode/commands/       # 派生的 opencode 斜杠指令
@@ -37,14 +35,14 @@ example/                  # 参考示例（已 gitignore），不属于本项目
 
 ### 规范源与派生适配器
 
-- `commands/*.toml` 是命令提示词的规范源；`.opencode/commands/*.md` 与 `.claude/commands/*.md` 由它派生（`{{args}}` → `$1`）。
+- `commands/*.toml` 是命令提示词的规范源；`.opencode/commands/*.md` 与 `.claude/commands/*.md` 由它派生，并使用宿主参数变量（`$ARGUMENTS`）。
 - `rules/specs-workflow.md` 是紧凑规则集的规范源；所有规则适配器原样复制其正文（仅宿主 frontmatter 不同）。
 - **修改时**：先改规范源，再更新派生文件，确保 `node scripts/check-sync.js` 通过。
 
 ## 中英文同步规则
 
-- **英文版本**：`skills/<skill-name>/SKILL.md` — 可分发的规范技能文件。
-- **中文版本**：`zh/<skill-name>/SKILL.zh.md` — 面向中文用户，单独存放以保持 `skills/` 目录整洁。
+- **英文版本**：`skills/specs-workflow/SKILL.md` — 可分发的规范技能文件。
+- **中文版本**：`zh/SKILL.zh.md` — 面向中文用户，单独存放以保持 `skills/` 目录整洁。
 - **修改时**：必须同时更新两个文件。内容必须在结构和语义上完全一致 — 相同的章节、相同的表格、相同的代码块、相同的示例。仅语言不同。
 
 ## 技能文档格式
@@ -148,8 +146,7 @@ grep -n '^##' zh/<skill-name>/SKILL.zh.md
 
 | 技能 | 描述 | 目录 |
 |---|---|---|
-| vue-tsx | Vue 3 Composition API + TSX 开发 | `skills/vue-tsx/` |
-| fsd | Feature-Sliced Design 前端架构 | `skills/fsd/` |
+| specs-workflow | 规范驱动工作流（`.specs/` requirements/design/tasks/CHANGELOG 约定） | `skills/specs-workflow/` |
 
 ## 构建 / 测试 / 代码检查
 

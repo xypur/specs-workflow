@@ -2,7 +2,7 @@
 
 English | [中文](./README.zh-CN.md)
 
-Spec-driven workflow for AI coding assistants. Before code is written, every module gets `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md` under `.specs/`, kept traceable to each other and synced through `.specs/index.md`. `.specs/index.md` is a progressive-disclosure index: a top status bar (done/blocked, dependency-derived next task and next gate), a module status table with `Progress`, and a Task Summary table let the agent pick which tasks to execute; module documents are loaded on demand — only for the modules the current task touches. Each `tasks.md` ends with a module status block (progress · current task · gate chain).
+Spec-driven workflow for AI coding assistants. Before code is written, every module gets `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md` under `.specs/`, kept traceable to each other and synced through `.specs/index.md`. `.specs/index.md` is a progressive-disclosure index: a top status bar (done/blocked, dependency-derived next task and next gate), a module status table with `Progress`, and a Task Summary table let the agent pick which tasks to execute; module documents are loaded on demand — only for the modules the current task touches. The index is the single source of task status.
 
 This repo is a portable distribution: one skill + one compact ruleset, shipped as thin adapters for multiple AI CLI tools.
 
@@ -59,4 +59,4 @@ The derived adapters must stay aligned with the canonical sources:
 node scripts/check-sync.js   # or: npm test
 ```
 
-The check verifies (a) every rule adapter body equals `rules/specs-workflow.md`, and (b) every `.opencode/` and `.claude/` command equals its `commands/*.toml` prompt (`{{args}}` → `$1`).
+The check verifies (a) every rule adapter body equals `rules/specs-workflow.md`, and (b) every `.opencode/` and `.claude/` command equals its `commands/*.toml` prompt using the host argument variable. For a consumer project, run `node scripts/validate-specs.js <project-root>` to check `.specs` structure, references, task synchronization, dependency graphs, and forbidden versioned design files.

@@ -10,15 +10,13 @@ A curated collection of skill packs for AI coding assistants, providing framewor
 
 ```
 skills/
-  <skill-name>/           # kebab-case, the distributable skill package
-    SKILL.md              # English skill definition (required)
+  specs-workflow/         # the distributable skill package
+    SKILL.md              # English skill definition
     GENERATION.md         # Provenance & generation metadata
     CHANGES.md            # Modification changelog
-    references/           # Optional: detailed reference documents
-      ...
+    references/           # Detailed reference documents
 zh/
-  <skill-name>/           # Chinese versions of skill documents
-    SKILL.zh.md           # Chinese skill definition, same content as skills/<skill-name>/SKILL.md
+  SKILL.zh.md             # Chinese version of skills/specs-workflow/SKILL.md
 commands/*.toml           # Canonical command prompts (Gemini CLI custom commands)
 rules/specs-workflow.md   # Canonical compact always-on ruleset
 .opencode/commands/       # Derived opencode slash commands
@@ -37,14 +35,14 @@ example/                  # Reference examples (gitignored), not part of this pr
 
 ### Canonical Sources & Derived Adapters
 
-- `commands/*.toml` is the canonical source for command prompts; `.opencode/commands/*.md` and `.claude/commands/*.md` are derived from it (`{{args}}` → `$1`).
+- `commands/*.toml` is the canonical source for command prompts; `.opencode/commands/*.md` and `.claude/commands/*.md` are derived from it using the host argument variable (`$ARGUMENTS`).
 - `rules/specs-workflow.md` is the canonical compact ruleset; all rule adapters copy its body verbatim (host-specific frontmatter only).
 - **When modifying**: edit the canonical source first, then regenerate/update the derived files so `node scripts/check-sync.js` passes.
 
 ## Chinese/English Sync Rule
 
-- **English version**: `skills/<skill-name>/SKILL.md` — the distributable, canonical skill file.
-- **Chinese version**: `zh/<skill-name>/SKILL.zh.md` — for Chinese-speaking users, stored separately to keep the `skills/` directory clean.
+- **English version**: `skills/specs-workflow/SKILL.md` — the distributable, canonical skill file.
+- **Chinese version**: `zh/SKILL.zh.md` — for Chinese-speaking users, stored separately to keep the `skills/` directory clean.
 - **When modifying**: Always update both files simultaneously. Content must be structurally and semantically identical — same sections, same tables, same code blocks, same examples. Only the language differs.
 
 ## Skill Document Format
@@ -148,9 +146,6 @@ Line counts and section numbers should match.
 
 | Skill | Description | Directory |
 |---|---|---|
-| vue-tsx | Vue 3 Composition API + TSX development | `skills/vue-tsx/` |
-| fsd | Feature-Sliced Design frontend architecture | `skills/fsd/` |
-| vue-component-authoring | Vue component library authoring conventions | `skills/vue-component-authoring/` |
 | specs-workflow | Spec-driven workflow (`.specs/` requirements/design/tasks/CHANGELOG convention) | `skills/specs-workflow/` |
 
 ## Build / Test / Lint

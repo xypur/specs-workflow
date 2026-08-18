@@ -21,7 +21,7 @@ Specs-workflow is an agent-portable skill distribution. The behavior lives in `s
 
 | Source | Purpose |
 |--------|---------|
-| `commands/*.toml` | Canonical command prompts; `.opencode/commands/` and `.claude/commands/` files are derived from it (`{{args}}` → `$1`). |
+| `commands/*.toml` | Canonical command prompts; `.opencode/commands/` and `.claude/commands/` files are derived from it using the host argument variable (`$ARGUMENTS`). |
 | `rules/specs-workflow.md` | Canonical compact ruleset; all rule adapters copy its body verbatim (host frontmatter only). |
 | `skills/specs-workflow/SKILL.md` | Full skill definition with templates and prompting depth. |
 

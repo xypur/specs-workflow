@@ -2,7 +2,7 @@
 description: Create or update a module's design.md
 ---
 
-Create or update the `.specs/$1/design.md` document for the module `$1`. If `$1` is empty, ask the user for the module name first.
+Create or update the `.specs/$ARGUMENTS/design.md` document for the module `$ARGUMENTS`. If `$ARGUMENTS` is empty, ask the user for the module name first.
 
 Load the specs-workflow skill (skill tool, name `specs-workflow`), then read from the skill directory: `references/file-templates.md` (skeleton), `references/prompt-templates.md` (depth guidance), and `references/examples/traceability.md` (traceability format), and follow them. If the skill is not available, follow the rules below.
 
@@ -16,4 +16,6 @@ Follow these rules:
 - **Error Handling**: a scenario/handling table covering exceptional inputs, empty/disabled states, async failures, and misuse (e.g. used outside a provider).
 - **Correctness Properties**: formal statements in the `*For any* <precondition>, <conclusion>` form, each marked `**Validates: Requirements x.y**`. Every property must be checkable by a test; if it cannot be asserted, it is not a property.
 
-Read the module's `.specs/$1/requirements.md` first so every requirement number referenced by `**Validates:**` actually exists. If `.specs/$1/design.md` already exists, preserve its content and extend it rather than rewriting.
+Read the module's `.specs/$ARGUMENTS/requirements.md` first so every requirement number referenced by `**Validates:**` actually exists. If `.specs/$ARGUMENTS/design.md` already exists, preserve its content and extend it rather than rewriting.
+
+If `scripts/validate-specs.js` is available, run `node scripts/validate-specs.js .` before finishing and report any validation errors.

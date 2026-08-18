@@ -86,7 +86,7 @@ One sentence describing what this module is and what problem it solves.
 
 ## `<module>/design.md`
 
-```markdown
+````markdown
 # Design Document
 
 ## Overview
@@ -136,11 +136,11 @@ Type definitions and data structures.
 *For any* <precondition>，<conclusion>。
 
 **Validates: Requirements x.y**
-```
+````
 
 ## `<module>/tasks.md`
 
-```markdown
+````markdown
 # Implementation Plan: <module>
 
 ## Overview
@@ -149,13 +149,14 @@ Phased implementation approach with explicit verification methods.
 
 ## Tasks
 
-- [ ] 1. <Phase Title>
+## Phase 1: <Phase Title>
   - [ ] 1.1 <Task Description>
     - <Implementation key points>
     - _Requirements: x.y, x.z_
   - [ ] 1.2 ...
 
-- [ ] N. Checkpoint — <Verification Description>
+- [ ] 1.3 Checkpoint — <Verification Description>
+  - _Requirements: x.y_
   - Run tests/build, make sure they pass, ask the user if there are issues.
 
 ## Notes
@@ -175,18 +176,8 @@ Phased implementation approach with explicit verification methods.
 }
 ```
 
-## Status Block
-
-Module-local status snapshot, kept in sync with the checkboxes above. Each phase's terminal task (the last `N.M`, usually its Checkpoint) is a **gate**; the gate chain compresses the phase dependency graph into one line.
-
-```markdown
-进度 2/5 · 当前：tree.1.2 · 门禁链：1.4 → 2.3
-```
-
-- **进度**: `done/total` from the task checkboxes (same numbers as the `Progress` column in `.specs/index.md`).
-- **当前**: the task id that satisfies "next task" (first `[ ]` whose deps are all `[x]`).
-- **门禁链**: `<phase>.<last task>` for each phase in order, joined with ` → `.
-```
+Task status is maintained in `.specs/index.md`, which derives progress, the next task, and the next gate from task checkboxes and dependencies. Do not add a module-local status block.
+````
 
 ## `<module>/CHANGELOG.md`
 

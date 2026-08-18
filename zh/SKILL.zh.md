@@ -46,7 +46,7 @@ flowchart TD
 
 ### 第 2 步：写代码前先创建模块文档
 
-在为新模块或新功能编写任何代码之前，先创建 `.specs/<module>/` 目录，包含 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md` 四个文件，并填好需求。在 `.specs/index.md` 状态总表中为该模块新增一行，并在任务摘要表中为每个任务新增一行（随 `tasks.md` 编写）。骨架模板见 [references/file-templates.md](references/file-templates.md)（定结构）；逐节思考提示见 [references/prompt-templates.md](references/prompt-templates.md)（定深度）；质量验收清单见 [references/checklists.md](references/checklists.md)（定合格标准）；精确的追溯格式见 [references/examples/traceability.md](references/examples/traceability.md)（示例）。
+在为新模块或新功能编写任何代码之前，先创建 `.specs/<module>/` 目录，包含 `requirements.md`、`design.md`、`tasks.md`、`CHANGELOG.md` 四个文件，并填好需求。在 `.specs/index.md` 状态总表中为该模块新增一行，并在任务摘要表中为每个任务新增一行（随 `tasks.md` 编写）。骨架模板见 [references/file-templates.md](../skills/specs-workflow/references/file-templates.md)（定结构）；逐节思考提示见 [references/prompt-templates.md](../skills/specs-workflow/references/prompt-templates.md)（定深度）；质量验收清单见 [references/checklists.md](../skills/specs-workflow/references/checklists.md)（定合格标准）；精确的追溯格式见 [references/examples/traceability.md](../skills/specs-workflow/references/examples/traceability.md)（示例）。
 
 ### 第 3 步：编写需求
 
@@ -58,11 +58,11 @@ flowchart TD
 
 ### 第 5 步：编写任务计划
 
-在 `tasks.md` 中将实现拆分为层级编号的任务（`N.M`，与需求编号解耦），并按选定的排序策略组织（Foundation-First / Feature-Slice / Risk-First / Hybrid）。每条任务用 `_Requirements: x.y, x.z_` 引用其实现的需求条款。包含任务依赖图（waves）与检查点（checkpoint）任务，在关键里程碑运行测试/构建 —— 每个阶段的终态任务即该阶段的**门禁**。在 `tasks.md` 末尾添加**状态块**：进度（`done/total`）、当前任务、门禁链（`<阶段>.<末位任务> → …`）。
+在 `tasks.md` 中将实现拆分为层级编号的任务（`N.M`，与需求编号解耦），并按选定的排序策略组织（Foundation-First / Feature-Slice / Risk-First / Hybrid）。每条任务用 `_Requirements: x.y, x.z_` 引用其实现的需求条款。包含任务依赖图（waves）与检查点（checkpoint）任务，在关键里程碑运行测试/构建 —— 每个阶段的终态任务即该阶段的**门禁**。任务状态只维护在 `.specs/index.md` 中，不在 `tasks.md` 添加手工维护的状态块。
 
 ### 第 6 步：实现并同步进度
 
-按依赖顺序执行任务。完成的任务勾选 `- [x]`，及时更新 `.specs/index.md` 模块状态总表（按 `draft → design → implementing → implemented` 推进），并同步 `.specs/index.md` 任务摘要表中的勾选状态与 `tasks.md` 保持一致。同步更新 `Progress` 列（`done/total (pct)`）、模块的状态块与索引状态栏：**下一任务** = 第一个状态为 `[ ]` 且其 `Depends on` 全部已完成的任务；**下一门禁** = 门禁链中下一个尚未勾选的阶段终态任务。在每个检查点运行测试/构建并汇报结果。
+按依赖顺序执行任务。完成的任务勾选 `- [x]`，及时更新 `.specs/index.md` 模块状态总表（按 `draft → design → implementing → implemented` 推进），并同步 `.specs/index.md` 任务摘要表中的勾选状态与 `tasks.md` 保持一致。同步更新 `Progress` 列（`done/total (pct)`）与索引状态栏：**下一任务** = 第一个状态为 `[ ]` 且其 `Depends on` 全部已完成的任务；**下一门禁** = 门禁链中下一个尚未勾选的阶段终态任务。在每个检查点运行测试/构建并汇报结果。
 
 ### 第 7 步：记录设计变更
 
@@ -80,7 +80,7 @@ flowchart TD
 └── <module>/
     ├── requirements.md  # 需求（Requirement N + 验收标准）
     ├── design.md        # 设计（架构/数据流/接口 + Correctness Properties）
-    ├── tasks.md         # 任务（引用需求编号 + 依赖图 + 状态块）
+    ├── tasks.md         # 任务（引用需求编号 + 依赖图）
     └── CHANGELOG.md     # 变更日志（设计改版记录）
 ```
 
@@ -92,7 +92,7 @@ flowchart TD
 | 2 | 保持可追溯：任务引用 `_Requirements: x.y_`；每条 Correctness Property 标注 `**Validates: Requirements x.y**` |
 | 3 | 设计改版记录到 `CHANGELOG.md`；严禁创建 `v1.md`/`v2.md` 文件 |
 | 4 | 跨模块复用的共享设施单独建目录 `.specs/shared/` |
-| 5 | 完成的任务勾选 `- [x]`，并同步 `.specs/index.md` 状态总表、任务摘要表、`Progress` 列、索引状态栏与模块状态块 |
+| 5 | 完成的任务勾选 `- [x]`，并同步 `.specs/index.md` 状态总表、任务摘要表、`Progress` 列与索引状态栏 |
 | 6 | 验收完结的模块在 `.specs/index.md` 状态总表中标记为 `archived` |
 | 7 | 读任何模块文档前，先读 `.specs/index.md`；根据任务摘要表按需加载模块文档 |
 | 8 | 从依赖推导下一任务 / 下一门禁（第一个依赖全部满足的待办任务；门禁链中下一个未勾选的阶段终态任务），并记录在索引状态栏中 |
@@ -113,7 +113,7 @@ flowchart TD
 - 不得创建 `v1.md` / `v2.md` 等版本化设计文件；应使用 `CHANGELOG.md`。
 - 不得在任务中跳过需求引用，或在设计属性中跳过 `Validates` 标注。
 - 不得让已完成的任务保持未勾选，或与 `.specs/index.md` 状态总表、任务摘要表脱节。
-- 不得让索引状态栏、`Progress` 列或模块的状态块与任务勾选状态脱节。
+- 不得让索引状态栏或 `Progress` 列与任务勾选状态脱节。
 - 不得在各模块中重复编写共享基础设施的需求；应抽取到 `.specs/shared/`。
 
 ## 不确定时

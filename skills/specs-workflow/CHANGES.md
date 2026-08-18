@@ -1,5 +1,14 @@
 # 修改记录
 
+## 2026-08-18
+
+### 修复宿主参数映射并建立 `.specs` 结构校验
+
+- `.opencode/` 与 `.claude/` 命令统一使用 `$ARGUMENTS`，同步检查按宿主变量验证派生内容。
+- 移除 `tasks.md` 的手工 Status Block，改由 `.specs/index.md` 作为唯一任务状态来源。
+- 新增无依赖的 `scripts/validate-specs.js`，校验模块文件、需求追溯、任务同步、依赖图、Markdown 围栏和禁止的版本化设计文件。
+- 命令在可用时运行 validator；保留语义分析和复杂状态推断作为后续阶段。
+
 ## 2026-08-09
 
 ### description 触发策略改为"显式调用短语 + 隐式场景"混合

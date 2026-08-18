@@ -5,6 +5,7 @@
   "description": "Spec-driven workflow for AI coding assistants: .specs/ convention skill + multi-tool adapters.",
   "license": "MIT",
   "scripts": {
-    "test": "node scripts/check-sync.js"
+    "test": "node scripts/check-sync.js",
+    "validate-specs": "node scripts/validate-specs.js"
   }
 }
