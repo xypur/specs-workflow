@@ -31,11 +31,11 @@ Read this file before any module document: use the Status Bar, Module Status Tab
 
 Global index of every task across modules. Add one row per task in `<module>/tasks.md`; keep the checkbox state in sync.
 
-| Task | Module | Title | Status | Depends on |
-|------|--------|-------|--------|------------|
-| shared.1 | shared | Selection behavior core | [x] | - |
-| tree.1 | tree | Tree state model | [ ] | shared.1 |
-| tree.2 | tree | Tree node rendering | [ ] | tree.1 |
+| Task | Status | Module | Title | Depends on |
+|------|--------|--------|-------|------------|
+| shared.1 | [x] | shared | Selection behavior core | - |
+| tree.1 | [ ] | tree | Tree state model | shared.1 |
+| tree.2 | [ ] | tree | Tree node rendering | tree.1 |
 
 `Task` is the globally unique id `<module>.<N.M>` (the module dir name + the task's number in `tasks.md`). `Status` mirrors the `- [ ]` / `- [x]` checkbox in `tasks.md`.
 

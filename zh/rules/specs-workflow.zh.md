@@ -15,7 +15,7 @@
 
 ## 文档格式
 
-- `index.md`：常驻索引 —— 顶部状态栏（`📍 状态栏`：当前模块 + 状态 · done/total · 阻塞数 · 下一任务 · 下一门禁 · 最近更新）、模块状态总表（`Module | Status | Progress | Depends on | Notes`，`Progress` 格式为 `done/total (pct)`）、任务摘要表（`Task | Module | Title | Status | Depends on`，`Task` 为全局唯一编号 `<module>.<N.M>`，与 `tasks.md` 勾选状态一致）、执行顺序/依赖，以及变更记录。
+- `index.md`：常驻索引 —— 顶部状态栏（`📍 状态栏`：当前模块 + 状态 · done/total · 阻塞数 · 下一任务 · 下一门禁 · 最近更新）、模块状态总表（`Module | Status | Progress | Depends on | Notes`，`Progress` 格式为 `done/total (pct)`）、任务摘要表（`Task | Status | Module | Title | Depends on`，`Task` 为全局唯一编号 `<module>.<N.M>`，与 `tasks.md` 勾选状态一致）、执行顺序/依赖，以及变更记录。
 
 - `requirements.md`：`Requirement N`（整数，递增）+ User Story（*As a `<角色>` / I want `<能力>` / so that `<价值>`*）+ 验收标准按 `N.M` 编号，使用 `THE <System> SHALL` / `WHEN` / `IF` / `WHILE` 句式，可补充复合 `AND` / `OR` 条件以及基于状态、性能与安全类的变体，每一条都必须可被机器测试，整体覆盖正常路径、边界条件与错误/排除场景。
 - `design.md`：Overview（定位 + 关键取舍）/ Architecture（分层 + Mermaid 图表达数据流；说明"为什么"这样拆分）/ Components & Composables（接口、职责、结构化伪代码）/ Interfaces & Data Models（类型、字段、默认值、可选项）/ Key Decisions（决策记录：上下文、含优缺点与工作量的备选方案、选定方案、理由）/ Error Handling（场景/策略表）/ Correctness Properties（`*For any* <前置条件>, <结论>`，每条标注 `**Validates: Requirements x.y**`）。

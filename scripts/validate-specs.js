@@ -184,7 +184,7 @@ for (const [id, record] of allTasks) {
     fail(`.specs/index.md: missing Task Summary row for ${id}`);
     continue;
   }
-  if (row[3] !== (record.checked ? '[x]' : '[ ]')) fail(`.specs/index.md: status mismatch for ${id}`);
+  if (row[1] !== (record.checked ? '[x]' : '[ ]')) fail(`.specs/index.md: status mismatch for ${id}`);
   const depends = (row[4] || '').split(',').map((value) => value.trim()).filter(Boolean).filter((value) => value !== '-');
   for (const dependency of depends) if (!allTasks.has(dependency)) fail(`.specs/index.md: ${id} depends on unknown task ${dependency}`);
 }

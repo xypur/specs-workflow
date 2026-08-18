@@ -2,6 +2,10 @@
 
 ## 2026-08-18
 
+### Task Summary 列序调整：状态列前移
+
+将 `index.md` 任务摘要表列序从 `Task | Module | Title | Status | Depends on` 调整为 `Task | Status | Module | Title | Depends on`：`Task` 与 `Status` 是执行时最先关注的信息，状态也是变化最频繁的字段，前移后更易纵向扫描。同步更新 `rules/specs-workflow.md`、`zh/rules/specs-workflow.zh.md`、全部规则适配器、`commands/specs-init.toml` 及派生命令、`references/file-templates.md` 骨架与示例；`scripts/validate-specs.js` 改为按新列序读取状态列。历史条目中的旧列序为当时记录，不再回改。
+
 ### 修复宿主参数映射并建立 `.specs` 结构校验
 
 - `.opencode/` 与 `.claude/` 命令统一使用 `$ARGUMENTS`，同步检查按宿主变量验证派生内容。
