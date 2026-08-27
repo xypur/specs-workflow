@@ -4,15 +4,15 @@ Organized by functional module, each module is a self-contained directory (requi
 
 Read this file before any module document: use the Status Bar, Module Status Table, and Task Summary below to determine which module(s) and task(s) the current request touches, then open only the relevant module documents on demand.
 
-> 📍 **Status Bar** · agent-adapters [`implementing`] · 16/19 done · 0 blocked ·
-> Next task: **agent-adapters.5.1** (deps satisfied) · Next gate: **agent-adapters.5.3**
-> Last updated: 2026-08-27 (Phase 4 done: pi extension + package manifest)
+> 📍 **Status Bar** · agent-adapters [`implemented`] · 19/19 done · 0 blocked ·
+> Next task: —（模块已实现，待验收后归档） · Next gate: —（全部 gate 已通过）
+> Last updated: 2026-08-27 (Phase 5 done: CI + final consistency pass; module implemented)
 
 ## Module Status Table
 
 | Module | Status | Progress | Depends on | Notes |
 |--------|--------|----------|------------|-------|
-| agent-adapters | implementing | 16/19 (84%) | - | 对齐 ponytail 的适配升级：AGENTS.md 分发、插件 manifests、运行时 hooks、pi 扩展、CI |
+| agent-adapters | implemented | 19/19 (100%) | - | 对齐 ponytail 的适配升级：AGENTS.md 分发、插件 manifests、运行时 hooks、pi 扩展、CI |
 
 `Progress` = `done/total (pct)` counting every task checkbox in `<module>/tasks.md`. Status values: `draft` → `design` → `implementing` → `implemented` → `archived`. Archived modules stay listed with status `archived`; their directories are not moved.
 
@@ -38,9 +38,9 @@ Global index of every task across modules. Add one row per task in `<module>/tas
 | agent-adapters.4.2 | [x] | agent-adapters | pi 会话启动提醒注入 | agent-adapters.4.1 |
 | agent-adapters.4.3 | [x] | agent-adapters | pi 扩展打包元数据 | agent-adapters.4.1 |
 | agent-adapters.4.4 | [x] | agent-adapters | Checkpoint — pi 本地安装验证 | agent-adapters.4.2, agent-adapters.4.3 |
-| agent-adapters.5.1 | [ ] | agent-adapters | GitHub Actions CI 工作流 | agent-adapters.1.4 |
-| agent-adapters.5.2 | [ ] | agent-adapters | 全量一致性收尾（EN/zh 对齐） | agent-adapters.2.5, agent-adapters.3.3, agent-adapters.4.4, agent-adapters.5.1 |
-| agent-adapters.5.3 | [ ] | agent-adapters | Checkpoint — 全绿并标记 implemented | agent-adapters.5.2 |
+| agent-adapters.5.1 | [x] | agent-adapters | GitHub Actions CI 工作流 | agent-adapters.1.4 |
+| agent-adapters.5.2 | [x] | agent-adapters | 全量一致性收尾（EN/zh 对齐） | agent-adapters.2.5, agent-adapters.3.3, agent-adapters.4.4, agent-adapters.5.1 |
+| agent-adapters.5.3 | [x] | agent-adapters | Checkpoint — 全绿并标记 implemented | agent-adapters.5.2 |
 
 `Task` is the globally unique id `<module>.<N.M>` (the module dir name + the task's number in `tasks.md`). `Status` mirrors the `- [ ]` / `- [x]` checkbox in `tasks.md`.
 
@@ -62,3 +62,4 @@ Phase 1（指令层 AGENTS.md + 同步校验）是其余所有阶段的前置基
 | 2026-08-27 | Phase 1 完成：AGENTS.md 标记区块分发、check-sync 校验、文档中英同步（1.1–1.4） |
 | 2026-08-27 | Phase 2 完成：三个插件 manifest + 安装/卸载文档（2.1–2.5）。实现发现：Claude Code plugin.json 路径字段必须以 `./` 开头；marketplace.json 为严格 schema（拒绝根级 `$schema`/`description`）；命令路径取 `./.claude/commands` 复用既有派生文件 |
 | 2026-08-27 | Phase 3 完成：提醒脚本 + hooks 接入 manifests（3.1–3.3）。实现发现：Claude 的 SubagentStart 上下文必须用 hookSpecificOutput JSON 包裹，否则被丢弃；Codex 以 PLUGIN_DATA 环境变量检测 |
+| 2026-08-27 | Phase 5 完成：CI 工作流 + portability 文档三层重组（EN/zh）+ 全量一致性收尾（5.1–5.3），模块标记 implemented。CI 首次运行需 push 至 GitHub 后确认；其调用的两个脚本本地均通过 |

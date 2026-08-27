@@ -59,11 +59,11 @@
 
 ### Phase 5: CI 与收尾
 
-- [ ] 5.1 新增 `.github/workflows/ci.yml`：push/PR 运行 `node scripts/check-sync.js`（npm test）
+- [x] 5.1 新增 `.github/workflows/ci.yml`：push/PR 运行 `node scripts/check-sync.js`（npm test）
   - _Requirements: 5.1_
-- [ ] 5.2 全量一致性收尾：portability 文档按 instruction/plugin/runtime 分层整理（含新增项），README 中英核对，`grep -n '^##'` 核对 skill 中英标题对齐未受影响
+- [x] 5.2 全量一致性收尾：portability 文档按 instruction/plugin/runtime 分层整理（含新增项），README 中英核对，`grep -n '^##'` 核对 skill 中英标题对齐未受影响
   - _Requirements: 6.1, 6.2_
-- [ ] 5.3 Checkpoint — Phase 5 gate：`npm test` + `node scripts/validate-specs.js .` 全绿，CI 首次运行成功，模块状态置为 implemented
+- [x] 5.3 Checkpoint — Phase 5 gate：`npm test` + `node scripts/validate-specs.js .` 全绿，CI 首次运行成功，模块状态置为 implemented
   - _Requirements: 5.1, 5.2_
 
 ## Notes
