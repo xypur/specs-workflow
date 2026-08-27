@@ -1,10 +1,10 @@
-# File Templates for the `.specs/` Convention
+# File Templates for the `.agents/specs/` Convention
 
-Use these skeletons when creating `.specs/` documents. Copy each block into the corresponding file and fill in the content.
+Use these skeletons when creating `.agents/specs/` documents. Copy each block into the corresponding file and fill in the content.
 
-## `.specs/index.md`
+## `.agents/specs/index.md`
 
-`.specs/index.md` is the **always-read entry point** of the progressive disclosure chain. Its Task Summary table lets the agent decide which tasks to execute without opening every module's `tasks.md`.
+`.agents/specs/index.md` is the **always-read entry point** of the progressive disclosure chain. Its Task Summary table lets the agent decide which tasks to execute without opening every module's `tasks.md`.
 
 ```markdown
 # Specs Index
@@ -15,7 +15,7 @@ Read this file before any module document: use the Status Bar, Module Status Tab
 
 > 📍 **Status Bar** · cs-foundation [`design`] · 0/31 done · 0 blocked ·
 > Next task: **cs-foundation.1.1** (deps satisfied) · Next gate: **cs-foundation.1.6**
-> Last updated: YYYY-MM-DD (init .specs)
+> Last updated: YYYY-MM-DD (init .agents/specs)
 
 ## Module Status Table
 
@@ -176,7 +176,7 @@ Phased implementation approach with explicit verification methods.
 }
 ```
 
-Task status is maintained in `.specs/index.md`, which derives progress, the next task, and the next gate from task checkboxes and dependencies. Do not add a module-local status block.
+Task status is maintained in `.agents/specs/index.md`, which derives progress, the next task, and the next gate from task checkboxes and dependencies. Do not add a module-local status block.
 ````
 
 ## `<module>/CHANGELOG.md`

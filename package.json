@@ -2,7 +2,7 @@
   "name": "specs-workflow",
   "version": "1.0.0",
   "private": true,
-  "description": "Spec-driven workflow for AI coding assistants: .specs/ convention skill + multi-tool adapters.",
+  "description": "Spec-driven workflow for AI coding assistants: .agents/specs/ convention skill + multi-tool adapters.",
   "license": "MIT",
   "scripts": {
     "test": "node scripts/check-sync.js",

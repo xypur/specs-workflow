@@ -2,7 +2,7 @@
 
 English | [中文](./README.zh-CN.md)
 
-Spec-driven workflow for AI coding assistants. Before code is written, every module gets `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md` under `.specs/`, kept traceable to each other and synced through `.specs/index.md`. `.specs/index.md` is a progressive-disclosure index: a top status bar (done/blocked, dependency-derived next task and next gate), a module status table with `Progress`, and a Task Summary table let the agent pick which tasks to execute; module documents are loaded on demand — only for the modules the current task touches. The index is the single source of task status.
+Spec-driven workflow for AI coding assistants. Before code is written, every module gets `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md` under `.agents/specs/`, kept traceable to each other and synced through `.agents/specs/index.md`. `.agents/specs/index.md` is a progressive-disclosure index: a top status bar (done/blocked, dependency-derived next task and next gate), a module status table with `Progress`, and a Task Summary table let the agent pick which tasks to execute; module documents are loaded on demand — only for the modules the current task touches. The index is the single source of task status.
 
 This repo is a portable distribution: one skill + one compact ruleset, shipped as thin adapters for multiple AI CLI tools.
 
@@ -35,7 +35,7 @@ Install the full `specs-workflow` skill with the [Skills CLI](https://skills.sh/
 npx skills add https://github.com/xypur/specs-workflow --skill specs-workflow
 ```
 
-The skill itself works in any skill-capable host (Claude Code, Codex, opencode, Gemini, Qoder, Devin, etc.): register `skills/specs-workflow/` as a skill and it activates on `.specs/` work.
+The skill itself works in any skill-capable host (Claude Code, Codex, opencode, Gemini, Qoder, Devin, etc.): register `skills/specs-workflow/` as a skill and it activates on `.agents/specs/` work.
 
 See [docs/agent-portability.md](docs/agent-portability.md) for the full host → file mapping.
 
@@ -44,7 +44,7 @@ See [docs/agent-portability.md](docs/agent-portability.md) for the full host →
 | Command | What it does |
 |---------|--------------|
 | `/specs <description>` | Unified entry: describe the feature, creates all four spec documents for the derived module in one pass. The commands below are the step-by-step / single-document variants. |
-| `/specs-init` | Bootstrap `.specs/` (index with status bar + status table + task summary + dependencies) |
+| `/specs-init` | Bootstrap `.agents/specs/` (index with status bar + status table + task summary + dependencies) |
 | `/specs-requirements <module>` | Create/update a module's `requirements.md` |
 | `/specs-design <module>` | Create/update a module's `design.md` |
 | `/specs-tasks <module>` | Create/update a module's `tasks.md` |
@@ -59,4 +59,4 @@ The derived adapters must stay aligned with the canonical sources:
 node scripts/check-sync.js   # or: npm test
 ```
 
-The check verifies (a) every rule adapter body equals `rules/specs-workflow.md`, and (b) every `.opencode/` and `.claude/` command equals its `commands/*.toml` prompt using the host argument variable. For a consumer project, run `node scripts/validate-specs.js <project-root>` to check `.specs` structure, references, task synchronization, dependency graphs, and forbidden versioned design files.
+The check verifies (a) every rule adapter body equals `rules/specs-workflow.md`, and (b) every `.opencode/` and `.claude/` command equals its `commands/*.toml` prompt using the host argument variable. For a consumer project, run `node scripts/validate-specs.js <project-root>` to check `.agents/specs` structure, references, task synchronization, dependency graphs, and forbidden versioned design files.

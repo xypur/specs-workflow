@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const projectRoot = path.resolve(process.argv[2] || process.cwd());
-const specsRoot = path.join(projectRoot, '.specs');
+const specsRoot = path.join(projectRoot, '.agents', 'specs');
 const errors = [];
 
 function fail(message) {
@@ -129,16 +129,16 @@ function dependencyGraph(text, label, records) {
 function validateModule(moduleName) {
   const moduleRoot = path.join(specsRoot, moduleName);
   if (!fs.existsSync(moduleRoot) || !fs.statSync(moduleRoot).isDirectory()) {
-    fail(`Index lists missing module directory: .specs/${moduleName}`);
+    fail(`Index lists missing module directory: .agents/specs/${moduleName}`);
     return null;
   }
   for (const file of ['requirements.md', 'design.md', 'tasks.md', 'CHANGELOG.md']) {
-    if (!fs.existsSync(path.join(moduleRoot, file))) fail(`.specs/${moduleName}: missing ${file}`);
+    if (!fs.existsSync(path.join(moduleRoot, file))) fail(`.agents/specs/${moduleName}: missing ${file}`);
   }
   const requirements = readFile(path.join(moduleRoot, 'requirements.md'));
   const design = readFile(path.join(moduleRoot, 'design.md'));
   const tasks = readFile(path.join(moduleRoot, 'tasks.md'));
-  const label = `.specs/${moduleName}`;
+  const label = `.agents/specs/${moduleName}`;
   checkFences(requirements, `${label}/requirements.md`);
   checkFences(design, `${label}/design.md`);
   checkFences(tasks, `${label}/tasks.md`);
@@ -151,7 +151,7 @@ function validateModule(moduleName) {
   return { moduleName, records };
 }
 
-if (!fs.existsSync(specsRoot)) fail(`Missing .specs directory in ${projectRoot}`);
+if (!fs.existsSync(specsRoot)) fail(`Missing .agents/specs directory in ${projectRoot}`);
 const indexPath = path.join(specsRoot, 'index.md');
 const indexText = readFile(indexPath);
 const statuses = new Map();
@@ -160,7 +160,7 @@ for (const cells of tableRows(rowsBetween(indexText, '## Module Status Table', '
 }
 const validStatuses = new Set(['draft', 'design', 'implementing', 'implemented', 'archived']);
 for (const [moduleName, status] of statuses) {
-  if (!validStatuses.has(status)) fail(`.specs/index.md: invalid status for ${moduleName}: ${status}`);
+  if (!validStatuses.has(status)) fail(`.agents/specs/index.md: invalid status for ${moduleName}: ${status}`);
 }
 
 const modules = [...statuses.keys()].map((moduleName) => validateModule(moduleName)).filter(Boolean);
@@ -181,18 +181,18 @@ for (const cells of summaryRows) {
 for (const [id, record] of allTasks) {
   const row = summary.get(id);
   if (!row) {
-    fail(`.specs/index.md: missing Task Summary row for ${id}`);
+    fail(`.agents/specs/index.md: missing Task Summary row for ${id}`);
     continue;
   }
-  if (row[1] !== (record.checked ? '[x]' : '[ ]')) fail(`.specs/index.md: status mismatch for ${id}`);
+  if (row[1] !== (record.checked ? '[x]' : '[ ]')) fail(`.agents/specs/index.md: status mismatch for ${id}`);
   const depends = (row[4] || '').split(',').map((value) => value.trim()).filter(Boolean).filter((value) => value !== '-');
-  for (const dependency of depends) if (!allTasks.has(dependency)) fail(`.specs/index.md: ${id} depends on unknown task ${dependency}`);
+  for (const dependency of depends) if (!allTasks.has(dependency)) fail(`.agents/specs/index.md: ${id} depends on unknown task ${dependency}`);
 }
-for (const id of summary.keys()) if (!allTasks.has(id)) fail(`.specs/index.md: Task Summary references unknown task ${id}`);
+for (const id of summary.keys()) if (!allTasks.has(id)) fail(`.agents/specs/index.md: Task Summary references unknown task ${id}`);
 
 function visit(id, visiting, visited) {
   if (visiting.has(id)) {
-    fail(`.specs/index.md: dependency cycle includes ${id}`);
+    fail(`.agents/specs/index.md: dependency cycle includes ${id}`);
     return;
   }
   if (visited.has(id)) return;
@@ -210,7 +210,7 @@ for (const moduleName of statuses.keys()) {
   const moduleRoot = path.join(specsRoot, moduleName);
   if (fs.existsSync(moduleRoot)) {
     for (const file of fs.readdirSync(moduleRoot)) {
-      if (/^v\d+\.md$/i.test(file)) fail(`.specs/${moduleName}: versioned design file is forbidden: ${file}`);
+      if (/^v\d+\.md$/i.test(file)) fail(`.agents/specs/${moduleName}: versioned design file is forbidden: ${file}`);
     }
   }
 }
@@ -221,4 +221,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`OK: .specs validation passed for ${projectRoot}`);
+console.log(`OK: .agents/specs validation passed for ${projectRoot}`);

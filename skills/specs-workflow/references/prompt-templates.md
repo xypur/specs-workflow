@@ -1,6 +1,6 @@
-# Prompting Templates for `.specs/` Documents
+# Prompting Templates for `.agents/specs/` Documents
 
-Use these prompts together with the skeletons in [file-templates.md](file-templates.md) when generating `.specs/` documents. Each section below states what the AI must *think about* when filling that section — the skeletons define the structure, the prompts define the depth. For the concrete traceability format (`Validates:` / `_Requirements:`), see [examples/traceability.md](examples/traceability.md).
+Use these prompts together with the skeletons in [file-templates.md](file-templates.md) when generating `.agents/specs/` documents. Each section below states what the AI must *think about* when filling that section — the skeletons define the structure, the prompts define the depth. For the concrete traceability format (`Validates:` / `_Requirements:`), see [examples/traceability.md](examples/traceability.md).
 
 ## `index.md`
 
@@ -14,7 +14,7 @@ A blockquote at the top of the file — the "IDE bottom bar" equivalent: one gla
 2. **done/total** — count of `[x]` over all task checkboxes, plus the blocked count (todo tasks whose deps are not all done).
 3. **Next task** — the first Task Summary row with `[ ]` whose every `Depends on` id is `[x]`; if no task is ready, note "all blocked". This is the "smart next step" — derive it, never hand-pick.
 4. **Next gate** — the first unchecked phase-terminal (Checkpoint) task in the active module's gate chain.
-5. **Last updated** — date + a one-line note (e.g. "init .specs").
+5. **Last updated** — date + a one-line note (e.g. "init .agents/specs").
 
 Keep the status bar in sync every time a task is checked off, a module status changes, or the task list is edited.
 

@@ -146,7 +146,7 @@ grep -n '^##' zh/<skill-name>/SKILL.zh.md
 
 | 技能 | 描述 | 目录 |
 |---|---|---|
-| specs-workflow | 规范驱动工作流（`.specs/` requirements/design/tasks/CHANGELOG 约定） | `skills/specs-workflow/` |
+| specs-workflow | 规范驱动工作流（`.agents/specs/` requirements/design/tasks/CHANGELOG 约定） | `skills/specs-workflow/` |
 
 ## 构建 / 测试 / 代码检查
 

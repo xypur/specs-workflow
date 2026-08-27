@@ -1,6 +1,6 @@
 description = "Create or update a module's tasks.md"
 prompt = '''
-Create or update the `.specs/{{args}}/tasks.md` document for the module `{{args}}`. If `{{args}}` is empty, ask the user for the module name first.
+Create or update the `.agents/specs/{{args}}/tasks.md` document for the module `{{args}}`. If `{{args}}` is empty, ask the user for the module name first.
 
 Load the specs-workflow skill (skill tool, name `specs-workflow`), then read from the skill directory: `references/file-templates.md` (skeleton), `references/prompt-templates.md` (depth guidance), and `references/examples/traceability.md` (traceability format), and follow them. If the skill is not available, follow the rules below.
 
@@ -11,9 +11,9 @@ Follow these rules:
 - **Checkpoints**: at meaningful milestones, add checkpoint tasks that run the test suite/build and surface issues early.
 - **Task Dependency Graph**: express the phases as ordered waves in JSON so execution order is unambiguous.
 - **Status**: keep the index as the single source of task status. Do not add a manually maintained status block to `tasks.md`.
-- **Index sync**: after writing/updating the tasks, add or update one row per task in the `.specs/index.md` Task Summary table — `Task` = `<module>.<N.M>`, `Status` mirrors the checkbox in `tasks.md`; update the module's `Progress` column; and rebuild the Status Bar (next task = first `[ ]` with all deps done, next gate = next unchecked phase-terminal task, blocked count, done/total, last updated) — so the index stays the single source of truth for what to execute.
+- **Index sync**: after writing/updating the tasks, add or update one row per task in the `.agents/specs/index.md` Task Summary table — `Task` = `<module>.<N.M>`, `Status` mirrors the checkbox in `tasks.md`; update the module's `Progress` column; and rebuild the Status Bar (next task = first `[ ]` with all deps done, next gate = next unchecked phase-terminal task, blocked count, done/total, last updated) — so the index stays the single source of truth for what to execute.
 
-Read the module's `.specs/{{args}}/requirements.md` first so every requirement clause referenced by `_Requirements:` actually exists — no dangling references. If `.specs/{{args}}/tasks.md` already exists, preserve its content and extend it rather than rewriting.
+Read the module's `.agents/specs/{{args}}/requirements.md` first so every requirement clause referenced by `_Requirements:` actually exists — no dangling references. If `.agents/specs/{{args}}/tasks.md` already exists, preserve its content and extend it rather than rewriting.
 
 If `scripts/validate-specs.js` is available, run `node scripts/validate-specs.js .` before finishing and report any validation errors.
 '''

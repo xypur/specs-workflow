@@ -1,5 +1,16 @@
 # 修改记录
 
+## 2026-08-27
+
+### 约定根目录从 `.specs/` 迁移到 `.agents/specs/`
+
+将 spec 文档目录约定整体迁移至 `.agents/specs/`，与 `.agents/` 作为跨工具 agent 状态目录的惯例统一（技能已在 `~/.agents/skills/`、规则适配器在 `.agents/rules/`）。**完全切换，不保留 `.specs/` 回退**（工具未推广、无外部用户）。历史条目中的旧路径为当时记录，不再回改。
+
+- 替换范围：`SKILL.md` / `SKILL.zh.md`、`references/`（checklists / file-templates / prompt-templates）、`rules/specs-workflow.md` / `zh/rules/specs-workflow.zh.md`、全部规则适配器（`.cursor/.windsurf/.clinerules/.kiro/.agents/.qoder/.github`）、`commands/*.toml` 五个命令及 `.opencode/` / `.claude/` 派生命令、`README.md` / `README.zh-CN.md`、`docs/agent-portability*.md`、`examples/README.md`、`AGENTS.md` / `AGENTS.zh.md`、`package.json` description。
+- `scripts/validate-specs.js`：校验根改为 `path.join(projectRoot, '.agents', 'specs')`；错误信息前缀同步为新路径。已实测：缺失目录、结构校验报错、最小合规项目正向通过（exit=0）均在 `.agents/specs/` 下工作。
+- 命名与语义不变：模块仍为 `<module>/requirements.md + design.md + tasks.md + CHANGELOG.md`，状态机、追溯格式、共享目录 `.agents/specs/shared/` 约定原样保留。
+- `node scripts/check-sync.js` 通过。
+
 ## 2026-08-18
 
 ### Task Summary 列序调整：状态列前移

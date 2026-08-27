@@ -2,7 +2,7 @@
 description: Create or update a module's requirements.md
 ---
 
-Create or update the `.specs/$ARGUMENTS/requirements.md` document for the module `$ARGUMENTS`. If `$ARGUMENTS` is empty, ask the user for the module name first.
+Create or update the `.agents/specs/$ARGUMENTS/requirements.md` document for the module `$ARGUMENTS`. If `$ARGUMENTS` is empty, ask the user for the module name first.
 
 Load the specs-workflow skill (skill tool, name `specs-workflow`), then read from the skill directory: `references/file-templates.md` (skeleton), `references/prompt-templates.md` (depth guidance), and `references/examples/traceability.md` (traceability format), and follow them. If the skill is not available, follow the rules below.
 
@@ -15,6 +15,6 @@ Follow these rules:
   - A complete User Story with all three parts: *As a `<role>`, I want `<capability>`, so that `<value>`* — the value clause must explain *why*, not restate the capability
   - Acceptance Criteria numbered `N.M` in the `THE <System> SHALL` / `WHEN` / `IF` / `WHILE` forms, plus composite `AND` / `OR` conditions and state-based, performance, and security variants, every one machine-testable, together covering the happy path, boundary conditions, and error/exclusion cases
 
-If `.specs/$ARGUMENTS/requirements.md` already exists, preserve its content and extend it rather than rewriting. If `.specs/index.md` exists and the module `$ARGUMENTS` is not listed in its status table, add a row for it.
+If `.agents/specs/$ARGUMENTS/requirements.md` already exists, preserve its content and extend it rather than rewriting. If `.agents/specs/index.md` exists and the module `$ARGUMENTS` is not listed in its status table, add a row for it.
 
 If `scripts/validate-specs.js` is available, run `node scripts/validate-specs.js .` before finishing and report any validation errors.

@@ -1,12 +1,12 @@
 ---
-description: Initialize the .specs/ directory convention
+description: Initialize the .agents/specs/ directory convention
 ---
 
-Bootstrap the `.specs/` spec-driven workflow convention in this project.
+Bootstrap the `.agents/specs/` spec-driven workflow convention in this project.
 
 Load the specs-workflow skill (skill tool, name `specs-workflow`), then read `references/file-templates.md` from the skill directory and follow its skeleton. If the skill is not available, follow the rules below.
 
-1. Create `.specs/index.md` with:
+1. Create `.agents/specs/index.md` with:
    - A "Status Bar" blockquote at the top (`> 📍 **Status Bar**`): active module + status, done/total, blocked, next task, next gate, last updated. With no modules yet, show `-` placeholders and a "no modules yet" note.
    - A "Module Status Table" with columns `Module | Status | Progress | Depends on | Notes`, using only the status values `draft` → `design` → `implementing` → `implemented` → `archived`. `Progress` is `done/total (pct)` counting every task checkbox in the module's `tasks.md` (0/0 (0%) until tasks exist).
    - A "Task Summary" table with columns `Task | Status | Module | Title | Depends on` (Task is the globally unique `<module>.<N.M>` id; it gains rows as `tasks.md` files are written)

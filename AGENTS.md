@@ -146,7 +146,7 @@ Line counts and section numbers should match.
 
 | Skill | Description | Directory |
 |---|---|---|
-| specs-workflow | Spec-driven workflow (`.specs/` requirements/design/tasks/CHANGELOG convention) | `skills/specs-workflow/` |
+| specs-workflow | Spec-driven workflow (`.agents/specs/` requirements/design/tasks/CHANGELOG convention) | `skills/specs-workflow/` |
 
 ## Build / Test / Lint
 
