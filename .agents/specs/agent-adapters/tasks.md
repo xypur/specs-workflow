@@ -46,14 +46,15 @@
 
 ### Phase 4: pi 扩展
 
-- [ ] 4.1 新增 `pi-extension/index.js`：扩展骨架，运行时解析 `commands/*.toml`（内置迷你解析器）并注册 `/specs`、`/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks`
+- [x] 4.1 新增 `pi-extension/index.js`：扩展骨架，运行时解析 `commands/*.toml`（内置迷你解析器）并注册 `/specs`、`/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks`
   - `{{args}}` 透传命令参数；解析失败跳过该项并提示，不中断加载
   - _Requirements: 4.1, 4.2, 4.4_
-- [ ] 4.2 在扩展 `session_start` 事件中实现启动提醒：条件与文案语义同 `hooks/specs-reminder.js`
+- [x] 4.2 在扩展 `session_start` 事件中实现启动提醒：条件与文案语义同 `hooks/specs-reminder.js`
   - _Requirements: 4.3_
-- [ ] 4.3 新增 `pi-extension/package.json` 打包元数据，支持 `pi install`（本地路径）
+- [x] 4.3 新增 `pi-extension/package.json` 打包元数据，支持 `pi install`（本地路径）
+  - 注：打包元数据落在根 `package.json` 的 `pi` 清单（git 安装时包根为仓库根，子目录清单不会被读取），同时分发 `skills/`
   - _Requirements: 4.1_
-- [ ] 4.4 Checkpoint — Phase 4 gate：`pi install` 本地安装后验证五命令提示词与 TOML 同源、提醒注入条件正确
+- [x] 4.4 Checkpoint — Phase 4 gate：`pi install` 本地安装后验证五命令提示词与 TOML 同源、提醒注入条件正确
   - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
 ### Phase 5: CI 与收尾

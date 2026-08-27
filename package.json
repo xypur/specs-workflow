@@ -4,8 +4,13 @@
   "private": true,
   "description": "Spec-driven workflow for AI coding assistants: .agents/specs/ convention skill + multi-tool adapters.",
   "license": "MIT",
+  "keywords": ["pi-package"],
   "scripts": {
     "test": "node scripts/check-sync.js",
     "validate-specs": "node scripts/validate-specs.js"
+  },
+  "pi": {
+    "extensions": ["./pi-extension/index.js"],
+    "skills": ["./skills"]
   }
 }

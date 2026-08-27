@@ -4,15 +4,15 @@ Organized by functional module, each module is a self-contained directory (requi
 
 Read this file before any module document: use the Status Bar, Module Status Table, and Task Summary below to determine which module(s) and task(s) the current request touches, then open only the relevant module documents on demand.
 
-> 📍 **Status Bar** · agent-adapters [`implementing`] · 12/19 done · 0 blocked ·
-> Next task: **agent-adapters.4.1** (deps satisfied) · Next gate: **agent-adapters.4.4**
-> Last updated: 2026-08-27 (Phase 3 done: reminder hook + manifest wiring)
+> 📍 **Status Bar** · agent-adapters [`implementing`] · 16/19 done · 0 blocked ·
+> Next task: **agent-adapters.5.1** (deps satisfied) · Next gate: **agent-adapters.5.3**
+> Last updated: 2026-08-27 (Phase 4 done: pi extension + package manifest)
 
 ## Module Status Table
 
 | Module | Status | Progress | Depends on | Notes |
 |--------|--------|----------|------------|-------|
-| agent-adapters | implementing | 12/19 (63%) | - | 对齐 ponytail 的适配升级：AGENTS.md 分发、插件 manifests、运行时 hooks、pi 扩展、CI |
+| agent-adapters | implementing | 16/19 (84%) | - | 对齐 ponytail 的适配升级：AGENTS.md 分发、插件 manifests、运行时 hooks、pi 扩展、CI |
 
 `Progress` = `done/total (pct)` counting every task checkbox in `<module>/tasks.md`. Status values: `draft` → `design` → `implementing` → `implemented` → `archived`. Archived modules stay listed with status `archived`; their directories are not moved.
 
@@ -34,10 +34,10 @@ Global index of every task across modules. Add one row per task in `<module>/tas
 | agent-adapters.3.1 | [x] | agent-adapters | hooks/specs-reminder.js 提醒脚本 | agent-adapters.1.4 |
 | agent-adapters.3.2 | [x] | agent-adapters | hooks/specs-hooks.json 并接入 manifests | agent-adapters.3.1, agent-adapters.2.1, agent-adapters.2.2 |
 | agent-adapters.3.3 | [x] | agent-adapters | Checkpoint — hook 行为验证 | agent-adapters.3.2 |
-| agent-adapters.4.1 | [ ] | agent-adapters | pi 扩展骨架 + 命令注册 | agent-adapters.1.4 |
-| agent-adapters.4.2 | [ ] | agent-adapters | pi 会话启动提醒注入 | agent-adapters.4.1 |
-| agent-adapters.4.3 | [ ] | agent-adapters | pi 扩展打包元数据 | agent-adapters.4.1 |
-| agent-adapters.4.4 | [ ] | agent-adapters | Checkpoint — pi 本地安装验证 | agent-adapters.4.2, agent-adapters.4.3 |
+| agent-adapters.4.1 | [x] | agent-adapters | pi 扩展骨架 + 命令注册 | agent-adapters.1.4 |
+| agent-adapters.4.2 | [x] | agent-adapters | pi 会话启动提醒注入 | agent-adapters.4.1 |
+| agent-adapters.4.3 | [x] | agent-adapters | pi 扩展打包元数据 | agent-adapters.4.1 |
+| agent-adapters.4.4 | [x] | agent-adapters | Checkpoint — pi 本地安装验证 | agent-adapters.4.2, agent-adapters.4.3 |
 | agent-adapters.5.1 | [ ] | agent-adapters | GitHub Actions CI 工作流 | agent-adapters.1.4 |
 | agent-adapters.5.2 | [ ] | agent-adapters | 全量一致性收尾（EN/zh 对齐） | agent-adapters.2.5, agent-adapters.3.3, agent-adapters.4.4, agent-adapters.5.1 |
 | agent-adapters.5.3 | [ ] | agent-adapters | Checkpoint — 全绿并标记 implemented | agent-adapters.5.2 |

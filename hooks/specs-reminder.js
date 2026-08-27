@@ -82,8 +82,16 @@ function main() {
 }
 
 try {
-  main();
+  if (require.main === module) {
+    main();
+  }
 } catch (e) {
   // Last-resort guard: a failing hook must never block or error the host.
 }
-process.exit(0);
+if (require.main === module) {
+  process.exit(0);
+}
+
+// Exported so the pi extension (pi-extension/index.js) can reuse the exact
+// same reminder text — single source of truth for the runtime reminder.
+module.exports = { reminderText };
