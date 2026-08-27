@@ -26,6 +26,7 @@
 | Kiro | 将 `.kiro/steering/specs-workflow.md` 复制到 `~/.kiro/steering/` 或项目的 `.kiro/steering/` | 常驻的规范先行规则 |
 | Qoder | 将 `.qoder/rules/specs-workflow.md` 复制到项目的 `.qoder/rules/` | 常驻的规范先行规则 |
 | GitHub Copilot | 将 `.github/copilot-instructions.md` 复制到仓库 | 仓库级规范先行指令 |
+| AGENTS.md 宿主（Amp、Zed、Jules、Codex 扩展、Antigravity、CodeWhale 等） | 将本仓库 `AGENTS.md` 中的标记规则区块复制到项目（或全局）的 `AGENTS.md` | 对所有自动读取 `AGENTS.md` 的宿主生效的常驻规范先行规则 |
 | 通用代理 | 复制 `rules/specs-workflow.md` 或加载 `skills/specs-workflow/SKILL.md` | 规则集或完整技能 |
 
 ### 技能
@@ -60,4 +61,4 @@ npx skills add https://github.com/xypur/specs-workflow --skill specs-workflow
 node scripts/check-sync.js   # 或：npm test
 ```
 
-检查验证：(a) 每个规则适配器正文等于 `rules/specs-workflow.md`；(b) 每个 `.opencode/` 与 `.claude/` 指令等于其 `commands/*.toml` 提示词，并使用对应宿主的参数变量。对于消费者项目，可运行 `node scripts/validate-specs.js <project-root>` 校验 `.agents/specs` 结构、引用、任务同步、依赖图和禁止的版本化设计文件。
+检查验证：(a) 每个规则适配器正文等于 `rules/specs-workflow.md`（含本仓库自身 `AGENTS.md` 中的标记规则区块）；(b) 每个 `.opencode/` 与 `.claude/` 指令等于其 `commands/*.toml` 提示词，并使用对应宿主的参数变量。对于消费者项目，可运行 `node scripts/validate-specs.js <project-root>` 校验 `.agents/specs` 结构、引用、任务同步、依赖图和禁止的版本化设计文件。

@@ -15,7 +15,7 @@ skills/
     GENERATION.md         # Provenance & generation metadata
     CHANGES.md            # Modification changelog
     references/           # Detailed reference documents
-zh/
+skills-zh/
   SKILL.zh.md             # Chinese version of skills/specs-workflow/SKILL.md
 commands/*.toml           # Canonical command prompts (Gemini CLI custom commands)
 rules/specs-workflow.md   # Canonical compact always-on ruleset
@@ -42,7 +42,7 @@ example/                  # Reference examples (gitignored), not part of this pr
 ## Chinese/English Sync Rule
 
 - **English version**: `skills/specs-workflow/SKILL.md` — the distributable, canonical skill file.
-- **Chinese version**: `zh/SKILL.zh.md` — for Chinese-speaking users, stored separately to keep the `skills/` directory clean.
+- **Chinese version**: `skills-zh/SKILL.zh.md` — for Chinese-speaking users, stored separately to keep the `skills/` directory clean.
 - **When modifying**: Always update both files simultaneously. Content must be structurally and semantically identical — same sections, same tables, same code blocks, same examples. Only the language differs.
 
 ## Skill Document Format
@@ -120,7 +120,7 @@ Skills are loaded on-demand — the agent sees only the skill name and descripti
    - `GENERATION.md` (metadata: source, git SHA, generation date)
    - `CHANGES.md` (changelog in Chinese)
    - `references/` (optional, for supplementary docs)
-2. Create `zh/<skill-name>/` with:
+2. Create `skills-zh/<skill-name>/` with:
    - `SKILL.zh.md` (Chinese, structurally identical to the English version)
 3. Update `README.md` and `README.zh-CN.md` with the new skill entry and install command.
 
@@ -137,7 +137,7 @@ After modifying a skill, compare section headers to ensure both language version
 
 ```bash
 grep -n '^##' skills/<skill-name>/SKILL.md
-grep -n '^##' zh/<skill-name>/SKILL.zh.md
+grep -n '^##' skills-zh/<skill-name>/SKILL.zh.md
 ```
 
 Line counts and section numbers should match.
@@ -156,4 +156,54 @@ This repository has no build pipeline or linter configuration. The one automated
 node scripts/check-sync.js   # or: npm test
 ```
 
-It fails if a rule adapter body drifts from `rules/specs-workflow.md`, or a `.opencode/` / `.claude/` command drifts from its `commands/*.toml` prompt. Otherwise verification is manual — review the rendered markdown and check for structural consistency between language versions.
+It fails if a rule adapter body (including the `AGENTS.md` marked ruleset section) drifts from `rules/specs-workflow.md`, or a `.opencode/` / `.claude/` command drifts from its `commands/*.toml` prompt. Otherwise verification is manual — review the rendered markdown and check for structural consistency between language versions.
+
+## Specs Workflow Ruleset (distribution copy)
+
+The marked block below is a verbatim distribution copy of `rules/specs-workflow.md` (the canonical compact ruleset). Hosts that auto-read `AGENTS.md` (Amp, Zed, Jules, Codex extension, Antigravity, CodeWhale, …) load it as always-on context when working from a checkout of this repo. Edit the canonical source, not this copy — `node scripts/check-sync.js` verifies the copy.
+
+<!-- specs-workflow:ruleset:start -->
+
+# Specs Workflow
+
+Work spec-first in this project. Before writing code for a new module or feature, write the `.agents/specs/` documents first, keep them traceable, and keep the module status table current. The full workflow, templates, and prompting depth live in the `specs-workflow` skill (load it when available).
+
+## Mandatory Rules
+
+1. Before coding, create `.agents/specs/<module>/` with `requirements.md`, `design.md`, `tasks.md`, and `CHANGELOG.md`, and fill in the requirements. Add a row for the module in the `.agents/specs/index.md` status table and a row per task in its Task Summary table.
+2. Keep traceability: every task references the requirement clauses it implements with `_Requirements: x.y, x.z_`; every design Correctness Property marks `**Validates: Requirements x.y**`. No dangling references.
+3. Record design revisions in `CHANGELOG.md`; never create `v1.md` / `v2.md` version files.
+4. Shared facilities reused by multiple modules get their own spec directory under `.agents/specs/shared/`.
+5. Check off completed tasks `- [x]` and keep the `.agents/specs/index.md` status and Task Summary tables in sync (`draft` → `design` → `implementing` → `implemented` → `archived`). The index is the single source of task status; derive its `Progress` column, status bar, next task, and next gate from the task checkboxes and dependencies.
+6. On acceptance, mark the module `archived` in the `.agents/specs/index.md` status table. The module directory stays in place; git history preserves the documents.
+7. Read `.agents/specs/index.md` before any module document; use its Task Summary to determine which tasks to execute and load module docs on demand — do not read every module's documents upfront.
+8. Derive the next task and next gate from dependencies: the next task is the first todo task (`[ ]`) whose `Depends on` are all done; the next gate is the next unchecked phase-terminal (Checkpoint) task. Record the result in the index status bar.
+
+## Document Formats
+
+- `index.md`: resident index — a top status bar (`📍 状态栏`: active module + status · done/total · blocked · next task · next gate · last updated), Module Status Table (`Module | Status | Progress | Depends on | Notes`, with `Progress` = `done/total (pct)`), Task Summary table (`Task | Status | Module | Title | Depends on`, with `Task` = globally unique `<module>.<N.M>` mirroring `tasks.md` checkboxes), execution order/dependencies, and a Change Log.
+- `requirements.md`: `Requirement N` (integer, incrementing) + User Story (*As a `<role>` / I want `<capability>` / so that `<value>`*) + Acceptance Criteria numbered `N.M` in the `THE <System> SHALL` / `WHEN` / `IF` / `WHILE` forms, plus composite `AND` / `OR` conditions and state-based, performance, and security variants, every one machine-testable and together covering the happy path, boundary conditions, and error/exclusion cases.
+- `design.md`: Overview (positioning + key trade-offs) / Architecture (layers + data flow with a Mermaid diagram; explain *why* the split) / Components & Composables (interface, responsibility, structured pseudocode) / Interfaces & Data Models (types, fields, defaults, optionality) / Key Decisions (decision records: context, options considered with pros/cons/effort, chosen option, rationale) / Error Handling (scenario/handling table) / Correctness Properties (`*For any* <precondition>, <conclusion>`, each marked `**Validates: Requirements x.y**`).
+- `tasks.md`: hierarchical tasks numbered `N.M` (decoupled from requirement numbers), split by **dependency**, sequenced by a stated strategy (Foundation-First / Feature-Slice / Risk-First / Hybrid), each referencing `_Requirements: x.y_`, optional/MVP-skippable subtasks marked `*`, Checkpoint tasks that run the tests/build at meaningful milestones, and a JSON Task Dependency Graph (ordered waves). Task status is maintained in `.agents/specs/index.md`, not in a second status block.
+- `CHANGELOG.md`: dated entries with what changed and the rationale.
+
+## Prohibitions
+
+- No code before the module's `.agents/specs/<module>/` documents (at minimum `requirements.md`) exist and are filled in.
+- No reading every module's documents upfront; read `.agents/specs/index.md` first and load only what the current task needs.
+- No versioned design files (`v1.md` / `v2.md`); use `CHANGELOG.md` instead.
+- No skipping `_Requirements:` references in tasks or `**Validates:**` annotations in design properties.
+- No leaving completed tasks unchecked or the status/Task Summary tables out of sync.
+- No leaving the index status bar or the `Progress` column stale relative to the task checkboxes.
+- No duplicating shared infrastructure requirements across modules; extract them to `.agents/specs/shared/`.
+
+## Naming Conventions
+
+| Item | Convention |
+|------|------------|
+| Module directory | Lowercase `kebab-case` |
+| Status values | `draft` / `design` / `implementing` / `implemented` / `archived` |
+| Requirement numbering | `Requirement N`; acceptance criteria `N.M` |
+| Task numbering | Hierarchical `N.M`, decoupled from requirement numbers |
+
+<!-- specs-workflow:ruleset:end -->

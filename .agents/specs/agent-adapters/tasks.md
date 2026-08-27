@@ -8,16 +8,16 @@
 
 ### Phase 1: 指令层 — AGENTS.md 分发与同步校验
 
-- [ ] 1.1 在根 `AGENTS.md` 追加 `<!-- specs-workflow:ruleset:start/end -->` 标记区块，区块内容为 `rules/specs-workflow.md` 主体逐字拷贝，置于贡献者指南之后
+- [x] 1.1 在根 `AGENTS.md` 追加 `<!-- specs-workflow:ruleset:start/end -->` 标记区块，区块内容为 `rules/specs-workflow.md` 主体逐字拷贝，置于贡献者指南之后
   - 保持区块外原有贡献者指南内容不变
   - _Requirements: 1.1_
-- [ ] 1.2 扩展 `scripts/check-sync.js`：提取 AGENTS.md 标记区块并与 canonical ruleset 比对，缺失或漂移时报错、非零退出
+- [x] 1.2 扩展 `scripts/check-sync.js`：提取 AGENTS.md 标记区块并与 canonical ruleset 比对，缺失或漂移时报错、非零退出
   - 复用既有 `check()` 输出风格；成功信息更新为包含 AGENTS.md
   - _Requirements: 1.2_
-- [ ] 1.3 更新 `docs/agent-portability.md`（+zh）与 `README.md`（+zh）：新增 AGENTS.md 行、列出自动读取 AGENTS.md 的 host 与两种使用方式
+- [x] 1.3 更新 `docs/agent-portability.md`（+zh）与 `README.md`（+zh）：新增 AGENTS.md 行、列出自动读取 AGENTS.md 的 host 与两种使用方式
   - 同一变更内同步 zh 文档
   - _Requirements: 1.3, 1.4, 6.1, 6.2_
-- [ ] 1.4 Checkpoint — Phase 1 gate：`node scripts/check-sync.js` 与 `node scripts/validate-specs.js .` 全部通过
+- [x] 1.4 Checkpoint — Phase 1 gate：`node scripts/check-sync.js` 与 `node scripts/validate-specs.js .` 全部通过
   - _Requirements: 1.2_
 
 ### Phase 2: 插件层 — Claude Code / Codex / Copilot CLI manifests

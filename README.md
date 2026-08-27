@@ -25,6 +25,7 @@ This repo is a portable distribution: one skill + one compact ruleset, shipped a
 | Kiro | Copy `.kiro/steering/specs-workflow.md` into `~/.kiro/steering/` or the project's `.kiro/steering/` | Always-on spec-first rule |
 | Qoder | Copy `.qoder/rules/specs-workflow.md` into the project's `.qoder/rules/` | Always-on spec-first rule |
 | GitHub Copilot | Copy `.github/copilot-instructions.md` into the repo | Repo-wide spec-first instructions |
+| AGENTS.md hosts (Amp, Zed, Jules, Codex extension, Antigravity, CodeWhale, …) | Copy the marked ruleset section from the repo's `AGENTS.md` into your project's (or global) `AGENTS.md` | Always-on spec-first rules for any host that auto-reads `AGENTS.md` |
 | Generic agents | Copy `rules/specs-workflow.md` or load `skills/specs-workflow/SKILL.md` | Ruleset or full skill |
 
 ### Skill
@@ -59,4 +60,4 @@ The derived adapters must stay aligned with the canonical sources:
 node scripts/check-sync.js   # or: npm test
 ```
 
-The check verifies (a) every rule adapter body equals `rules/specs-workflow.md`, and (b) every `.opencode/` and `.claude/` command equals its `commands/*.toml` prompt using the host argument variable. For a consumer project, run `node scripts/validate-specs.js <project-root>` to check `.agents/specs` structure, references, task synchronization, dependency graphs, and forbidden versioned design files.
+The check verifies (a) every rule adapter body equals `rules/specs-workflow.md` (including the marked ruleset section in this repo's own `AGENTS.md`), and (b) every `.opencode/` and `.claude/` command equals its `commands/*.toml` prompt using the host argument variable. For a consumer project, run `node scripts/validate-specs.js <project-root>` to check `.agents/specs` structure, references, task synchronization, dependency graphs, and forbidden versioned design files.

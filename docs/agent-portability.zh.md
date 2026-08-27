@@ -14,6 +14,7 @@ Specs-workflow 是可移植的 AI 技能分发。核心行为在 `skills/specs-w
 | Cline | `.clinerules/specs-workflow.md` | 项目规则。 |
 | Kiro | `.kiro/steering/specs-workflow.md` | Steering 规则；可全局（`~/.kiro/steering/`）或按项目复制。 |
 | Qoder | `.qoder/rules/specs-workflow.md` | 项目规则（Qoder 也会自动加载 `AGENTS.md`）。 |
+| AGENTS.md 宿主（Amp、Zed、Jules、Codex 扩展、Antigravity、CodeWhale、JetBrains Junie、Copilot CLI 回退等） | 仓库根 `AGENTS.md` 中的标记规则区块 | 任何自动读取 `AGENTS.md` 的宿主在 checkout 中运行即可生效。两种使用方式：(a) 从本仓库 checkout 运行代理，自动加载；(b) 将标记区块复制到项目或全局 `AGENTS.md`。指令层：仅规则，无斜杠指令。 |
 | GitHub Copilot | `.github/copilot-instructions.md` | 仓库级指令文件。 |
 | 通用代理 | `rules/specs-workflow.md` 或 `skills/specs-workflow/SKILL.md` | 复制紧凑规则集或直接加载技能。 |
 
@@ -22,10 +23,10 @@ Specs-workflow 是可移植的 AI 技能分发。核心行为在 `skills/specs-w
 | 源 | 用途 |
 |----|------|
 | `commands/*.toml` | 命令提示词规范源；`.opencode/commands/` 与 `.claude/commands/` 由它派生，并使用宿主参数变量（`$ARGUMENTS`）。 |
-| `rules/specs-workflow.md` | 紧凑规则集规范源；所有规则适配器原样复制其正文（仅宿主 frontmatter 不同）。 |
+| `rules/specs-workflow.md` | 紧凑规则集规范源；所有规则适配器原样复制其正文（仅宿主 frontmatter 不同），包括本仓库自身 `AGENTS.md` 中的标记区块。 |
 | `skills/specs-workflow/SKILL.md` | 完整技能定义，含模板与提示深度。 |
 
-中文参考：`SKILL.zh.md` 与 `rules/specs-workflow.zh.md` 位于 `zh/`，仅供中文用户参考，不被各宿主自动加载。
+中文参考：`SKILL.zh.md` 与 `rules/specs-workflow.zh.md` 位于 `skills-zh/`，仅供中文用户参考，不被各宿主自动加载。
 
 ## 同步
 
@@ -35,4 +36,4 @@ Specs-workflow 是可移植的 AI 技能分发。核心行为在 `skills/specs-w
 node scripts/check-sync.js
 ```
 
-它验证：(a) 每个规则适配器正文等于 `rules/specs-workflow.md`；(b) 每个 `.opencode/` + `.claude/` 指令等于其 `commands/*.toml` 提示词。
+它验证：(a) 每个规则适配器正文等于 `rules/specs-workflow.md`（含 `AGENTS.md` 中的标记规则区块）；(b) 每个 `.opencode/` + `.claude/` 指令等于其 `commands/*.toml` 提示词。

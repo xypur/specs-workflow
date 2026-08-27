@@ -71,11 +71,28 @@ for (const name of COMMANDS) {
   }
 }
 
+// 3. AGENTS.md marked section mirrors the canonical ruleset, so hosts that
+//    auto-read AGENTS.md (Amp, Zed, Jules, Codex extension, Antigravity, ...)
+//    load the same always-on ruleset.
+const MARK_START = '<!-- specs-workflow:ruleset:start -->';
+const MARK_END = '<!-- specs-workflow:ruleset:end -->';
+function extractMarkedRuleset(text) {
+  const start = text.indexOf(MARK_START);
+  const end = text.indexOf(MARK_END);
+  if (start < 0 || end < 0 || end < start) return null;
+  return text.slice(start + MARK_START.length, end).trim();
+}
+const markedRuleset = extractMarkedRuleset(read('AGENTS.md'));
+check(markedRuleset !== null, `AGENTS.md is missing the ${MARK_START} / ${MARK_END} markers`);
+if (markedRuleset !== null) {
+  check(markedRuleset === rulesetBody, 'AGENTS.md marked ruleset section drifted from rules/specs-workflow.md');
+}
+
 if (failed) {
   console.error('Sync check failed. Regenerate the derived files from the canonical sources.');
   process.exit(1);
 }
 
 console.log(
-  `OK: rule copies match rules/specs-workflow.md; commands match commands/*.toml across .opencode/ and .claude/.`
+  `OK: rule copies and the AGENTS.md marked section match rules/specs-workflow.md; commands match commands/*.toml across .opencode/ and .claude/.`
 );

@@ -14,6 +14,7 @@ Specs-workflow is an agent-portable skill distribution. The behavior lives in `s
 | Cline | `.clinerules/specs-workflow.md` | Project rule. |
 | Kiro | `.kiro/steering/specs-workflow.md` | Steering rule; copy globally (`~/.kiro/steering/`) or into a project. |
 | Qoder | `.qoder/rules/specs-workflow.md` | Project rule (Qoder also auto-loads `AGENTS.md`). |
+| AGENTS.md hosts (Amp, Zed, Jules, Codex extension, Antigravity, CodeWhale, JetBrains Junie, Copilot CLI fallback, …) | The marked ruleset section in the repo's root `AGENTS.md` | Any host that auto-reads `AGENTS.md` gets the ruleset when running from a checkout. Two usage modes: (a) run the agent from a checkout of this repo and it loads automatically; (b) copy the marked section into your project's or global `AGENTS.md`. Instruction-tier: rules only, no slash commands. |
 | GitHub Copilot | `.github/copilot-instructions.md` | Repository instruction file. |
 | Generic agents | `rules/specs-workflow.md` or `skills/specs-workflow/SKILL.md` | Copy the compact ruleset or load the skill directly. |
 
@@ -22,7 +23,7 @@ Specs-workflow is an agent-portable skill distribution. The behavior lives in `s
 | Source | Purpose |
 |--------|---------|
 | `commands/*.toml` | Canonical command prompts; `.opencode/commands/` and `.claude/commands/` files are derived from it using the host argument variable (`$ARGUMENTS`). |
-| `rules/specs-workflow.md` | Canonical compact ruleset; all rule adapters copy its body verbatim (host frontmatter only). |
+| `rules/specs-workflow.md` | Canonical compact ruleset; all rule adapters copy its body verbatim (host frontmatter only), including the marked section in the repo's own `AGENTS.md`. |
 | `skills/specs-workflow/SKILL.md` | Full skill definition with templates and prompting depth. |
 
 ## Sync
@@ -33,4 +34,4 @@ Keep the adapters aligned with the canonical sources — run the check after any
 node scripts/check-sync.js
 ```
 
-It verifies (a) every rule adapter body equals `rules/specs-workflow.md`, and (b) every `.opencode/` + `.claude/` command equals its `commands/*.toml` prompt.
+It verifies (a) every rule adapter body equals `rules/specs-workflow.md` (including the marked ruleset section in `AGENTS.md`), and (b) every `.opencode/` + `.claude/` command equals its `commands/*.toml` prompt.
