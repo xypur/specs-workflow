@@ -10,5 +10,6 @@
   "repository": "https://github.com/xypur/specs-workflow",
   "license": "MIT",
   "keywords": ["specs", "spec-driven", "workflow", "planning", "requirements"],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "hooks": "./hooks/specs-hooks.json"
 }

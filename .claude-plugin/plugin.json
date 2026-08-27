@@ -11,5 +11,6 @@
   "license": "MIT",
   "keywords": ["specs", "spec-driven", "workflow", "planning", "requirements"],
   "commands": "./.claude/commands",
-  "skills": "./skills"
+  "skills": "./skills",
+  "hooks": "./hooks/specs-hooks.json"
 }

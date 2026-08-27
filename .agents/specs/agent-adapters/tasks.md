@@ -36,12 +36,12 @@
 
 ### Phase 3: 运行时层 — hooks 常驻提醒
 
-- [ ] 3.1 新增 `hooks/specs-reminder.js`：stdin JSON 取 cwd，存在 `.agents/specs/index.md` 时输出 ≤10 行工作流提醒，否则空输出；全文 try/catch、零依赖、恒 exit 0
+- [x] 3.1 新增 `hooks/specs-reminder.js`：stdin JSON 取 cwd，存在 `.agents/specs/index.md` 时输出 ≤10 行工作流提醒，否则空输出；全文 try/catch、零依赖、恒 exit 0
   - 提醒文本与 SKILL.md 工作流语义一致（先读 index → 按需加载 → 同步状态）
   - _Requirements: 3.2, 3.3, 3.4_
-- [ ] 3.2 新增 `hooks/specs-hooks.json`（SessionStart + SubagentStart），并在 `.claude-plugin/plugin.json` 与 `.codex-plugin/plugin.json` 接入 `hooks` 字段
+- [x] 3.2 新增 `hooks/specs-hooks.json`（SessionStart + SubagentStart），并在 `.claude-plugin/plugin.json` 与 `.codex-plugin/plugin.json` 接入 `hooks` 字段
   - _Requirements: 3.1_
-- [ ] 3.3 Checkpoint — Phase 3 gate：本地验证 hook 行为（有/无 `.agents/specs/` 两种 cwd、非法 stdin），确认空输出与 exit 0
+- [x] 3.3 Checkpoint — Phase 3 gate：本地验证 hook 行为（有/无 `.agents/specs/` 两种 cwd、非法 stdin），确认空输出与 exit 0
   - _Requirements: 3.2, 3.4_
 
 ### Phase 4: pi 扩展
