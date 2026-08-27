@@ -1,0 +1,15 @@
+{
+  "name": "specs-workflow",
+  "owner": {
+    "name": "xypur",
+    "url": "https://github.com/xypur"
+  },
+  "plugins": [
+    {
+      "name": "specs-workflow",
+      "description": "Spec-driven workflow: requirements/design/tasks/CHANGELOG under .agents/specs/, kept traceable.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

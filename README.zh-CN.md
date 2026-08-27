@@ -17,6 +17,9 @@
 
 | 工具 | 方式 | 得到什么 |
 |------|------|----------|
+| Claude Code（插件） | `/plugin marketplace add xypur/specs-workflow`，再 `/plugin install specs-workflow@specs-workflow` | 五个斜杠指令 + specs-workflow 技能，一条命令，无需复制文件 |
+| Codex（插件） | `codex plugin marketplace add xypur/specs-workflow`，再 `codex plugin add specs-workflow@specs-workflow` | specs-workflow 技能 |
+| GitHub Copilot CLI（插件） | `copilot plugin marketplace add xypur/specs-workflow`，再 `copilot plugin install specs-workflow@specs-workflow` | 五个斜杠指令 + specs-workflow 技能 |
 | opencode | 将 `.opencode/commands/*.md` 复制到项目的 `.opencode/commands/`（或全局 `~/.config/opencode/commands/`） | `/specs`、`/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks` |
 | Claude Code | 将 `.claude/commands/*.md` 复制到项目的 `.claude/commands/` | 同样的五个斜杠指令 |
 | Gemini CLI | 将 `commands/*.toml` 复制到项目的 `commands/` | 同样的五个斜杠指令 |
@@ -38,6 +41,15 @@ npx skills add https://github.com/xypur/specs-workflow --skill specs-workflow
 ```
 
 技能本身可用于任何支持技能的宿主（Claude Code、Codex、opencode、Gemini、Qoder、Devin 等）：把 `skills/specs-workflow/` 注册为技能，遇到 `.agents/specs/` 相关工作即会激活。
+
+### 卸载（插件）
+
+| 宿主 | 命令 |
+|------|------|
+| Claude Code | `/plugin remove specs-workflow` |
+| Codex | `codex plugin remove specs-workflow` |
+| GitHub Copilot CLI | `copilot plugin uninstall specs-workflow` |
+| 复制安装的宿主 | 删除复制的规则/指令文件 |
 
 完整的宿主 → 文件映射见 [docs/agent-portability.md](docs/agent-portability.md)。
 

@@ -22,16 +22,16 @@
 
 ### Phase 2: 插件层 — Claude Code / Codex / Copilot CLI manifests
 
-- [ ] 2.1 新增 `.claude-plugin/plugin.json` 与 `.claude-plugin/marketplace.json`：命令与 skill 按显式路径引用（Decision 2），`hooks` 字段先省略
+- [x] 2.1 新增 `.claude-plugin/plugin.json` 与 `.claude-plugin/marketplace.json`：命令与 skill 按显式路径引用（Decision 2），`hooks` 字段先省略
   - 字段以 Claude Code 插件官方文档为准
   - _Requirements: 2.1, 2.2, 2.5_
-- [ ] 2.2 新增 `.codex-plugin/plugin.json`：`skills: "./skills/"`，hooks 字段先省略
+- [x] 2.2 新增 `.codex-plugin/plugin.json`：`skills: "./skills/"`，hooks 字段先省略
   - _Requirements: 2.3, 2.5_
-- [ ] 2.3 新增 `.github/plugin/plugin.json` 与 `marketplace.json`（Copilot CLI marketplace 结构）
+- [x] 2.3 新增 `.github/plugin/plugin.json` 与 `marketplace.json`（Copilot CLI marketplace 结构）
   - _Requirements: 2.4, 2.5_
-- [ ] 2.4 在 `README.md`/`README.zh-CN.md` 增加三个插件的安装与卸载命令表格行
+- [x] 2.4 在 `README.md`/`README.zh-CN.md` 增加三个插件的安装与卸载命令表格行
   - _Requirements: 2.6, 6.2_
-- [ ] 2.5 Checkpoint — Phase 2 gate：至少完成 Claude Code 插件本地安装冒烟验证（marketplace add + install，确认五命令与 skill 可见）；Codex / Copilot CLI 以文档核对替代
+- [x] 2.5 Checkpoint — Phase 2 gate：至少完成 Claude Code 插件本地安装冒烟验证（marketplace add + install，确认五命令与 skill 可见）；Codex / Copilot CLI 以文档核对替代
   - _Requirements: 2.1, 2.2, 2.4_
 
 ### Phase 3: 运行时层 — hooks 常驻提醒

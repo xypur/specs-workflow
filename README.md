@@ -16,6 +16,9 @@ This repo is a portable distribution: one skill + one compact ruleset, shipped a
 
 | Tool | How | What you get |
 |------|-----|--------------|
+| Claude Code (plugin) | `/plugin marketplace add xypur/specs-workflow`, then `/plugin install specs-workflow@specs-workflow` | The five slash commands + the specs-workflow skill, one command, no file copying |
+| Codex (plugin) | `codex plugin marketplace add xypur/specs-workflow`, then `codex plugin add specs-workflow@specs-workflow` | The specs-workflow skill |
+| GitHub Copilot CLI (plugin) | `copilot plugin marketplace add xypur/specs-workflow`, then `copilot plugin install specs-workflow@specs-workflow` | The five slash commands + the specs-workflow skill |
 | opencode | Copy `.opencode/commands/*.md` into the project's `.opencode/commands/` (or global `~/.config/opencode/commands/`) | `/specs`, `/specs-init`, `/specs-requirements`, `/specs-design`, `/specs-tasks` |
 | Claude Code | Copy `.claude/commands/*.md` into the project's `.claude/commands/` | Same five slash commands |
 | Gemini CLI | Copy `commands/*.toml` into the project's `commands/` | Same five slash commands |
@@ -37,6 +40,15 @@ npx skills add https://github.com/xypur/specs-workflow --skill specs-workflow
 ```
 
 The skill itself works in any skill-capable host (Claude Code, Codex, opencode, Gemini, Qoder, Devin, etc.): register `skills/specs-workflow/` as a skill and it activates on `.agents/specs/` work.
+
+### Uninstall (plugins)
+
+| Host | Command |
+|------|---------|
+| Claude Code | `/plugin remove specs-workflow` |
+| Codex | `codex plugin remove specs-workflow` |
+| GitHub Copilot CLI | `copilot plugin uninstall specs-workflow` |
+| Copy-install hosts | Delete the copied rule/command file |
 
 See [docs/agent-portability.md](docs/agent-portability.md) for the full host → file mapping.
 

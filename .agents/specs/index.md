@@ -4,15 +4,15 @@ Organized by functional module, each module is a self-contained directory (requi
 
 Read this file before any module document: use the Status Bar, Module Status Table, and Task Summary below to determine which module(s) and task(s) the current request touches, then open only the relevant module documents on demand.
 
-> 📍 **Status Bar** · agent-adapters [`implementing`] · 4/19 done · 0 blocked ·
-> Next task: **agent-adapters.2.1** (deps satisfied) · Next gate: **agent-adapters.2.5**
-> Last updated: 2026-08-27 (Phase 1 done: AGENTS.md distribution + sync check + docs)
+> 📍 **Status Bar** · agent-adapters [`implementing`] · 9/19 done · 0 blocked ·
+> Next task: **agent-adapters.3.1** (deps satisfied) · Next gate: **agent-adapters.3.3**
+> Last updated: 2026-08-27 (Phase 2 done: plugin manifests + install smoke test)
 
 ## Module Status Table
 
 | Module | Status | Progress | Depends on | Notes |
 |--------|--------|----------|------------|-------|
-| agent-adapters | implementing | 4/19 (21%) | - | 对齐 ponytail 的适配升级：AGENTS.md 分发、插件 manifests、运行时 hooks、pi 扩展、CI |
+| agent-adapters | implementing | 9/19 (47%) | - | 对齐 ponytail 的适配升级：AGENTS.md 分发、插件 manifests、运行时 hooks、pi 扩展、CI |
 
 `Progress` = `done/total (pct)` counting every task checkbox in `<module>/tasks.md`. Status values: `draft` → `design` → `implementing` → `implemented` → `archived`. Archived modules stay listed with status `archived`; their directories are not moved.
 
@@ -26,11 +26,11 @@ Global index of every task across modules. Add one row per task in `<module>/tas
 | agent-adapters.1.2 | [x] | agent-adapters | check-sync 校验 AGENTS.md 区块 | agent-adapters.1.1 |
 | agent-adapters.1.3 | [x] | agent-adapters | 指令层文档更新（EN+zh） | agent-adapters.1.1 |
 | agent-adapters.1.4 | [x] | agent-adapters | Checkpoint — Phase 1 同步校验通过 | agent-adapters.1.2, agent-adapters.1.3 |
-| agent-adapters.2.1 | [ ] | agent-adapters | .claude-plugin 插件 manifest | agent-adapters.1.4 |
-| agent-adapters.2.2 | [ ] | agent-adapters | .codex-plugin 插件 manifest | agent-adapters.1.4 |
-| agent-adapters.2.3 | [ ] | agent-adapters | .github/plugin（Copilot CLI）manifest | agent-adapters.1.4 |
-| agent-adapters.2.4 | [ ] | agent-adapters | 插件安装/卸载文档（EN+zh） | agent-adapters.2.1, agent-adapters.2.2, agent-adapters.2.3 |
-| agent-adapters.2.5 | [ ] | agent-adapters | Checkpoint — 插件安装冒烟验证 | agent-adapters.2.4 |
+| agent-adapters.2.1 | [x] | agent-adapters | .claude-plugin 插件 manifest | agent-adapters.1.4 |
+| agent-adapters.2.2 | [x] | agent-adapters | .codex-plugin 插件 manifest | agent-adapters.1.4 |
+| agent-adapters.2.3 | [x] | agent-adapters | .github/plugin（Copilot CLI）manifest | agent-adapters.1.4 |
+| agent-adapters.2.4 | [x] | agent-adapters | 插件安装/卸载文档（EN+zh） | agent-adapters.2.1, agent-adapters.2.2, agent-adapters.2.3 |
+| agent-adapters.2.5 | [x] | agent-adapters | Checkpoint — 插件安装冒烟验证 | agent-adapters.2.4 |
 | agent-adapters.3.1 | [ ] | agent-adapters | hooks/specs-reminder.js 提醒脚本 | agent-adapters.1.4 |
 | agent-adapters.3.2 | [ ] | agent-adapters | hooks/specs-hooks.json 并接入 manifests | agent-adapters.3.1, agent-adapters.2.1, agent-adapters.2.2 |
 | agent-adapters.3.3 | [ ] | agent-adapters | Checkpoint — hook 行为验证 | agent-adapters.3.2 |
@@ -60,3 +60,4 @@ Phase 1（指令层 AGENTS.md + 同步校验）是其余所有阶段的前置基
 |------|--------|
 | 2026-08-27 | init .agents/specs（agent-adapters 模块立项） |
 | 2026-08-27 | Phase 1 完成：AGENTS.md 标记区块分发、check-sync 校验、文档中英同步（1.1–1.4） |
+| 2026-08-27 | Phase 2 完成：三个插件 manifest + 安装/卸载文档（2.1–2.5）。实现发现：Claude Code plugin.json 路径字段必须以 `./` 开头；marketplace.json 为严格 schema（拒绝根级 `$schema`/`description`）；命令路径取 `./.claude/commands` 复用既有派生文件 |
