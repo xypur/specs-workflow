@@ -22,12 +22,13 @@ rules/specs-workflow.md   # Canonical compact always-on ruleset
 .opencode/commands/       # Derived opencode slash commands
 .claude/commands/         # Derived Claude Code slash commands
 .cursor/rules/            # Cursor rule adapter (alwaysApply)
-.windsurf/rules/          # Windsurf rule adapter
 .clinerules/              # Cline rule adapter
-.kiro/steering/           # Kiro steering adapter
 .agents/rules/            # Agent-compatible rules adapter
-.qoder/rules/             # Qoder rules adapter
-.github/                  # GitHub Copilot instructions adapter
+.github/                  # GitHub Copilot instructions adapter + CI
+.claude-plugin/           # Claude Code plugin manifest (marketplace-installable)
+hooks/                    # Claude Code SessionStart/SubagentStart reminder hook
+pi-extension/             # pi agent harness extension (commands + per-turn reminder)
+.agents/specs/            # This repo's own spec documents (dogfooding)
 docs/                     # agent-portability.md (host → file mapping)
 scripts/check-sync.js     # Verifies adapters match the canonical sources
 example/                  # Reference examples (gitignored), not part of this project

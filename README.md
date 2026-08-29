@@ -16,17 +16,13 @@ This repo is a portable distribution: one skill + one compact ruleset, shipped a
 
 | Tool | How | What you get |
 |------|-----|--------------|
-| Claude Code (plugin) | `/plugin marketplace add xypur/specs-workflow`, then `/plugin install specs-workflow@specs-workflow` | The five slash commands + the specs-workflow skill, one command, no file copying |
-| Codex (plugin) | `codex plugin marketplace add xypur/specs-workflow`, then `codex plugin add specs-workflow@specs-workflow` | The specs-workflow skill |
-| GitHub Copilot CLI (plugin) | `copilot plugin marketplace add xypur/specs-workflow`, then `copilot plugin install specs-workflow@specs-workflow` | The five slash commands + the specs-workflow skill |
+| Claude Code (plugin) | `/plugin marketplace add xypur/specs-workflow`, then `/plugin install specs-workflow@specs-workflow` | The five slash commands + the specs-workflow skill + hooks, one command, no file copying |
 | opencode | Copy `.opencode/commands/*.md` into the project's `.opencode/commands/` (or global `~/.config/opencode/commands/`) | `/specs`, `/specs-init`, `/specs-requirements`, `/specs-design`, `/specs-tasks` |
 | Claude Code | Copy `.claude/commands/*.md` into the project's `.claude/commands/` | Same five slash commands |
 | Gemini CLI | Copy `commands/*.toml` into the project's `commands/` | Same five slash commands |
 | Cursor | Copy `.cursor/rules/specs-workflow.mdc` into the project's `.cursor/rules/` | Always-on spec-first rule |
-| Windsurf | Copy `.windsurf/rules/specs-workflow.md` into the project's `.windsurf/rules/` | Always-on spec-first rule |
 | Cline | Copy `.clinerules/specs-workflow.md` into the project's `.clinerules/` | Always-on spec-first rule |
-| Kiro | Copy `.kiro/steering/specs-workflow.md` into `~/.kiro/steering/` or the project's `.kiro/steering/` | Always-on spec-first rule |
-| Qoder | Copy `.qoder/rules/specs-workflow.md` into the project's `.qoder/rules/` | Always-on spec-first rule |
+| Other hosts (Windsurf, Kiro, Qoder, …) | Copy the body of `rules/specs-workflow.md` into the host's own rule file | Always-on spec-first rule |
 | GitHub Copilot | Copy `.github/copilot-instructions.md` into the repo | Repo-wide spec-first instructions |
 | AGENTS.md hosts (Amp, Zed, Jules, Codex extension, Antigravity, CodeWhale, …) | Copy the marked ruleset section from the repo's `AGENTS.md` into your project's (or global) `AGENTS.md` | Always-on spec-first rules for any host that auto-reads `AGENTS.md` |
 | Generic agents | Copy `rules/specs-workflow.md` or load `skills/specs-workflow/SKILL.md` | Ruleset or full skill |
@@ -46,8 +42,6 @@ The skill itself works in any skill-capable host (Claude Code, Codex, opencode, 
 | Host | Command |
 |------|---------|
 | Claude Code | `/plugin remove specs-workflow` |
-| Codex | `codex plugin remove specs-workflow` |
-| GitHub Copilot CLI | `copilot plugin uninstall specs-workflow` |
 | Copy-install hosts | Delete the copied rule/command file |
 
 See [docs/agent-portability.md](docs/agent-portability.md) for the full host → file mapping.

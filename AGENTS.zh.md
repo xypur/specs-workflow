@@ -15,19 +15,20 @@ skills/
     GENERATION.md         # 来源与生成元数据
     CHANGES.md            # 修改变更日志
     references/           # 详细参考文档
-zh/
+skills-zh/
   SKILL.zh.md             # skills/specs-workflow/SKILL.md 的中文版本
 commands/*.toml           # 命令提示词规范源（Gemini CLI 自定义指令）
 rules/specs-workflow.md   # 紧凑常驻规则集规范源
 .opencode/commands/       # 派生的 opencode 斜杠指令
 .claude/commands/         # 派生的 Claude Code 斜杠指令
 .cursor/rules/            # Cursor 规则适配器（alwaysApply）
-.windsurf/rules/          # Windsurf 规则适配器
 .clinerules/              # Cline 规则适配器
-.kiro/steering/           # Kiro steering 适配器
 .agents/rules/            # 通用代理规则适配器
-.qoder/rules/             # Qoder 规则适配器
-.github/                  # GitHub Copilot 指令适配器
+.github/                  # GitHub Copilot 指令适配器 + CI
+.claude-plugin/           # Claude Code 插件 manifest（可 marketplace 安装）
+hooks/                    # Claude Code SessionStart/SubagentStart 提醒 hook
+pi-extension/             # pi agent harness 扩展（指令 + 每轮提醒）
+.agents/specs/            # 本仓库自身的 spec 文档（自举）
 docs/                     # agent-portability.md（宿主 → 文件映射）
 scripts/check-sync.js     # 校验适配器与规范源一致
 example/                  # 参考示例（已 gitignore），不属于本项目
@@ -42,7 +43,7 @@ example/                  # 参考示例（已 gitignore），不属于本项目
 ## 中英文同步规则
 
 - **英文版本**：`skills/specs-workflow/SKILL.md` — 可分发的规范技能文件。
-- **中文版本**：`zh/SKILL.zh.md` — 面向中文用户，单独存放以保持 `skills/` 目录整洁。
+- **中文版本**：`skills-zh/SKILL.zh.md` — 面向中文用户，单独存放以保持 `skills/` 目录整洁。
 - **修改时**：必须同时更新两个文件。内容必须在结构和语义上完全一致 — 相同的章节、相同的表格、相同的代码块、相同的示例。仅语言不同。
 
 ## 技能文档格式
@@ -120,14 +121,14 @@ description: "<一句话描述何时使用该技能，包括触发场景>"
    - `GENERATION.md`（元数据：来源、git SHA、生成日期）
    - `CHANGES.md`（中文变更日志）
    - `references/`（可选，用于补充文档）
-2. 创建 `zh/<skill-name>/`，包含：
+2. 创建 `skills-zh/<skill-name>/`，包含：
    - `SKILL.zh.md`（中文，与英文版本结构一致）
 3. 更新 `README.md` 和 `README.zh-CN.md`，添加新技能条目和安装命令。
 
 ### 修改现有技能
 
 1. 首先编辑 `skills/<skill-name>/SKILL.md`（英文）。
-2. 将所有更改同步到 `zh/<skill-name>/SKILL.zh.md`（中文）。
+2. 将所有更改同步到 `skills-zh/<skill-name>/SKILL.zh.md`（中文）。
 3. 更新 `skills/<skill-name>/CHANGES.md`，记录修改。
 4. 如果技能的范围、描述或安装指令发生变化，更新 `README.md` 和 `README.zh-CN.md`。
 
@@ -137,7 +138,7 @@ description: "<一句话描述何时使用该技能，包括触发场景>"
 
 ```bash
 grep -n '^##' skills/<skill-name>/SKILL.md
-grep -n '^##' zh/<skill-name>/SKILL.zh.md
+grep -n '^##' skills-zh/<skill-name>/SKILL.zh.md
 ```
 
 行数和章节编号应该匹配。
@@ -156,4 +157,4 @@ grep -n '^##' zh/<skill-name>/SKILL.zh.md
 node scripts/check-sync.js   # 或：npm test
 ```
 
-若某个规则适配器正文偏离 `rules/specs-workflow.md`，或某个 `.opencode/` / `.claude/` 指令偏离其 `commands/*.toml` 提示词（英文与中文链都会校验），检查会失败。其余验证是手动的 — 检查渲染后的 markdown 并确认各语言版本之间的结构一致性。
+若某个规则适配器正文（包括 `AGENTS.md` 中的标记规则区块）偏离 `rules/specs-workflow.md`，或某个 `.opencode/` / `.claude/` 指令偏离其 `commands/*.toml` 提示词，检查会失败。其余验证是手动的 — 检查渲染后的 markdown 并确认各语言版本之间的结构一致性。

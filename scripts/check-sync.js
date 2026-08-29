@@ -35,11 +35,8 @@ const COMMANDS = ['specs', 'specs-init', 'specs-requirements', 'specs-design', '
 const RULESET = 'rules/specs-workflow.md';
 const RULE_COPIES = [
   '.cursor/rules/specs-workflow.mdc',
-  '.windsurf/rules/specs-workflow.md',
   '.clinerules/specs-workflow.md',
-  '.kiro/steering/specs-workflow.md',
   '.agents/rules/specs-workflow.md',
-  '.qoder/rules/specs-workflow.md',
   '.github/copilot-instructions.md',
 ];
 const COMMAND_TOML = (name) => `commands/${name}.toml`;

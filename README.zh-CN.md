@@ -17,17 +17,13 @@
 
 | 工具 | 方式 | 得到什么 |
 |------|------|----------|
-| Claude Code（插件） | `/plugin marketplace add xypur/specs-workflow`，再 `/plugin install specs-workflow@specs-workflow` | 五个斜杠指令 + specs-workflow 技能，一条命令，无需复制文件 |
-| Codex（插件） | `codex plugin marketplace add xypur/specs-workflow`，再 `codex plugin add specs-workflow@specs-workflow` | specs-workflow 技能 |
-| GitHub Copilot CLI（插件） | `copilot plugin marketplace add xypur/specs-workflow`，再 `copilot plugin install specs-workflow@specs-workflow` | 五个斜杠指令 + specs-workflow 技能 |
+| Claude Code（插件） | `/plugin marketplace add xypur/specs-workflow`，再 `/plugin install specs-workflow@specs-workflow` | 五个斜杠指令 + specs-workflow 技能 + hooks，一条命令，无需复制文件 |
 | opencode | 将 `.opencode/commands/*.md` 复制到项目的 `.opencode/commands/`（或全局 `~/.config/opencode/commands/`） | `/specs`、`/specs-init`、`/specs-requirements`、`/specs-design`、`/specs-tasks` |
 | Claude Code | 将 `.claude/commands/*.md` 复制到项目的 `.claude/commands/` | 同样的五个斜杠指令 |
 | Gemini CLI | 将 `commands/*.toml` 复制到项目的 `commands/` | 同样的五个斜杠指令 |
 | Cursor | 将 `.cursor/rules/specs-workflow.mdc` 复制到项目的 `.cursor/rules/` | 常驻的规范先行规则 |
-| Windsurf | 将 `.windsurf/rules/specs-workflow.md` 复制到项目的 `.windsurf/rules/` | 常驻的规范先行规则 |
 | Cline | 将 `.clinerules/specs-workflow.md` 复制到项目的 `.clinerules/` | 常驻的规范先行规则 |
-| Kiro | 将 `.kiro/steering/specs-workflow.md` 复制到 `~/.kiro/steering/` 或项目的 `.kiro/steering/` | 常驻的规范先行规则 |
-| Qoder | 将 `.qoder/rules/specs-workflow.md` 复制到项目的 `.qoder/rules/` | 常驻的规范先行规则 |
+| 其他宿主（Windsurf、Kiro、Qoder 等） | 将 `rules/specs-workflow.md` 正文复制进宿主自身的规则文件 | 常驻的规范先行规则 |
 | GitHub Copilot | 将 `.github/copilot-instructions.md` 复制到仓库 | 仓库级规范先行指令 |
 | AGENTS.md 宿主（Amp、Zed、Jules、Codex 扩展、Antigravity、CodeWhale 等） | 将本仓库 `AGENTS.md` 中的标记规则区块复制到项目（或全局）的 `AGENTS.md` | 对所有自动读取 `AGENTS.md` 的宿主生效的常驻规范先行规则 |
 | 通用代理 | 复制 `rules/specs-workflow.md` 或加载 `skills/specs-workflow/SKILL.md` | 规则集或完整技能 |
@@ -47,8 +43,6 @@ npx skills add https://github.com/xypur/specs-workflow --skill specs-workflow
 | 宿主 | 命令 |
 |------|------|
 | Claude Code | `/plugin remove specs-workflow` |
-| Codex | `codex plugin remove specs-workflow` |
-| GitHub Copilot CLI | `copilot plugin uninstall specs-workflow` |
 | 复制安装的宿主 | 删除复制的规则/指令文件 |
 
 完整的宿主 → 文件映射见 [docs/agent-portability.md](docs/agent-portability.md)。

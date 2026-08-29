@@ -12,29 +12,25 @@ Adapters come in three tiers — a host may appear in several:
 
 | Host | Files | Notes |
 |------|-------|-------|
-| AGENTS.md hosts (Amp, Zed, Jules, Codex extension, Antigravity, CodeWhale, JetBrains Junie, Copilot CLI fallback, …) | The marked ruleset section in the repo's root `AGENTS.md` | Any host that auto-reads `AGENTS.md` gets the ruleset when running from a checkout. Two usage modes: (a) run the agent from a checkout of this repo and it loads automatically; (b) copy the marked section into your project's or global `AGENTS.md`. Rules only, no slash commands. |
+| AGENTS.md hosts (Amp, Zed, Jules, Codex extension, Antigravity, CodeWhale, JetBrains Junie, Copilot CLI fallback, Qoder, …) | The marked ruleset section in the repo's root `AGENTS.md` | Any host that auto-reads `AGENTS.md` gets the ruleset when running from a checkout. Two usage modes: (a) run the agent from a checkout of this repo and it loads automatically; (b) copy the marked section into your project's or global `AGENTS.md`. Rules only, no slash commands. |
 | Cursor | `.cursor/rules/specs-workflow.mdc` | Always-on project rule. |
-| Windsurf | `.windsurf/rules/specs-workflow.md` | Project rule. |
 | Cline | `.clinerules/specs-workflow.md` | Project rule. |
-| Kiro | `.kiro/steering/specs-workflow.md` | Steering rule; copy globally (`~/.kiro/steering/`) or into a project. |
-| Qoder | `.qoder/rules/specs-workflow.md` | Project rule (Qoder also auto-loads `AGENTS.md`). |
 | GitHub Copilot | `.github/copilot-instructions.md` | Repository instruction file. |
+| Other hosts (Windsurf, Kiro, Qoder per-project rules, …) | copy the body of `rules/specs-workflow.md` into the host's own rule file | Same canonical ruleset; no per-host adapter file is shipped. |
 
 ## Plugin Tier
 
 | Host | Manifest | Install | What you get |
 |------|----------|---------|--------------|
 | Claude Code | `.claude-plugin/plugin.json` + `marketplace.json` | `/plugin marketplace add xypur/specs-workflow` → `/plugin install specs-workflow@specs-workflow` | The five `/specs*` commands + the skill + hooks (runtime tier). |
-| Codex | `.codex-plugin/plugin.json` | `codex plugin marketplace add xypur/specs-workflow` → `codex plugin add specs-workflow@specs-workflow` | The skill + hooks (runtime tier). |
-| GitHub Copilot CLI | `.github/plugin/plugin.json` + `marketplace.json` | `copilot plugin marketplace add xypur/specs-workflow` → `copilot plugin install specs-workflow@specs-workflow` | The five `/specs*` commands + the skill. |
 
-Uninstall: `/plugin remove specs-workflow` (Claude Code), `codex plugin remove specs-workflow` (Codex), `copilot plugin uninstall specs-workflow` (Copilot CLI).
+Uninstall: `/plugin remove specs-workflow` (Claude Code). Codex and GitHub Copilot CLI are covered instruction-tier via `AGENTS.md`; their native plugin manifests were removed as unmaintainable (see the `adapter-slimming` spec).
 
 ## Runtime Tier
 
 | Host | Files | Behavior |
 |------|-------|----------|
-| Claude Code, Codex (via plugin) | `hooks/specs-hooks.json` + `hooks/specs-reminder.js` | `SessionStart` + `SubagentStart`: when the cwd has `.agents/specs/index.md`, inject a compact workflow reminder; silent otherwise; always exit 0. Shared hooks file for both hosts. |
+| Claude Code (via plugin) | `hooks/specs-hooks.json` + `hooks/specs-reminder.js` | `SessionStart` + `SubagentStart`: when the cwd has `.agents/specs/index.md`, inject a compact workflow reminder; silent otherwise; always exit 0. The script also detects Codex (`PLUGIN_DATA`), so a manually wired Codex hook gets the same JSON output. |
 | pi | `pi-extension/index.js` (package manifest in root `package.json`) | `pi install git:github.com/xypur/specs-workflow` (or a local checkout path). Registers `/specs*` commands parsed at runtime from `commands/*.toml`, and appends the same reminder to the system prompt every turn while `.agents/specs/` exists. Also distributes `skills/`. |
 
 ## Slash Commands (copy-install)

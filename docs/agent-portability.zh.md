@@ -12,29 +12,25 @@ Specs-workflow 是可移植的 AI 技能分发。核心行为在 `skills/specs-w
 
 | 宿主 | 文件 | 说明 |
 |------|------|------|
-| AGENTS.md 宿主（Amp、Zed、Jules、Codex 扩展、Antigravity、CodeWhale、JetBrains Junie、Copilot CLI 回退等） | 仓库根 `AGENTS.md` 中的标记规则区块 | 任何自动读取 `AGENTS.md` 的宿主在 checkout 中运行即可生效。两种使用方式：(a) 从本仓库 checkout 运行代理，自动加载；(b) 将标记区块复制到项目或全局 `AGENTS.md`。仅规则，无斜杠指令。 |
+| AGENTS.md 宿主（Amp、Zed、Jules、Codex 扩展、Antigravity、CodeWhale、JetBrains Junie、Copilot CLI 回退、Qoder 等） | 仓库根 `AGENTS.md` 中的标记规则区块 | 任何自动读取 `AGENTS.md` 的宿主在 checkout 中运行即可生效。两种使用方式：(a) 从本仓库 checkout 运行代理，自动加载；(b) 将标记区块复制到项目或全局 `AGENTS.md`。仅规则，无斜杠指令。 |
 | Cursor | `.cursor/rules/specs-workflow.mdc` | 常驻项目规则。 |
-| Windsurf | `.windsurf/rules/specs-workflow.md` | 项目规则。 |
 | Cline | `.clinerules/specs-workflow.md` | 项目规则。 |
-| Kiro | `.kiro/steering/specs-workflow.md` | Steering 规则；可全局（`~/.kiro/steering/`）或按项目复制。 |
-| Qoder | `.qoder/rules/specs-workflow.md` | 项目规则（Qoder 也会自动加载 `AGENTS.md`）。 |
 | GitHub Copilot | `.github/copilot-instructions.md` | 仓库级指令文件。 |
+| 其他宿主（Windsurf、Kiro、Qoder 项目级规则等） | 将 `rules/specs-workflow.md` 正文复制进宿主自身的规则文件 | 同一规范规则集；不再随仓库分发逐宿主适配文件。 |
 
 ## 插件层
 
 | 宿主 | Manifest | 安装 | 得到什么 |
 |------|----------|------|----------|
 | Claude Code | `.claude-plugin/plugin.json` + `marketplace.json` | `/plugin marketplace add xypur/specs-workflow` → `/plugin install specs-workflow@specs-workflow` | 五个 `/specs*` 指令 + 技能 + hooks（运行时层）。 |
-| Codex | `.codex-plugin/plugin.json` | `codex plugin marketplace add xypur/specs-workflow` → `codex plugin add specs-workflow@specs-workflow` | 技能 + hooks（运行时层）。 |
-| GitHub Copilot CLI | `.github/plugin/plugin.json` + `marketplace.json` | `copilot plugin marketplace add xypur/specs-workflow` → `copilot plugin install specs-workflow@specs-workflow` | 五个 `/specs*` 指令 + 技能。 |
 
-卸载：`/plugin remove specs-workflow`（Claude Code）、`codex plugin remove specs-workflow`（Codex）、`copilot plugin uninstall specs-workflow`（Copilot CLI）。
+卸载：`/plugin remove specs-workflow`（Claude Code）。Codex 与 GitHub Copilot CLI 经 `AGENTS.md` 以指令层覆盖；其原生插件 manifest 因无法持续验证而移除（见 `adapter-slimming` 规格）。
 
 ## 运行时层
 
 | 宿主 | 文件 | 行为 |
 |------|------|------|
-| Claude Code、Codex（经插件） | `hooks/specs-hooks.json` + `hooks/specs-reminder.js` | `SessionStart` + `SubagentStart`：当 cwd 存在 `.agents/specs/index.md` 时注入紧凑工作流提醒；否则无输出；恒以退出码 0 结束。两个宿主共用同一 hooks 文件。 |
+| Claude Code（经插件） | `hooks/specs-hooks.json` + `hooks/specs-reminder.js` | `SessionStart` + `SubagentStart`：当 cwd 存在 `.agents/specs/index.md` 时注入紧凑工作流提醒；否则无输出；恒以退出码 0 结束。脚本同时检测 Codex（`PLUGIN_DATA`），手动接线的 Codex hook 可获得同样的 JSON 输出。 |
 | pi | `pi-extension/index.js`（包清单在根 `package.json`） | `pi install git:github.com/xypur/specs-workflow`（或本地 checkout 路径）。注册从 `commands/*.toml` 运行时解析的 `/specs*` 指令，并在 `.agents/specs/` 存在时每轮向系统提示词追加同一提醒。同时分发 `skills/`。 |
 
 ## 斜杠指令（复制安装）

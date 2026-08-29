@@ -4,15 +4,16 @@ Organized by functional module, each module is a self-contained directory (requi
 
 Read this file before any module document: use the Status Bar, Module Status Table, and Task Summary below to determine which module(s) and task(s) the current request touches, then open only the relevant module documents on demand.
 
-> 📍 **Status Bar** · agent-adapters [`implemented`] · 19/19 done · 0 blocked ·
+> 📍 **Status Bar** · adapter-slimming [`implemented`] · 8/8 done · 0 blocked ·
 > Next task: —（模块已实现，待验收后归档） · Next gate: —（全部 gate 已通过）
-> Last updated: 2026-08-27 (Phase 5 done: CI + final consistency pass; module implemented)
+> Last updated: 2026-08-29 (adapter-slimming done: 5 adapters removed, docs + check-sync converged)
 
 ## Module Status Table
 
 | Module | Status | Progress | Depends on | Notes |
 |--------|--------|----------|------------|-------|
 | agent-adapters | implemented | 19/19 (100%) | - | 对齐 ponytail 的适配升级：AGENTS.md 分发、插件 manifests、运行时 hooks、pi 扩展、CI |
+| adapter-slimming | implemented | 8/8 (100%) | - | 精简优先级 1–5 的适配（保留 Cline），收敛验证面与文档面 |
 
 `Progress` = `done/total (pct)` counting every task checkbox in `<module>/tasks.md`. Status values: `draft` → `design` → `implementing` → `implemented` → `archived`. Archived modules stay listed with status `archived`; their directories are not moved.
 
@@ -41,6 +42,14 @@ Global index of every task across modules. Add one row per task in `<module>/tas
 | agent-adapters.5.1 | [x] | agent-adapters | GitHub Actions CI 工作流 | agent-adapters.1.4 |
 | agent-adapters.5.2 | [x] | agent-adapters | 全量一致性收尾（EN/zh 对齐） | agent-adapters.2.5, agent-adapters.3.3, agent-adapters.4.4, agent-adapters.5.1 |
 | agent-adapters.5.3 | [x] | agent-adapters | Checkpoint — 全绿并标记 implemented | agent-adapters.5.2 |
+| adapter-slimming.1.1 | [x] | adapter-slimming | 收敛 check-sync 规则副本清单 | - |
+| adapter-slimming.1.2 | [x] | adapter-slimming | 移除 Windsurf 适配 | adapter-slimming.1.1 |
+| adapter-slimming.1.3 | [x] | adapter-slimming | 移除 Kiro 适配 | adapter-slimming.1.1 |
+| adapter-slimming.1.4 | [x] | adapter-slimming | 移除 Qoder 适配 | adapter-slimming.1.1 |
+| adapter-slimming.1.5 | [x] | adapter-slimming | 移除 Copilot CLI 插件 | adapter-slimming.1.1 |
+| adapter-slimming.1.6 | [x] | adapter-slimming | 移除 Codex 插件（hooks 保留 Codex 分支） | adapter-slimming.1.1 |
+| adapter-slimming.1.7 | [x] | adapter-slimming | 更新 AGENTS.md 项目结构图 | adapter-slimming.1.1 |
+| adapter-slimming.1.8 | [x] | adapter-slimming | Checkpoint — 全绿 + grep 无残留 | adapter-slimming.1.2, adapter-slimming.1.3, adapter-slimming.1.4, adapter-slimming.1.5, adapter-slimming.1.6, adapter-slimming.1.7 |
 
 `Task` is the globally unique id `<module>.<N.M>` (the module dir name + the task's number in `tasks.md`). `Status` mirrors the `- [ ]` / `- [x]` checkbox in `tasks.md`.
 
@@ -54,6 +63,8 @@ Global index of every task across modules. Add one row per task in `<module>/tas
 
 Phase 1（指令层 AGENTS.md + 同步校验）是其余所有阶段的前置基础；Phase 2（插件 manifests）/ Phase 3（hooks）/ Phase 4（pi 扩展）/ 5.1（CI）在 Phase 1 gate 之后并行推进；Phase 5 其余任务做跨阶段收尾。3.2 依赖 2.1/2.2（hooks 需接入已存在的 manifests），5.2 依赖全部前序 gate。
 
+adapter-slimming 为单阶段删减：1.1 脚本清单先行，1.2–1.7 并行删减与引用清理，1.8 收口。
+
 ## Change Log
 
 | Date | Change |
@@ -63,3 +74,6 @@ Phase 1（指令层 AGENTS.md + 同步校验）是其余所有阶段的前置基
 | 2026-08-27 | Phase 2 完成：三个插件 manifest + 安装/卸载文档（2.1–2.5）。实现发现：Claude Code plugin.json 路径字段必须以 `./` 开头；marketplace.json 为严格 schema（拒绝根级 `$schema`/`description`）；命令路径取 `./.claude/commands` 复用既有派生文件 |
 | 2026-08-27 | Phase 3 完成：提醒脚本 + hooks 接入 manifests（3.1–3.3）。实现发现：Claude 的 SubagentStart 上下文必须用 hookSpecificOutput JSON 包裹，否则被丢弃；Codex 以 PLUGIN_DATA 环境变量检测 |
 | 2026-08-27 | Phase 5 完成：CI 工作流 + portability 文档三层重组（EN/zh）+ 全量一致性收尾（5.1–5.3），模块标记 implemented。CI 首次运行需 push 至 GitHub 后确认；其调用的两个脚本本地均通过 |
+| 2026-08-29 | CI 上线并通过（checkout/setup-node 升 v5、node 22）；agent-adapters 待归档 |
+| 2026-08-29 | adapter-slimming 模块立项：精简优先级 1–5 适配 |
+| 2026-08-29 | adapter-slimming 完成：五个适配物移除，文档/脚本引用收敛，保留项核対无损（1.1–1.8），模块标记 implemented。顺带同步 AGENTS.zh.md 的过期 zh/ 路径与校验描述 |
